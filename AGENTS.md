@@ -44,6 +44,8 @@ The page also contains JSON-LD for local business and FAQ. Keep visible FAQ text
 
 The folder is linked to the existing Vercel project with `.vercel/project.json`, which is intentionally ignored by Git.
 
+The Vercel project is connected to the GitHub repo. Pushes to `main` should trigger Vercel deployments.
+
 Manual production deploy:
 
 ```powershell
@@ -56,5 +58,4 @@ GitHub is pushed on `main`. Once Vercel has a GitHub Login Connection enabled fo
 npx vercel git connect https://github.com/harleydoughertyart-sketch/gabriels-menswear --yes
 ```
 
-After that, pushes to `main` should be the source of truth for deployments.
-
+Use manual production deploys only when you need to force a deploy outside the Git flow.
