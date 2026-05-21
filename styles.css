@@ -184,6 +184,11 @@ select {
 
 .site-nav a {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 10px;
+  margin-inline: -10px;
   opacity: 0.82;
   transition:
     opacity var(--duration-hover) ease,
@@ -224,7 +229,7 @@ select {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 42px;
+  min-height: 44px;
   padding: 0 18px;
   color: var(--ink);
   background: var(--brass-soft);
@@ -561,10 +566,11 @@ section[id] {
 }
 
 .text-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 40px;
+  min-height: 44px;
   padding-block: 6px;
   color: var(--oxblood);
   font-size: 15px;
@@ -803,6 +809,11 @@ section[id] {
 }
 
 .contact-row a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-block: -10px;
   color: var(--ink);
   overflow-wrap: anywhere;
   font-variant-numeric: tabular-nums;
@@ -1011,9 +1022,10 @@ section[id] {
 }
 
 .footer-links a {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
+  min-height: 44px;
 }
 
 .footer-hours p {
