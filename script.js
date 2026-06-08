@@ -111,3 +111,44 @@ if (window.lucide) {
     icon.setAttribute("focusable", "false");
   });
 }
+
+const getAnalyticsLocation = (link) => {
+  const section = link.closest("section[id]");
+  if (section) return section.id;
+  if (link.closest(".site-header")) return "header";
+  if (link.closest(".site-footer")) return "footer";
+  if (link.closest(".mobile-action-bar")) return "mobile_action_bar";
+  return "page";
+};
+
+const trackActionClick = (eventName, link, destination) => {
+  if (typeof window.gtag !== "function") return;
+
+  window.gtag("event", eventName, {
+    destination,
+    link_text: link.textContent.trim().replace(/\s+/g, " "),
+    link_location: getAnalyticsLocation(link),
+  });
+};
+
+document.addEventListener("click", (event) => {
+  if (!(event.target instanceof Element)) return;
+
+  const link = event.target.closest("a");
+  if (!link) return;
+
+  const href = link.getAttribute("href") || "";
+  if (href.startsWith("tel:")) {
+    trackActionClick("call_click", link, "phone");
+    return;
+  }
+
+  if (href.includes("google.com/maps")) {
+    trackActionClick("directions_click", link, "google_maps");
+    return;
+  }
+
+  if (href.includes("bestprosintown.com")) {
+    trackActionClick("review_click", link, "public_reviews");
+  }
+});
