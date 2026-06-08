@@ -122,13 +122,21 @@ const getAnalyticsLocation = (link) => {
 };
 
 const trackActionClick = (eventName, link, destination) => {
-  if (typeof window.gtag !== "function") return;
-
-  window.gtag("event", eventName, {
+  const eventParams = {
     destination,
     link_text: link.textContent.trim().replace(/\s+/g, " "),
     link_location: getAnalyticsLocation(link),
+  };
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: eventName,
+    ...eventParams,
   });
+
+  if (typeof window.gtag !== "function") return;
+
+  window.gtag("event", eventName, eventParams);
 };
 
 document.addEventListener("click", (event) => {
