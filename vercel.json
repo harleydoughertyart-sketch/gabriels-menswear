@@ -2,14 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [
         {
           "type": "host",
           "value": "www.gabrielsmenswear.com"
         }
       ],
-      "destination": "https://gabrielsmenswear.com/:path*",
+      "destination": "https://gabrielsmenswear.com/$1",
       "permanent": true
     }
   ]
