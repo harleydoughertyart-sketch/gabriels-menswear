@@ -3,3 +3,12 @@ docs/
 
 
 .vercel
+.env
+.wrangler/
+scrollcraft/builds/*/node_modules/
+scrollcraft/builds/*/lab/
+scrollcraft/builds/*/out/
+scrollcraft/builds/*/package-lock.json
+scrollcraft/builds/*/package.json
+scrollcraft/builds/*/assets/logo-card.png
+scrollcraft/builds/*/assets/
