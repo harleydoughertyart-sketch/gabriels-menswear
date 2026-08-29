@@ -250,7 +250,40 @@
       }
 
       /* ------------------------------------------------ act 2: the week -- */
-      .gm-week { background: #eef2f4; }
+      .gm-week { background: #e7edf1; }
+      /* Chalk notations sketching themselves behind the lines: each group
+         draws in with its line's window and fades as the next arrives. */
+      .gm-notes {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+      .gm-notes g {
+        --oin: clamp(0, calc((var(--sc-p, 0) - var(--n0)) * 8), 1);
+        --oout: clamp(0, calc((var(--n1) + 0.08 - var(--sc-p, 0)) * 8), 1);
+        opacity: calc(var(--oin) * var(--oout) * 0.55);
+      }
+      .gm-notes g:last-child { --oout: 1; }
+      .gm-notes path {
+        fill: none;
+        stroke: var(--sc-accent);
+        stroke-width: 0.45;
+        stroke-linecap: round;
+        stroke-dasharray: 1;
+        --d: clamp(0, calc((var(--sc-p, 0) - var(--n0)) * 5), 1);
+        stroke-dashoffset: calc(1 - var(--d));
+      }
+      .gm-notes g:nth-child(1) { --n0: 0.0;  --n1: 0.21; }
+      .gm-notes g:nth-child(2) { --n0: 0.18; --n1: 0.42; }
+      .gm-notes g:nth-child(3) { --n0: 0.38; --n1: 0.59; }
+      .gm-notes g:nth-child(4) { --n0: 0.57; --n1: 0.78; }
+      .gm-notes g:nth-child(5) { --n0: 0.76; --n1: 1; }
+      @media (prefers-reduced-motion: reduce) {
+        .gm-notes g { opacity: 0.35; }
+        .gm-notes path { stroke-dashoffset: 0; }
+      }
       .gm-week .sc-stage {
         display: grid;
         place-items: center;
@@ -286,7 +319,17 @@
       }
 
       /* ------------------------------------------------ act 3: the turn -- */
-      .gm-turn { padding-block: calc(var(--sc-section) * 0.3) var(--sc-section); }
+      /* The navy interlude: a hard cut out of the pale opening run, so the
+         white sections around it read as chapters, not one long page. */
+      .gm-turn {
+        padding-block: calc(var(--sc-section) * 0.7) var(--sc-section);
+        background: #152238;
+        --sc-ink: #f2f5f7;
+        --sc-ink-soft: #b7c4d4;
+        --sc-hairline: rgba(242, 245, 247, 0.14);
+        color: var(--sc-ink);
+      }
+      .gm-turn h2 em { color: #7db2cc; }
       .gm-turn .sc-wrap {
         display: grid;
         grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
@@ -315,9 +358,9 @@
           radial-gradient(120% 100% at 50% 30%, #ffffff 0%, #f4f2ee 58%, #ece9e3 100%);
       }
       .gm-board-wrap {
-        width: min(74vh, 92vw, 58rem);
+        width: min(88vh, 96vw, 74rem);
         aspect-ratio: 5 / 4;
-        --gone: clamp(0, calc((var(--sc-p, 0) - 0.82) * 9), 1);
+        --gone: clamp(0, calc((var(--sc-p, 0) - 0.88) * 14), 1);
         opacity: calc(1 - var(--gone));
         transform: scale(calc(1 + var(--gone) * 0.05));
         will-change: transform, opacity;
@@ -340,11 +383,11 @@
         will-change: transform, opacity;
       }
       .gm-piece img { width: 100%; height: auto; }
-      .gm-piece--jacket { --w0: 0.0;  --wm: 4.5; --dx: -60vw; --dy: 0vh;   --dr: -10deg; --r0: -1.5deg; width: 56%; left: 2%;  top: 3%; }
-      .gm-piece--shirt  { --w0: 0.16; --wm: 4.2; --dx: 24vw;  --dy: -60vh; --dr: 8deg;   --r0: 1deg;    width: 34%; left: 61%; top: 2%; }
-      .gm-piece--tie    { --w0: 0.32; --wm: 4.2; --dx: 55vw;  --dy: 8vh;   --dr: 14deg;  --r0: 3deg;    width: 26%; left: 68%; top: 40%; }
-      .gm-piece--square { --w0: 0.46; --wm: 4.5; --dx: 20vw;  --dy: 55vh;  --dr: -12deg; --r0: -2deg;   width: 17%; left: 47%; top: 71%; }
-      .gm-piece--tape   { --w0: 0.56; --wm: 5;   --dx: -30vw; --dy: 50vh;  --dr: 18deg;  --r0: 4deg;    width: 24%; left: 6%;  top: 63%; }
+      .gm-piece--jacket { --w0: 0.0;  --wm: 2.9; --dx: -60vw; --dy: 0vh;   --dr: -10deg; --r0: -1.5deg; width: 56%; left: 2%;  top: 3%; }
+      .gm-piece--shirt  { --w0: 0.12; --wm: 3.1; --dx: 24vw;  --dy: -60vh; --dr: 8deg;   --r0: 1deg;    width: 34%; left: 61%; top: 2%; }
+      .gm-piece--tie    { --w0: 0.25; --wm: 3.4; --dx: 55vw;  --dy: 8vh;   --dr: 14deg;  --r0: 3deg;    width: 26%; left: 68%; top: 40%; }
+      .gm-piece--square { --w0: 0.37; --wm: 3.8; --dx: 20vw;  --dy: 55vh;  --dr: -12deg; --r0: -2deg;   width: 17%; left: 47%; top: 71%; }
+      .gm-piece--tape   { --w0: 0.45; --wm: 4.2; --dx: -30vw; --dy: 50vh;  --dr: 18deg;  --r0: 4deg;    width: 24%; left: 6%;  top: 63%; }
       .gm-chalk { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
       .gm-chalk path {
         fill: none;
@@ -357,14 +400,14 @@
         --tc: clamp(0, calc((var(--sc-p, 0) - var(--c0)) * 7), 1);
         stroke-dashoffset: calc(1 - var(--tc));
       }
-      .gm-chalk path:nth-child(1) { --c0: 0.62; }
-      .gm-chalk path:nth-child(2) { --c0: 0.66; }
-      .gm-chalk path:nth-child(3) { --c0: 0.70; }
-      .gm-chalk path:nth-child(4) { --c0: 0.73; }
+      .gm-chalk path:nth-child(1) { --c0: 0.52; }
+      .gm-chalk path:nth-child(2) { --c0: 0.56; }
+      .gm-chalk path:nth-child(3) { --c0: 0.60; }
+      .gm-chalk path:nth-child(4) { --c0: 0.64; }
       .gm-worn {
         position: absolute;
         inset: 0;
-        opacity: clamp(0, calc((var(--sc-p, 0) - 0.84) * 9), 1);
+        opacity: clamp(0, calc((var(--sc-p, 0) - 0.90) * 14), 1);
         will-change: opacity;
       }
       .gm-worn img {
@@ -497,25 +540,37 @@
       .gm-faq summary:hover { color: var(--sc-accent); }
       .gm-foot a:hover, .gm-rating__meta a:hover { color: var(--sc-ink); }
 
-      /* ------------------------------------------------ act 6: macro ----- */
-      .gm-macro .sc-copy--trail h2 { max-width: 16ch; }
-      .gm-macro .sc-scrim--trail {
-        background: linear-gradient(
-          to top left,
-          color-mix(in oklab, var(--sc-canvas) 96%, transparent) 0%,
-          color-mix(in oklab, var(--sc-canvas) 82%, transparent) 34%,
-          color-mix(in oklab, var(--sc-canvas) 42%, transparent) 56%,
-          transparent 76%);
+      /* ------------------------------------------------ act 6: stitch ---- */
+      /* Two full-bleed sharp macro clips, no wash at all: the fabric is dark
+         enough to carry ivory type directly. Scroll crossfades A into B. */
+      .gm-stitch .sc-stage { background: #10182a; }
+      .gm-stitch__vid {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
-      @media (max-width: 860px) {
-        .gm-macro .sc-scrim--trail {
-          background: linear-gradient(
-            to top,
-            color-mix(in oklab, var(--sc-canvas) 96%, transparent) 0%,
-            color-mix(in oklab, var(--sc-canvas) 80%, transparent) 26%,
-            color-mix(in oklab, var(--sc-canvas) 40%, transparent) 48%,
-            transparent 62%);
-        }
+      .gm-stitch__vid--b {
+        opacity: clamp(0, calc((var(--sc-p, 0) - 0.42) * 6), 1);
+        will-change: opacity;
+      }
+      /* Invisible-dark corner washes on an already dark frame: they exist so
+         the ivory basting thread never crosses directly under a letterform. */
+      .gm-stitch__shade { position: absolute; inset: 0; pointer-events: none; }
+      .gm-stitch__shade--lead {
+        background: linear-gradient(to top right, rgba(16, 24, 42, 0.72) 0%, rgba(16, 24, 42, 0.3) 32%, transparent 56%);
+      }
+      .gm-stitch__shade--trail {
+        background: linear-gradient(to top left, rgba(16, 24, 42, 0.72) 0%, rgba(16, 24, 42, 0.3) 32%, transparent 56%);
+      }
+      .gm-stitch .sc-copy h2 {
+        color: #f2f5f7;
+        max-width: 14ch;
+      }
+      .gm-stitch .sc-copy h2 em { color: #8fc0d8; }
+      @media (prefers-reduced-motion: reduce) {
+        .gm-stitch__vid--b { opacity: 0; }
       }
 
       /* ------------------------------------------------ act 7: proof ----- */
@@ -561,21 +616,35 @@
         color: var(--sc-ink-soft);
         font-size: var(--sc-t-sm);
       }
-      /* The credibility strip: every review, scrolled through by hand. */
+      /* The credibility strip: a slow self-playing marquee. Hovering or
+         focusing pauses it; reduced motion turns it back into a scroller. */
       .gm-reviews-strip {
+        overflow: hidden;
+        padding: var(--sc-6) 0 var(--sc-5);
+        margin-top: var(--sc-5);
+      }
+      .gm-reviews-track {
         display: flex;
         gap: clamp(1rem, 2.5vw, 1.75rem);
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        scroll-snap-type: x proximity;
-        padding: var(--sc-6) var(--sc-2) var(--sc-5);
-        margin-top: var(--sc-5);
-        scrollbar-width: thin;
+        width: max-content;
+        padding-inline: var(--sc-2);
+      }
+      .gm-reviews-track[data-cloned] { animation: gm-marquee 70s linear infinite; }
+      .gm-reviews-set { display: flex; gap: clamp(1rem, 2.5vw, 1.75rem); }
+      .gm-reviews-strip:hover .gm-reviews-track,
+      .gm-reviews-strip:focus-within .gm-reviews-track { animation-play-state: paused; }
+      @keyframes gm-marquee {
+        from { transform: translate3d(0, 0, 0); }
+        to { transform: translate3d(-50%, 0, 0); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .gm-reviews-strip { overflow-x: auto; scrollbar-width: thin; }
+        .gm-reviews-track { animation: none; }
+        .gm-reviews-track > [aria-hidden="true"] { display: none; }
       }
       .gm-review {
         flex: 0 0 auto;
         width: clamp(17rem, 24vw, 21rem);
-        scroll-snap-align: start;
         background: var(--sc-surface);
         border-radius: var(--sc-r-lg);
         padding: clamp(1.5rem, 2.5vw, 2rem);
@@ -749,7 +818,6 @@
       /* ------------------------------------------------ close ------------ */
       .gm-close .sc-stage {
         display: grid;
-        grid-template-rows: 1fr auto;
         background: #e4ebef;
       }
       .gm-close__inner {
@@ -762,18 +830,82 @@
       }
       .gm-close__inner h2 { max-width: 18ch; }
       .gm-cta--big { font-size: var(--sc-t-lg); padding: 0.85em 1.6em; }
-      .gm-foot {
+      .gm-cta--big:hover { transform: translateY(-1px); }
+      .gm-cta--big:active { transform: translateY(1px) scale(0.98); }
+      /* The chalk ring: sketches itself around the call button as the close
+         pins, in place of any pointer-chasing. */
+      .gm-close__cta { position: relative; display: inline-block; }
+      .gm-close__ring {
+        position: absolute;
+        inset: -1.6em -2.4em;
+        width: calc(100% + 4.8em);
+        height: calc(100% + 3.2em);
+        pointer-events: none;
+        overflow: visible;
+      }
+      .gm-close__ring path {
+        fill: none;
+        stroke: var(--sc-accent);
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        opacity: 0.65;
+        stroke-dasharray: 1;
+        --rp: clamp(0, calc((var(--sc-p, 0) - 0.12) * 2.4), 1);
+        stroke-dashoffset: calc(1 - var(--rp));
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .gm-close__ring path { stroke-dashoffset: 0; }
+      }
+
+      /* ------------------------------------------------ footer ----------- */
+      .gm-footer {
+        background: #152238;
+        color: #b7c4d4;
+      }
+      .gm-footer a { color: #f2f5f7; text-decoration: none; }
+      .gm-footer a:hover { text-decoration: underline; }
+      .gm-footer__grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr;
+        gap: clamp(2rem, 5vw, 4rem);
+        padding: clamp(3rem, 6vw, 5rem) var(--sc-gutter) var(--sc-7);
+        max-width: var(--sc-maxw);
+        margin-inline: auto;
+      }
+      .gm-footer__brand { display: flex; flex-direction: column; gap: var(--sc-3); }
+      .gm-footer__brand .gm-brand { align-items: flex-start; color: #f2f5f7; }
+      .gm-footer__brand .gm-brand__row { color: #7db2cc; }
+      .gm-footer__brand p { margin: 0; font-size: var(--sc-t-sm); max-width: 30ch; }
+      .gm-footer h3 {
+        font-family: var(--sc-font-text);
+        font-size: var(--sc-t-xs);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: var(--sc-track-wide);
+        color: #7db2cc;
+        margin: 0 0 var(--sc-3);
+      }
+      .gm-footer__col { display: flex; flex-direction: column; gap: var(--sc-2); font-size: var(--sc-t-sm); }
+      .gm-footer__col dl { display: grid; gap: var(--sc-1); margin: 0; }
+      .gm-footer__col dl div { display: flex; justify-content: space-between; gap: var(--sc-3); }
+      .gm-footer__col dd { margin: 0; color: #f2f5f7; font-variant-numeric: tabular-nums; }
+      .gm-footer__bottom {
+        border-top: 1px solid rgba(242, 245, 247, 0.14);
+        padding: var(--sc-4) var(--sc-gutter);
+        max-width: var(--sc-maxw);
+        margin-inline: auto;
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
         justify-content: space-between;
         gap: var(--sc-3);
-        padding: var(--sc-4) var(--sc-gutter);
-        border-top: 1px solid var(--sc-hairline);
-        color: var(--sc-ink-soft);
         font-size: var(--sc-t-xs);
       }
-      .gm-foot a { color: var(--sc-ink-soft); }
+      @media (max-width: 860px) {
+        .gm-footer__grid { grid-template-columns: 1fr 1fr; }
+      }
+      @media (max-width: 560px) {
+        .gm-footer__grid { grid-template-columns: 1fr; }
+      }
 
       .gm-eyebrow {
         font-size: var(--sc-t-xs);
@@ -1017,8 +1149,34 @@
       </section>
 
       <!-- 2 · RECOGNITION: the week, pinned quick lines -->
-      <section class="gm-week" data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#eef2f4" aria-label="The occasions Gabriel dresses">
+      <section class="gm-week" data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#e7edf1" aria-label="The occasions Gabriel dresses">
         <div data-sc-stage>
+          <svg class="gm-notes" viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g>
+              <path pathLength="1" d="M 13 12 C 9 15, 9 21, 14 23 C 20 25, 25 20, 22 14 C 20 10, 16 10, 13 12" />
+              <path pathLength="1" d="M 17.5 23.5 C 17 27, 18 30, 17 33" />
+              <path pathLength="1" d="M 82 40 l 3 -1 m -2.5 3.5 l 3 -1 m -2 4 l 3 -1" />
+            </g>
+            <g>
+              <path pathLength="1" d="M 83 13 C 79 10, 75 11, 76 15 C 77 18, 81 18, 83 15 C 85 18, 89 18, 90 15 C 91 11, 87 10, 83 13" />
+              <path pathLength="1" d="M 82 13.6 a 1.4 1.4 0 1 0 2.8 0 a 1.4 1.4 0 1 0 -2.8 0" />
+              <path pathLength="1" d="M 12 44 c 3 2, 7 2, 10 0" />
+            </g>
+            <g>
+              <path pathLength="1" d="M 12 12 l 5 7 l 5 -7" />
+              <path pathLength="1" d="M 17 19 l 0 10 m -2 -3 l 2 4 l 2 -4" />
+              <path pathLength="1" d="M 80 42 c 4 -2, 8 -2, 12 0 m -12 3 c 4 -2, 8 -2, 12 0" />
+            </g>
+            <g>
+              <path pathLength="1" d="M 30 50 L 70 50" stroke-dasharray="0.02 0.02" />
+              <path pathLength="1" d="M 36 48.5 l 0 3 m 28 -3 l 0 3" />
+            </g>
+            <g>
+              <path pathLength="1" d="M 16 52 L 84 52 M 16 50.5 l 0 3 M 84 50.5 l 0 3" />
+              <path pathLength="1" d="M 50 52 l -3 3 m 3 -3 l 3 3" />
+              <path pathLength="1" d="M 10 10 c 2 4, 2 8, 0 12 m 80 -12 c -2 4, -2 8, 0 12" />
+            </g>
+          </svg>
           <div class="gm-week__lines">
             <p data-sc-cue="0 0.21 0 0.18">A wedding <em>in three weeks.</em></p>
             <p data-sc-cue="0.18 0.42 0.1 0.14">Prom <em>on Friday.</em></p>
@@ -1040,7 +1198,7 @@
               and the finishing pieces so the whole look comes together in the shop.
             </p>
           </div>
-          <figure data-sc-reveal="left" data-sc-reveal-at="0.16 0.6">
+          <figure data-sc-reveal="left" data-sc-reveal-at="0.08 0.42">
             <img
               src="assets/turn2.webp"
               width="1600"
@@ -1054,7 +1212,7 @@
       </section>
 
       <!-- 4 · DELIGHT, THE PEAK: the suit assembles, then it's worn -->
-      <section class="gm-assembly" data-sc-act="pin" data-sc-span="3.5" data-sc-drift="#f4f2ee" aria-label="A full outfit assembling piece by piece, then worn at a wedding">
+      <section class="gm-assembly" data-sc-act="pin" data-sc-span="4.2" data-sc-drift="#f4f2ee" aria-label="A full outfit assembling piece by piece, then worn at a wedding">
         <div data-sc-stage>
           <div class="gm-board-wrap" aria-hidden="true">
             <div class="gm-board">
@@ -1078,7 +1236,7 @@
           <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.3 0">
             <h2 class="sc-display sc-display--lg">Watch it <em>come together</em>.</h2>
           </div>
-          <div class="sc-copy sc-copy--lead" data-sc-cue="0.92 1 0.28 0.14">
+          <div class="sc-copy sc-copy--lead" data-sc-cue="0.94 1 0.3 0.1">
             <p class="gm-assembled-line">The look, the fit, and the day itself. <em class="gm-chalk-u">Handled.</em></p>
           </div>
         </div>
@@ -1135,14 +1293,18 @@
         </div>
       </section>
 
-      <!-- 6 · TRUST: macro scrub, the second and last scrubbed clip -->
-      <section class="gm-macro" data-sc-act="scrub" data-sc-span="1.7" data-sc-dwell="0.3" data-sc-drift="#f7f5f1" aria-label="Fabric and stitching up close">
+      <!-- 6 · TRUST: two sharp full-bleed macro clips, crossfaded by scroll -->
+      <section class="gm-stitch" data-sc-act="pin" data-sc-span="2.4" data-sc-drift="#10182a" aria-label="Fabric and stitching up close">
         <div data-sc-stage>
-          <img class="sc-stage__poster" src="assets/06-poster.webp" alt="A threaded needle resting in deep navy herringbone suit fabric, up close." />
-          <video data-sc-scrub data-sc-src="assets/06.mp4" data-sc-src-mobile="assets/06-m.mp4" muted playsinline aria-hidden="true" tabindex="-1"></video>
-          <div class="sc-scrim sc-scrim--trail" aria-hidden="true"></div>
-          <div class="sc-copy sc-copy--trail" data-sc-cue="0.12 1">
-            <h2 class="sc-display sc-display--lg">Fit is checked <em>in person</em>, down to the stitch.</h2>
+          <video class="gm-roll gm-stitch__vid" src="assets/m2-a.mp4" poster="assets/m2-a-poster.webp" muted loop playsinline preload="metadata" aria-label="A threaded needle and ivory basting stitch on navy herringbone fabric, sharp and up close"></video>
+          <video class="gm-roll gm-stitch__vid gm-stitch__vid--b" src="assets/m2-b.mp4" poster="assets/m2-b-poster.webp" muted loop playsinline preload="metadata" aria-label="Ivory pick-stitching and a horn button along a navy lapel edge, sharp and up close"></video>
+          <div class="gm-stitch__shade gm-stitch__shade--lead" aria-hidden="true"></div>
+          <div class="gm-stitch__shade gm-stitch__shade--trail" aria-hidden="true"></div>
+          <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.38 0 0.3">
+            <h2 class="sc-display sc-display--lg">Fit is checked <em>in person</em>.</h2>
+          </div>
+          <div class="sc-copy sc-copy--trail" data-sc-cue="0.52 1 0.25 0.12">
+            <h2 class="sc-display sc-display--lg">Down to <em>the stitch</em>.</h2>
           </div>
         </div>
       </section>
@@ -1153,7 +1315,7 @@
           <div class="gm-proof__head" data-sc-in>
             <div class="sc-stack">
               <h2 class="sc-display sc-display--lg">People leave feeling <em>looked after</em>.</h2>
-              <p class="sc-body">Real reviews from the shop's Google profile. Scroll through them.</p>
+              <p class="sc-body">Real reviews from the shop's Google profile.</p>
             </div>
             <div class="gm-rating">
               <strong>4.7</strong>
@@ -1168,7 +1330,9 @@
             </div>
           </div>
         </div>
-        <div class="gm-reviews-strip" role="region" aria-label="Customer reviews, horizontally scrollable" tabindex="0">
+        <div class="gm-reviews-strip" role="region" aria-label="Customer reviews" tabindex="0">
+          <div class="gm-reviews-track">
+          <div class="gm-reviews-set">
           <article class="gm-review">
             <blockquote>&ldquo;A great selection of beautiful suits&rdquo;</blockquote>
             <p>&ldquo;Amazing personal service and a great selection of beautiful suits! It's the kind of shop you keep going back to to build your wardrobe, from business casual to formal.&rdquo;</p>
@@ -1209,12 +1373,14 @@
             <p>&ldquo;The pants are very high quality cotton and suits and everything is very stylish&hellip; Fantastic store and I highly recommend it.&rdquo;</p>
             <footer><strong>Wayfarer</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
           </article>
+          </div>
+          </div>
         </div>
         <div class="sc-wrap">
           <div class="gm-gabriel" id="tailoring">
             <figure data-sc-in>
               <img
-                src="assets/gabriel-portrait.jpg"
+                src="assets/gabriel-portrait-cool.jpg"
                 width="960"
                 height="1200"
                 loading="lazy"
@@ -1234,7 +1400,7 @@
                   suits, jackets, trousers, and formalwear for the moments people remember.
                 </p>
               </div>
-              <div class="gm-gabriel-points" data-sc-stagger="80">
+              <div class="gm-gabriel-points" data-sc-in data-sc-stagger="80">
                 <article>
                   <h3>Trained to see the details.</h3>
                   <p>From trouser break to jacket balance, Gabriel looks at the fit in person and catches the things a rack or online order cannot.</p>
@@ -1255,7 +1421,7 @@
           <div class="sc-stack" data-sc-in>
             <h2 class="sc-display sc-display--md">Quick answers <em>before you stop in</em>.</h2>
           </div>
-          <div style="margin-top: var(--sc-6)" data-sc-stagger="50">
+          <div style="margin-top: var(--sc-6)" data-sc-in data-sc-stagger="50">
             <details>
               <summary>I don't know exactly what I need. Can I still come in?</summary>
               <p>Yes. Walk in and tell Gabriel what the occasion is. He can guide the suit, fit, and finishing details from there.</p>
@@ -1327,28 +1493,82 @@
 
       <!-- CLOSE -->
       <section class="gm-close" data-sc-act="pin" data-sc-span="1.1" data-sc-drift="#e4ebef" aria-label="Call Gabriel's Menswear">
-        <div data-sc-stage data-sc-spotlight>
+        <div data-sc-stage>
           <div class="gm-close__inner">
             <h2 class="sc-display sc-display--lg" data-sc-cue="0 1 0 0">Get a tailor's answer <em>before you spend more</em>.</h2>
-            <a class="gm-cta gm-cta--big" href="tel:+15088295186" data-sc-magnet="0.26" data-sc-cue="0 1 0 0" data-sc-rise="0">
-              Call (508) 829-5186
-            </a>
+            <span class="gm-close__cta" data-sc-cue="0 1 0 0">
+              <svg class="gm-close__ring" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+                <path pathLength="1" d="M 8 21 C 6 9, 30 4, 52 4 C 78 4, 96 9, 95 20 C 94 32, 72 37, 48 36 C 26 35, 9 31, 8 23" vector-effect="non-scaling-stroke" />
+              </svg>
+              <a class="gm-cta gm-cta--big" href="tel:+15088295186">Call (508) 829-5186</a>
+            </span>
           </div>
-          <footer class="gm-foot">
-            <span>Gabriel's Menswear &middot; 1363 Main St, Holden, MA &middot; Suits, fittings, accessories, and alterations.</span>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
-              target="_blank"
-              rel="noopener noreferrer"
-            >Get directions</a>
-          </footer>
         </div>
       </section>
     </main>
 
+    <footer class="gm-footer">
+      <div class="gm-footer__grid">
+        <div class="gm-footer__brand">
+          <span class="gm-brand" aria-hidden="true">
+            <span class="gm-brand__name">Gabriel's</span>
+            <span class="gm-brand__row">
+              <span class="gm-brand__sub">Menswear</span>
+            </span>
+          </span>
+          <p>Suits, fittings, accessories, and alterations for the days when fit matters. Formerly Main Street Menswear.</p>
+        </div>
+        <div class="gm-footer__col">
+          <h3>Visit</h3>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
+            target="_blank"
+            rel="noopener noreferrer"
+          >1363 Main St, Holden, MA 01520</a>
+          <a href="tel:+15088295186">(508) 829-5186</a>
+        </div>
+        <div class="gm-footer__col">
+          <h3>Hours</h3>
+          <dl>
+            <div><dt>Mon&ndash;Fri</dt><dd>11&ndash;6:30</dd></div>
+            <div><dt>Sat</dt><dd>11&ndash;6</dd></div>
+            <div><dt>Sun</dt><dd>12&ndash;4</dd></div>
+          </dl>
+        </div>
+        <div class="gm-footer__col">
+          <h3>Explore</h3>
+          <a href="#menswear">Menswear</a>
+          <a href="#occasions">Occasions</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#faq">FAQ</a>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Gabriel's%20Menswear%201363%20Main%20St%20Holden%20MA"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Reviews on Google</a>
+        </div>
+      </div>
+      <div class="gm-footer__bottom">
+        <span>&copy; 2026 Gabriel's Menswear &middot; Holden, Massachusetts</span>
+        <span>Expert tailoring. Personal service.</span>
+      </div>
+    </footer>
+
     <script src="scrollcraft.js"></script>
     <script>
       ScrollCraft.mount(document.body);
+
+      // Review marquee: duplicate the set once so the -50% loop is seamless.
+      (function () {
+        var track = document.querySelector(".gm-reviews-track");
+        var set = track && track.querySelector(".gm-reviews-set");
+        if (!track || !set) return;
+        var clone = set.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        clone.querySelectorAll("a, button").forEach(function (el) { el.tabIndex = -1; });
+        track.appendChild(clone);
+        track.setAttribute("data-cloned", "");
+      })();
 
       // B-roll rail clips: play only while near the viewport, never under
       // reduced motion, and stoppable by the visible toggle (WCAG 2.2.2).

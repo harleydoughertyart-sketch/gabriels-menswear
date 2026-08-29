@@ -12,3 +12,5 @@ scrollcraft/builds/*/package-lock.json
 scrollcraft/builds/*/package.json
 scrollcraft/builds/*/assets/logo-card.png
 scrollcraft/builds/*/assets/
+scrollcraft/builds/*/out2/
+scrollcraft/builds/*/cut/
