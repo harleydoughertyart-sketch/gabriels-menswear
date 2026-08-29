@@ -24,7 +24,7 @@
     <meta property="og:image:height" content="889" />
     <meta
       property="og:image:alt"
-      content="Tailored navy suits on a rack in a bright menswear shop interior."
+      content="Navy suit jackets on wooden hangers, photographed up close."
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Gabriel's Menswear | Suits & Alterations in Holden, MA" />
@@ -35,7 +35,7 @@
     <meta name="twitter:image" content="https://gabrielsmenswear.com/assets/og-hero.jpg" />
     <meta
       name="twitter:image:alt"
-      content="Tailored navy suits on a rack in a bright menswear shop interior."
+      content="Navy suit jackets on wooden hangers, photographed up close."
     />
     <meta name="theme-color" content="#f7f5f1" />
     <script>
@@ -64,11 +64,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Archivo:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="preload" href="assets/01-poster.webp" as="image" media="(min-width: 861px)" />
-    <link rel="preload" href="assets/01-poster-p.webp" as="image" media="(max-width: 860px)" />
+    <link rel="preload" href="assets/h2-01-poster.webp" as="image" media="(min-width: 861px)" />
+    <link rel="preload" href="assets/h2-01-poster-p.webp" as="image" media="(max-width: 860px)" />
     <link rel="stylesheet" href="scrollcraft.css" />
     <style>
       /* ------------------------------------------------ brand tokens ----- */
@@ -82,7 +82,6 @@
         --sc-font-display: "Playfair Display", Georgia, serif;
         --sc-font-text: "Archivo", system-ui, sans-serif;
         --sc-font-mono: "Archivo", system-ui, sans-serif;
-        /* light canvas: shadows soften and cool, the edge light goes white */
         --sc-shadow-color: 213 28% 22%;
         --sc-e1: 0 1px 2px hsl(var(--sc-shadow-color) / 0.10),
                  0 2px 6px -1px hsl(var(--sc-shadow-color) / 0.08);
@@ -96,6 +95,20 @@
       .sc-grain { opacity: 0.028; }
       .sc-display { font-weight: 600; }
 
+      /* The black-and-blue voice: every headline carries one italic accent
+         phrase in the brand teal. One hue, one role, the whole page. */
+      h1 em, h2 em, .gm-week__lines em {
+        font-style: italic;
+        color: var(--sc-accent);
+      }
+      .gm-chalk-u {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M2 6 C 30 2.5, 62 7.5, 118 3.5' stroke='%2333627C' stroke-width='2.6' fill='none' stroke-linecap='round' opacity='0.75'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: 0 96%;
+        background-size: 100% 0.16em;
+        padding-bottom: 0.12em;
+      }
+
       /* ------------------------------------------------ chrome ----------- */
       .gm-bar {
         position: fixed;
@@ -106,12 +119,50 @@
         justify-content: space-between;
         gap: var(--sc-4);
         padding: var(--sc-3) var(--sc-gutter);
-        background: color-mix(in oklab, var(--sc-canvas) 86%, transparent);
+        background: color-mix(in oklab, var(--sc-canvas) 88%, transparent);
         -webkit-backdrop-filter: blur(14px);
         backdrop-filter: blur(14px);
         border-bottom: 1px solid var(--sc-hairline);
       }
-      .gm-bar__brand img { width: clamp(132px, 16vw, 188px); height: auto; }
+      .gm-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        text-decoration: none;
+        color: var(--sc-ink);
+      }
+      .gm-brand__name {
+        font-family: var(--sc-font-display);
+        font-weight: 600;
+        font-size: clamp(1.15rem, 2vw, 1.45rem);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        line-height: 1;
+      }
+      .gm-brand__row {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        color: var(--sc-accent);
+      }
+      .gm-brand__row::before,
+      .gm-brand__row::after {
+        content: "";
+        height: 1px;
+        width: 1.6em;
+        background: currentColor;
+        opacity: 0.55;
+      }
+      .gm-brand__sub {
+        font-family: var(--sc-font-text);
+        font-weight: 600;
+        font-size: 0.58rem;
+        letter-spacing: 0.42em;
+        text-indent: 0.42em;
+        text-transform: uppercase;
+        line-height: 1;
+      }
       .gm-cta {
         display: inline-flex;
         align-items: center;
@@ -154,30 +205,34 @@
       .skip-link:focus-visible { left: 0; }
 
       /* ------------------------------------------------ hero ------------- */
-      /* Denser corner wash: the dolly slides jackets under the copy corner at
-         the worst frame, so the default lead scrim is not enough here. */
+      /* The hero clip is close-up bokeh with its own pale negative space, so
+         the wash is a whisper, not a fog. */
+      /* A column of density under the text column, full height, so every line
+         of the copy block sits on it; the jackets on the right stay untouched. */
       .gm-hero-scrim {
         background: linear-gradient(
-          to top right,
-          color-mix(in oklab, var(--sc-canvas) 97%, transparent) 0%,
-          color-mix(in oklab, var(--sc-canvas) 88%, transparent) 32%,
-          color-mix(in oklab, var(--sc-canvas) 58%, transparent) 54%,
-          transparent 78%);
+          100deg,
+          color-mix(in oklab, var(--sc-canvas) 90%, transparent) 0%,
+          color-mix(in oklab, var(--sc-canvas) 68%, transparent) 30%,
+          color-mix(in oklab, var(--sc-canvas) 30%, transparent) 48%,
+          transparent 64%);
       }
       @media (max-width: 860px) {
         .gm-hero-scrim {
           background: linear-gradient(
-            to top,
-            color-mix(in oklab, var(--sc-canvas) 97%, transparent) 0%,
-            color-mix(in oklab, var(--sc-canvas) 86%, transparent) 26%,
-            color-mix(in oklab, var(--sc-canvas) 45%, transparent) 48%,
-            transparent 64%);
+            to bottom,
+            color-mix(in oklab, var(--sc-canvas) 92%, transparent) 0%,
+            color-mix(in oklab, var(--sc-canvas) 62%, transparent) 40%,
+            transparent 68%);
         }
       }
-      .gm-hero-copy h1 {
-        color: var(--sc-ink);
-        max-width: 13ch;
-      }
+      /* The clip reserves its negative space in the upper left, so the copy
+         lives there, not at the foot of the frame. */
+      .gm-hero-copy { top: clamp(6rem, 15vh, 10rem); bottom: auto; }
+      /* Capped below the fluid xl so the teal line never reaches the jackets
+         on the right; the wash column only covers the left half. */
+      .gm-hero-copy h1 { color: var(--sc-ink); max-width: 12ch; font-size: clamp(2.8rem, 1.9rem + 3.4vw, 4.6rem); }
+      .gm-hero-copy h1 > span, .gm-hero-copy h1 > em { display: block; }
       .gm-hero-copy .sc-lede { margin-top: var(--sc-4); max-width: 34ch; }
       .gm-hero-actions {
         display: flex;
@@ -217,10 +272,6 @@
         color: var(--sc-ink);
         text-wrap: balance;
       }
-      .gm-week__lines > p > em {
-        font-style: italic;
-        color: var(--sc-accent);
-      }
       .gm-week__tick {
         position: absolute;
         left: 50%;
@@ -254,27 +305,29 @@
       }
 
       /* ------------------------------------------------ act 4: assembly -- */
-      /* THE SIGNATURE MOVE. Five flat-lay pieces converge into a fitting
-         flat-lay as the act scrubs; tailor's chalk then draws the fit marks.
-         Everything below is driven from the act's own --sc-p; the engine is
-         untouched. Pieces are photographed on pure white and multiply-blended
-         so their true contact shadows carry onto the board. */
+      /* THE SIGNATURE MOVE. Five alpha-cut pieces converge into a fitting
+         flat-lay under the wheel, chalk draws the fit marks, and the act
+         resolves into the suit worn at the wedding. All driven from --sc-p. */
       .gm-assembly .sc-stage {
         display: grid;
         place-items: center;
         background:
           radial-gradient(120% 100% at 50% 30%, #ffffff 0%, #f4f2ee 58%, #ece9e3 100%);
       }
-      .gm-board {
-        position: relative;
-        width: min(78vh, 92vw, 60rem);
+      .gm-board-wrap {
+        width: min(74vh, 92vw, 58rem);
         aspect-ratio: 5 / 4;
+        --gone: clamp(0, calc((var(--sc-p, 0) - 0.82) * 9), 1);
+        opacity: calc(1 - var(--gone));
+        transform: scale(calc(1 + var(--gone) * 0.05));
+        will-change: transform, opacity;
       }
+      .gm-board { position: relative; width: 100%; height: 100%; }
       .gm-piece {
         position: absolute;
         margin: 0;
-        mix-blend-mode: multiply;
-        /* progress through this piece's own window, smoothstepped */
+        filter: drop-shadow(0 18px 28px rgba(21, 34, 56, 0.16))
+          drop-shadow(0 2px 6px rgba(21, 34, 56, 0.10));
         --t: clamp(0, calc((var(--sc-p, 0) - var(--w0)) * var(--wm)), 1);
         --e: calc(var(--t) * var(--t) * (3 - 2 * var(--t)));
         opacity: var(--e);
@@ -287,17 +340,12 @@
         will-change: transform, opacity;
       }
       .gm-piece img { width: 100%; height: auto; }
-      .gm-piece--jacket { --w0: 0.0;  --wm: 4.5;  --dx: -60vw; --dy: 0vh;  --dr: -10deg; --r0: -1.5deg; width: 56%; left: 3%;  top: 4%; }
-      .gm-piece--shirt  { --w0: 0.16; --wm: 4.2;  --dx: 24vw;  --dy: -60vh; --dr: 8deg;  --r0: 1deg;    width: 36%; left: 60%; top: 2%; }
-      .gm-piece--tie    { --w0: 0.32; --wm: 4.2;  --dx: 55vw;  --dy: 8vh;  --dr: 14deg; --r0: 3deg;    width: 27%; left: 67%; top: 40%; }
-      .gm-piece--square { --w0: 0.46; --wm: 4.5;  --dx: 20vw;  --dy: 55vh; --dr: -12deg; --r0: -2deg;  width: 18%; left: 46%; top: 70%; }
-      .gm-piece--tape   { --w0: 0.56; --wm: 5;    --dx: -30vw; --dy: 50vh; --dr: 18deg; --r0: 4deg;    width: 25%; left: 5%;  top: 64%; }
-      .gm-chalk {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        overflow: visible;
-      }
+      .gm-piece--jacket { --w0: 0.0;  --wm: 4.5; --dx: -60vw; --dy: 0vh;   --dr: -10deg; --r0: -1.5deg; width: 56%; left: 2%;  top: 3%; }
+      .gm-piece--shirt  { --w0: 0.16; --wm: 4.2; --dx: 24vw;  --dy: -60vh; --dr: 8deg;   --r0: 1deg;    width: 34%; left: 61%; top: 2%; }
+      .gm-piece--tie    { --w0: 0.32; --wm: 4.2; --dx: 55vw;  --dy: 8vh;   --dr: 14deg;  --r0: 3deg;    width: 26%; left: 68%; top: 40%; }
+      .gm-piece--square { --w0: 0.46; --wm: 4.5; --dx: 20vw;  --dy: 55vh;  --dr: -12deg; --r0: -2deg;   width: 17%; left: 47%; top: 71%; }
+      .gm-piece--tape   { --w0: 0.56; --wm: 5;   --dx: -30vw; --dy: 50vh;  --dr: 18deg;  --r0: 4deg;    width: 24%; left: 6%;  top: 63%; }
+      .gm-chalk { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
       .gm-chalk path {
         fill: none;
         stroke: #ffffff;
@@ -306,30 +354,65 @@
         stroke-dasharray: 1;
         opacity: 0.9;
         filter: drop-shadow(0 0 0.6px rgba(255, 255, 255, 0.7));
-        --tc: clamp(0, calc((var(--sc-p, 0) - var(--c0)) * 6.5), 1);
+        --tc: clamp(0, calc((var(--sc-p, 0) - var(--c0)) * 7), 1);
         stroke-dashoffset: calc(1 - var(--tc));
       }
-      .gm-chalk path:nth-child(1) { --c0: 0.68; }
-      .gm-chalk path:nth-child(2) { --c0: 0.72; }
-      .gm-chalk path:nth-child(3) { --c0: 0.76; }
-      .gm-chalk path:nth-child(4) { --c0: 0.80; }
-      .gm-assembly .sc-copy--lead { bottom: clamp(2.5rem, 9vh, 6rem); }
-      .gm-assembly h2 { max-width: 12ch; }
-      .gm-assembly .gm-assembled-line {
-        font-size: var(--sc-t-lg);
-        line-height: 1.4;
-        letter-spacing: var(--sc-track-snug);
-        color: var(--sc-ink);
-        max-width: 30ch;
-        margin: 0;
+      .gm-chalk path:nth-child(1) { --c0: 0.62; }
+      .gm-chalk path:nth-child(2) { --c0: 0.66; }
+      .gm-chalk path:nth-child(3) { --c0: 0.70; }
+      .gm-chalk path:nth-child(4) { --c0: 0.73; }
+      .gm-worn {
+        position: absolute;
+        inset: 0;
+        opacity: clamp(0, calc((var(--sc-p, 0) - 0.84) * 9), 1);
+        will-change: opacity;
+      }
+      .gm-worn img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .gm-worn__wash {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top right,
+          color-mix(in oklab, var(--sc-canvas) 88%, transparent) 0%,
+          color-mix(in oklab, var(--sc-canvas) 54%, transparent) 34%,
+          transparent 62%);
       }
       @media (max-width: 860px) {
-        .gm-board { width: min(94vw, 62vh); }
-        .gm-assembly .sc-copy--trail { text-align: left; }
+        .gm-worn__wash {
+          background: linear-gradient(
+            to top,
+            color-mix(in oklab, var(--sc-canvas) 90%, transparent) 0%,
+            color-mix(in oklab, var(--sc-canvas) 58%, transparent) 32%,
+            transparent 58%);
+        }
+      }
+      .gm-assembly .sc-copy--lead { bottom: clamp(2.5rem, 9vh, 6rem); }
+      .gm-assembly h2 { max-width: 13ch; }
+      .gm-assembled-line {
+        font-family: var(--sc-font-display);
+        font-weight: 600;
+        font-size: var(--sc-t-xl);
+        line-height: 1.25;
+        color: var(--sc-ink);
+        max-width: 22ch;
+        margin: 0;
+        text-wrap: balance;
+      }
+      .gm-assembled-line em { font-style: italic; color: var(--sc-accent); }
+      @media (max-width: 860px) {
+        .gm-board-wrap { width: min(94vw, 60vh); }
       }
       @media (prefers-reduced-motion: reduce) {
         .gm-piece { --e: 1; opacity: 1; }
         .gm-chalk path { --tc: 1; stroke-dashoffset: 0; }
+        .gm-board-wrap { --gone: 0; opacity: 1; transform: none; }
+        .gm-worn { opacity: 0; }
         .gm-week__tick { transform: scaleX(1); }
       }
 
@@ -356,7 +439,6 @@
         display: flex;
         flex-direction: column;
         gap: var(--sc-3);
-        /* staggered settle: each card eases in across its own slice of travel */
         --t: clamp(0.55, calc(0.55 + (var(--sc-p, 1) - var(--s0)) * 4), 1);
         opacity: var(--t);
       }
@@ -364,13 +446,19 @@
       .gm-occasion:nth-of-type(2) { --s0: 0.10; }
       .gm-occasion:nth-of-type(3) { --s0: 0.26; }
       .gm-occasion:nth-of-type(4) { --s0: 0.42; }
-      .gm-occasion > div {
+      .gm-occasion:nth-of-type(5) { --s0: 0.58; }
+      .gm-occasion__media {
         border-radius: var(--sc-r-md);
         overflow: hidden;
         box-shadow: var(--sc-e2), var(--sc-edge);
         background: var(--sc-surface);
+        aspect-ratio: 3 / 4;
       }
-      .gm-occasion img { width: 100%; height: auto; }
+      .gm-occasion__media :is(video, img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
       .gm-occasion h3 {
         font-family: var(--sc-font-display);
         font-weight: 600;
@@ -379,19 +467,35 @@
         margin: var(--sc-2) 0 0;
         color: var(--sc-ink);
       }
+      .gm-occasion h3 em { font-style: italic; color: var(--sc-accent); }
       .gm-occasion p { margin: 0; color: var(--sc-ink-soft); max-width: 30ch; }
-      .gm-rail__note {
-        flex: 0 0 auto;
-        width: clamp(15rem, 22vw, 20rem);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: var(--sc-3);
-        color: var(--sc-ink-soft);
-      }
       @media (prefers-reduced-motion: reduce) {
         .gm-occasion { opacity: 1; }
       }
+      .gm-roll-toggle {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5em;
+        padding: 0.5em 1em;
+        border-radius: var(--sc-r-pill);
+        border: 1px solid var(--sc-hairline-strong);
+        background: transparent;
+        color: var(--sc-ink-soft);
+        font-size: var(--sc-t-xs);
+        font-weight: 600;
+        cursor: pointer;
+        transition: color 140ms var(--sc-ease-out), border-color 140ms var(--sc-ease-out);
+      }
+      .gm-roll-toggle:hover { color: var(--sc-ink); border-color: var(--sc-ink-soft); }
+      .gm-roll-toggle:active { transform: translateY(1px); }
+
+      /* hover states for the quieter interactive elements */
+      .gm-brand { transition: opacity 140ms var(--sc-ease-out); }
+      .gm-brand:hover { opacity: 0.8; }
+      .gm-faq summary { transition: color 140ms var(--sc-ease-out); }
+      .gm-faq summary:hover { color: var(--sc-accent); }
+      .gm-foot a:hover, .gm-rating__meta a:hover { color: var(--sc-ink); }
 
       /* ------------------------------------------------ act 6: macro ----- */
       .gm-macro .sc-copy--trail h2 { max-width: 16ch; }
@@ -416,68 +520,103 @@
 
       /* ------------------------------------------------ act 7: proof ----- */
       .gm-proof { background: var(--sc-canvas); }
-      .gm-reviews {
-        display: grid;
-        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-        gap: clamp(1.5rem, 4vw, 3rem);
-        margin-top: var(--sc-7);
-        align-items: start;
+      .gm-proof__head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: var(--sc-5);
       }
-      .gm-review--lead {
+      .gm-rating {
+        display: flex;
+        align-items: baseline;
+        gap: var(--sc-3);
+        white-space: nowrap;
+      }
+      .gm-rating strong {
+        font-family: var(--sc-font-display);
+        font-size: var(--sc-t-3xl);
+        font-weight: 600;
+        color: var(--sc-ink);
+        line-height: 1;
+      }
+      .gm-rating__meta { display: flex; flex-direction: column; gap: 2px; }
+      .gm-rating__stars {
+        position: relative;
+        display: inline-block;
+        color: color-mix(in oklab, var(--sc-accent) 28%, transparent);
+        letter-spacing: 0.14em;
+        font-size: var(--sc-t-base);
+        line-height: 1;
+      }
+      .gm-rating__stars > span {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        width: 94%;
+        color: var(--sc-accent);
+        white-space: nowrap;
+      }
+      .gm-rating__meta a {
+        color: var(--sc-ink-soft);
+        font-size: var(--sc-t-sm);
+      }
+      /* The credibility strip: every review, scrolled through by hand. */
+      .gm-reviews-strip {
+        display: flex;
+        gap: clamp(1rem, 2.5vw, 1.75rem);
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x proximity;
+        padding: var(--sc-6) var(--sc-2) var(--sc-5);
+        margin-top: var(--sc-5);
+        scrollbar-width: thin;
+      }
+      .gm-review {
+        flex: 0 0 auto;
+        width: clamp(17rem, 24vw, 21rem);
+        scroll-snap-align: start;
         background: var(--sc-surface);
         border-radius: var(--sc-r-lg);
-        padding: clamp(1.75rem, 4vw, 3rem);
+        padding: clamp(1.5rem, 2.5vw, 2rem);
         box-shadow: var(--sc-e2), var(--sc-edge);
+        display: flex;
+        flex-direction: column;
+        gap: var(--sc-3);
       }
-      .gm-review--lead blockquote {
+      .gm-review blockquote {
         margin: 0;
         font-family: var(--sc-font-display);
         font-style: italic;
-        font-weight: 600;
-        font-size: var(--sc-t-xl);
-        line-height: 1.25;
+        font-weight: 500;
+        font-size: var(--sc-t-lg);
+        line-height: 1.3;
         color: var(--sc-ink);
-        text-wrap: balance;
+        text-wrap: pretty;
       }
-      .gm-review--lead > p { margin: var(--sc-4) 0 0; color: var(--sc-ink-soft); }
-      .gm-review-side { display: flex; flex-direction: column; gap: var(--sc-5); }
-      .gm-review-side article {
-        padding-left: var(--sc-5);
-        border-left: 1px solid var(--sc-hairline-strong);
-      }
-      .gm-review-side h3 {
-        font-family: var(--sc-font-text);
-        font-weight: 600;
-        font-size: var(--sc-t-base);
-        margin: 0 0 var(--sc-2);
-        color: var(--sc-ink);
-      }
-      .gm-review-side p { margin: 0; color: var(--sc-ink-soft); }
-      .gm-stars {
-        color: var(--sc-accent);
-        letter-spacing: 0.18em;
-        font-size: var(--sc-t-sm);
-        margin: 0 0 var(--sc-2);
-      }
-      .gm-review-meta {
+      .gm-review > p { margin: 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+      .gm-review footer {
+        margin-top: auto;
+        padding-top: var(--sc-3);
+        border-top: 1px solid var(--sc-hairline);
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: var(--sc-3);
         font-size: var(--sc-t-xs);
-        text-transform: uppercase;
-        letter-spacing: var(--sc-track-wide);
         color: var(--sc-ink-soft);
-        margin: 0 0 var(--sc-3);
       }
-      @media (max-width: 860px) {
-        .gm-reviews { grid-template-columns: 1fr; }
-      }
+      .gm-review footer strong { color: var(--sc-ink); font-weight: 600; }
+      .gm-review__stars { color: var(--sc-accent); letter-spacing: 0.12em; white-space: nowrap; }
 
       .gm-gabriel {
         display: grid;
         grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
         gap: clamp(2rem, 6vw, 5rem);
         align-items: center;
-        margin-top: var(--sc-10);
+        margin-top: var(--sc-9);
       }
-      .gm-gabriel figure { margin: 0; position: relative; }
+      .gm-gabriel figure { margin: 0; }
       .gm-gabriel img {
         width: 100%;
         height: auto;
@@ -492,11 +631,7 @@
       }
       .gm-gabriel figcaption strong { color: var(--sc-ink); }
       .gm-gabriel figcaption span { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
-      .gm-gabriel-points {
-        display: grid;
-        gap: var(--sc-5);
-        margin-top: var(--sc-6);
-      }
+      .gm-gabriel-points { display: grid; gap: var(--sc-5); margin-top: var(--sc-6); }
       .gm-gabriel-points h3 {
         font-family: var(--sc-font-display);
         font-size: var(--sc-t-lg);
@@ -539,6 +674,78 @@
       .gm-faq details[open] summary::after { rotate: 45deg; }
       .gm-faq details p { margin: var(--sc-3) 0 0; color: var(--sc-ink-soft); max-width: 60ch; }
 
+      /* ------------------------------------------------ visit + map ------ */
+      .gm-visit { background: var(--sc-canvas); }
+      .gm-visit__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: clamp(1.5rem, 4vw, 3rem);
+        margin-top: var(--sc-7);
+        align-items: stretch;
+      }
+      .gm-contact {
+        background: var(--sc-surface);
+        border-radius: var(--sc-r-lg);
+        padding: clamp(1.75rem, 3.5vw, 2.75rem);
+        box-shadow: var(--sc-e2), var(--sc-edge);
+        display: flex;
+        flex-direction: column;
+        gap: var(--sc-5);
+      }
+      .gm-contact__row { display: flex; flex-direction: column; gap: 4px; }
+      .gm-contact__row > span {
+        font-size: var(--sc-t-xs);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: var(--sc-track-wide);
+        color: var(--sc-accent);
+      }
+      .gm-contact__row a {
+        color: var(--sc-ink);
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .gm-contact__row a:hover { text-decoration: underline; }
+      .gm-contact__phone { font-family: var(--sc-font-display); font-size: var(--sc-t-xl); }
+      .gm-hours { display: grid; gap: var(--sc-1); margin: 0; }
+      .gm-hours div { display: flex; justify-content: space-between; gap: var(--sc-4); }
+      .gm-hours dt { color: var(--sc-ink-soft); }
+      .gm-hours dd { margin: 0; color: var(--sc-ink); font-variant-numeric: tabular-nums; }
+      .gm-contact .gm-cta { align-self: flex-start; }
+      .gm-map {
+        border-radius: var(--sc-r-lg);
+        overflow: hidden;
+        box-shadow: var(--sc-e2), var(--sc-edge);
+        position: relative;
+        min-height: 22rem;
+        background: var(--sc-surface);
+      }
+      .gm-map iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      .gm-map__link {
+        position: absolute;
+        left: var(--sc-4);
+        bottom: var(--sc-4);
+        background: var(--sc-surface);
+        color: var(--sc-ink);
+        font-size: var(--sc-t-sm);
+        font-weight: 600;
+        padding: 0.55em 1em;
+        border-radius: var(--sc-r-pill);
+        box-shadow: var(--sc-e2);
+        text-decoration: none;
+      }
+      .gm-map__link:hover { text-decoration: underline; }
+      @media (max-width: 860px) {
+        .gm-visit__grid { grid-template-columns: 1fr; }
+        .gm-map { min-height: 18rem; }
+      }
+
       /* ------------------------------------------------ close ------------ */
       .gm-close .sc-stage {
         display: grid;
@@ -550,33 +757,11 @@
         place-content: center;
         justify-items: center;
         text-align: center;
-        gap: var(--sc-5);
+        gap: var(--sc-6);
         padding-inline: var(--sc-gutter);
       }
       .gm-close__inner h2 { max-width: 18ch; }
-      .gm-close__contact {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: var(--sc-3) var(--sc-6);
-        color: var(--sc-ink-soft);
-        font-size: var(--sc-t-sm);
-      }
-      .gm-close__contact a { color: var(--sc-ink); font-weight: 500; }
-      .gm-cta--big {
-        font-size: var(--sc-t-lg);
-        padding: 0.85em 1.6em;
-      }
-      .gm-close__hours {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: var(--sc-2) var(--sc-5);
-        color: var(--sc-ink-soft);
-        font-size: var(--sc-t-sm);
-        margin: 0;
-      }
-      .gm-close__hours span { white-space: nowrap; }
+      .gm-cta--big { font-size: var(--sc-t-lg); padding: 0.85em 1.6em; }
       .gm-foot {
         display: flex;
         flex-wrap: wrap;
@@ -590,7 +775,6 @@
       }
       .gm-foot a { color: var(--sc-ink-soft); }
 
-      /* eyebrow: used ONCE on the whole page */
       .gm-eyebrow {
         font-size: var(--sc-t-xs);
         font-weight: 600;
@@ -604,7 +788,16 @@
         [data-sc-cue] { opacity: 1 !important; }
         .gm-piece { opacity: 1 !important; transform: none !important; }
         .gm-chalk path { stroke-dashoffset: 0 !important; }
+        .gm-worn { display: none !important; }
         video[data-sc-scrub] { display: none; }
+        /* without JS nothing pins, so stacked cue layers return to flow */
+        [data-sc-stage] { height: auto !important; min-height: 0 !important; }
+        .sc-copy { position: static !important; translate: none !important; max-width: 46rem; padding: 2rem 0; }
+        .gm-week__lines { min-height: 0 !important; }
+        .gm-week__lines > p { position: static !important; translate: none !important; margin: 0 0 1rem !important; }
+        .gm-week .sc-stage, .gm-week [data-sc-stage] { padding-block: 3rem; }
+        .gm-board-wrap { opacity: 1 !important; transform: none !important; }
+        .gm-roll-toggle { display: none; }
       </style>
     </noscript>
     <script type="application/ld+json">
@@ -713,11 +906,6 @@
                   }
                 }
               ]
-            },
-            "subjectOf": {
-              "@type": "WebPage",
-              "name": "Public reviews for Gabriel's Menswear",
-              "url": "https://www.bestprosintown.com/ma/holden/gabriels-bridal-/comments/"
             }
           },
           {
@@ -787,8 +975,11 @@
     <div class="sc-grain" aria-hidden="true"></div>
 
     <header class="gm-bar">
-      <a class="gm-bar__brand" href="#main" aria-label="Gabriel's Menswear home">
-        <img src="assets/logo-header.webp" width="1200" height="700" alt="Gabriel's Menswear. Expert tailoring, personal service." />
+      <a class="gm-brand" href="#main" aria-label="Gabriel's Menswear home">
+        <span class="gm-brand__name">Gabriel's</span>
+        <span class="gm-brand__row" aria-hidden="true">
+          <span class="gm-brand__sub">Menswear</span>
+        </span>
       </a>
       <a class="gm-cta" href="tel:+15088295186">
         Call<span class="gm-bar__phone-full">&nbsp;(508) 829-5186</span>
@@ -796,20 +987,23 @@
     </header>
 
     <main id="main" tabindex="-1">
-      <!-- 1 · PULLED IN: scrub along the suit wall -->
-      <section data-sc-act="scrub" data-sc-span="2.3" data-sc-dwell="0.35" data-sc-drift="#f7f5f1" aria-label="Gabriel's Menswear introduction">
+      <!-- 1 · PULLED IN: close glide along the suit shoulders -->
+      <section data-sc-act="scrub" data-sc-span="2.2" data-sc-dwell="0.35" data-sc-drift="#f7f5f1" aria-label="Gabriel's Menswear introduction">
         <div data-sc-stage>
           <picture>
-            <source media="(max-width: 860px)" srcset="assets/01-poster-p.webp" />
-            <img class="sc-stage__poster" src="assets/01-poster.webp" alt="Tailored navy suits on wooden hangers in a bright shop interior." />
+            <source media="(max-width: 860px)" srcset="assets/h2-01-poster-p.webp" />
+            <img class="sc-stage__poster" src="assets/h2-01-poster.webp" alt="Navy suit jackets on wooden hangers, photographed up close." />
           </picture>
-          <video data-sc-scrub data-sc-src="assets/01.mp4" data-sc-src-mobile="assets/01-m.mp4" muted playsinline></video>
+          <video data-sc-scrub data-sc-src="assets/h2-01.mp4" data-sc-src-mobile="assets/h2-01-m.mp4" muted playsinline aria-hidden="true" tabindex="-1"></video>
           <div class="sc-scrim gm-hero-scrim" aria-hidden="true"></div>
           <div class="sc-copy sc-copy--lead gm-hero-copy" data-sc-cue="0 0.8 0">
-            <h1 class="sc-display sc-display--xl" data-sc-kinetic="lines">Need a suit? Gabriel makes it simple.</h1>
+            <h1 class="sc-display sc-display--xl">
+              <span data-sc-kinetic="lines">Need a suit?</span>
+              <em>Gabriel makes it <span class="gm-chalk-u">simple</span>.</em>
+            </h1>
             <p class="sc-lede">Suits, fittings, and alterations on Main Street in Holden.</p>
-            <div class="gm-hero-actions" aria-label="Primary actions">
-              <a class="gm-cta" href="tel:+15088295186">Call the shop</a>
+            <div class="gm-hero-actions">
+              <a class="gm-cta" href="tel:+15088295186">Call (508) 829-5186</a>
               <a
                 class="gm-cta gm-cta--ghost"
                 href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
@@ -817,7 +1011,7 @@
                 rel="noopener noreferrer"
               >Get directions</a>
             </div>
-            <p class="gm-hero-note">1363 Main St, Holden, MA</p>
+            <p class="gm-hero-note">1363 Main St, Holden, MA &middot; 4.7&#9733; on Google</p>
           </div>
         </div>
       </section>
@@ -830,7 +1024,7 @@
             <p data-sc-cue="0.18 0.42 0.1 0.14">Prom <em>on Friday.</em></p>
             <p data-sc-cue="0.38 0.59 0.15 0.18">An interview <em>Tuesday morning.</em></p>
             <p data-sc-cue="0.57 0.78 0.15 0.18">A funeral <em>tomorrow.</em></p>
-            <p data-sc-cue="0.76 1 0.15 0.12">Whatever the day is, the suit should be the easy part.</p>
+            <p data-sc-cue="0.76 1 0.15 0.12">Whatever the day is, the suit should be <em>the easy part.</em></p>
           </div>
           <span class="gm-week__tick" aria-hidden="true"></span>
         </div>
@@ -840,141 +1034,183 @@
       <section class="sc-section gm-turn" data-sc-act="flow" data-sc-drift="#f7f5f1" id="menswear">
         <div class="sc-wrap">
           <div class="sc-stack" data-sc-in data-sc-stagger="60">
-            <h2 class="sc-display sc-display--lg">Walk in unsure. Gabriel takes it from there.</h2>
+            <h2 class="sc-display sc-display--lg">Walk in <em>unsure</em>. Gabriel takes it from there.</h2>
             <p class="sc-body">
               No guessing through racks alone. Tell Gabriel the occasion, and he guides the suit, the fit,
-              and the finishing pieces so the look comes together in one visit.
+              and the finishing pieces so the whole look comes together in the shop.
             </p>
           </div>
           <figure data-sc-reveal="left" data-sc-reveal-at="0.16 0.6">
             <img
-              src="assets/03-turn.webp"
+              src="assets/turn2.webp"
               width="1600"
               height="900"
               loading="lazy"
               decoding="async"
-              alt="Folded navy suiting fabric, tailor's chalk, and thread on a bright worktable."
+              alt="Tailor's chalk resting on folded navy suiting fabric, up close."
             />
           </figure>
         </div>
       </section>
 
-      <!-- 4 · DELIGHT, THE PEAK: the suit assembles under scroll -->
-      <section class="gm-assembly" data-sc-act="pin" data-sc-span="3.4" data-sc-drift="#f4f2ee" aria-label="A full outfit assembling piece by piece">
+      <!-- 4 · DELIGHT, THE PEAK: the suit assembles, then it's worn -->
+      <section class="gm-assembly" data-sc-act="pin" data-sc-span="3.5" data-sc-drift="#f4f2ee" aria-label="A full outfit assembling piece by piece, then worn at a wedding">
         <div data-sc-stage>
-          <div class="gm-board" aria-hidden="true">
-            <figure class="gm-piece gm-piece--jacket"><img src="assets/piece-jacket.webp" width="900" height="1200" alt="" loading="lazy" decoding="async" /></figure>
-            <figure class="gm-piece gm-piece--shirt"><img src="assets/piece-shirt.webp" width="900" height="1200" alt="" loading="lazy" decoding="async" /></figure>
-            <figure class="gm-piece gm-piece--tie"><img src="assets/piece-tie.webp" width="900" height="1200" alt="" loading="lazy" decoding="async" /></figure>
-            <figure class="gm-piece gm-piece--square"><img src="assets/piece-square.webp" width="900" height="1200" alt="" loading="lazy" decoding="async" /></figure>
-            <figure class="gm-piece gm-piece--tape"><img src="assets/piece-tape.webp" width="900" height="1200" alt="" loading="lazy" decoding="async" /></figure>
-            <svg class="gm-chalk" viewBox="0 0 100 80" aria-hidden="true">
-              <path pathLength="1" d="M 26 14 C 30 22, 30 30, 26 38" />
-              <path pathLength="1" d="M 13 20 C 11 30, 10 40, 12 50" />
-              <path pathLength="1" d="M 20 46 l 5 4 m 0 -4 l -5 4" />
-              <path pathLength="1" d="M 40 18 C 42 26, 42 34, 40 42" />
-            </svg>
+          <div class="gm-board-wrap" aria-hidden="true">
+            <div class="gm-board">
+              <figure class="gm-piece gm-piece--jacket"><img src="assets/piece-jacket.webp" width="900" height="1191" alt="" loading="lazy" decoding="async" /></figure>
+              <figure class="gm-piece gm-piece--shirt"><img src="assets/piece-shirt.webp" width="900" height="1191" alt="" loading="lazy" decoding="async" /></figure>
+              <figure class="gm-piece gm-piece--tie"><img src="assets/piece-tie.webp" width="900" height="1191" alt="" loading="lazy" decoding="async" /></figure>
+              <figure class="gm-piece gm-piece--square"><img src="assets/piece-square.webp" width="900" height="1191" alt="" loading="lazy" decoding="async" /></figure>
+              <figure class="gm-piece gm-piece--tape"><img src="assets/piece-tape.webp" width="900" height="1191" alt="" loading="lazy" decoding="async" /></figure>
+              <svg class="gm-chalk" viewBox="0 0 100 80" aria-hidden="true">
+                <path pathLength="1" d="M 26 12 C 30 20, 30 28, 26 36" />
+                <path pathLength="1" d="M 12 18 C 10 28, 9 38, 11 48" />
+                <path pathLength="1" d="M 20 44 l 5 4 m 0 -4 l -5 4" />
+                <path pathLength="1" d="M 40 16 C 42 24, 42 32, 40 40" />
+              </svg>
+            </div>
+          </div>
+          <div class="gm-worn" aria-hidden="true">
+            <img src="assets/worn.webp" width="1800" height="1000" loading="lazy" decoding="async" alt="" />
+            <div class="gm-worn__wash"></div>
           </div>
           <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.3 0">
-            <h2 class="sc-display sc-display--lg" data-sc-kinetic="lines">Watch it come together.</h2>
+            <h2 class="sc-display sc-display--lg">Watch it <em>come together</em>.</h2>
           </div>
-          <div class="sc-copy sc-copy--trail" data-sc-cue="0.8 1 0.3 0.12">
-            <p class="gm-assembled-line">The look, the fit, and the finishing details. Handled.</p>
+          <div class="sc-copy sc-copy--lead" data-sc-cue="0.92 1 0.28 0.14">
+            <p class="gm-assembled-line">The look, the fit, and the day itself. <em class="gm-chalk-u">Handled.</em></p>
           </div>
         </div>
       </section>
 
-      <!-- 5 · APPETITE: the range travels sideways -->
+      <!-- 5 · APPETITE: close-up b-roll, panned through -->
       <section class="gm-rail-act" data-sc-act="pan" data-sc-span="3" data-sc-drift="#e4ebef" aria-label="Menswear for every occasion" id="occasions">
         <div data-sc-stage>
           <div class="gm-rail" data-sc-pan="0.06">
             <div class="gm-rail__lead">
               <p class="gm-eyebrow">Menswear for the days that matter</p>
-              <h2 class="sc-display sc-display--md">Come in for the occasion.</h2>
+              <h2 class="sc-display sc-display--md">Come in for <em>the occasion</em>.</h2>
               <p class="sc-body">Gabriel handles the rest.</p>
+              <button class="gm-roll-toggle" type="button" data-roll-toggle aria-pressed="false">
+                Pause the clips
+              </button>
             </div>
             <article class="gm-occasion">
-              <div data-sc-tilt="6"><img src="assets/rail-wedding.webp" width="900" height="1200" loading="lazy" decoding="async" alt="A navy three-piece wedding suit with a white boutonniere on a dress form." /></div>
+              <div class="gm-occasion__media" data-sc-tilt="6">
+                <video class="gm-roll" src="assets/roll-wedding.mp4" poster="assets/rail2-wedding.webp" muted loop playsinline preload="metadata" aria-label="A white boutonniere pinned to a navy suit lapel, up close"></video>
+              </div>
               <h3>Weddings</h3>
               <p>The look should match the moment. Fitted around your timeline.</p>
             </article>
             <article class="gm-occasion">
-              <div data-sc-tilt="6"><img src="assets/rail-prom.webp" width="900" height="1200" loading="lazy" decoding="async" alt="A midnight blue tuxedo jacket with a black bow tie on a hanger." /></div>
+              <div class="gm-occasion__media" data-sc-tilt="6">
+                <video class="gm-roll" src="assets/roll-prom.mp4" poster="assets/rail2-prom.webp" muted loop playsinline preload="metadata" aria-label="A black bow tie against a midnight blue tuxedo lapel, up close"></video>
+              </div>
               <h3>Prom</h3>
               <p>Stand out for the right reasons, even on a short deadline.</p>
             </article>
             <article class="gm-occasion">
-              <div data-sc-tilt="6"><img src="assets/rail-work.webp" width="900" height="1200" loading="lazy" decoding="async" alt="A slate blue blazer with a light blue shirt and knitted navy tie on a dress form." /></div>
+              <div class="gm-occasion__media" data-sc-tilt="6">
+                <video class="gm-roll" src="assets/roll-work.mp4" poster="assets/rail2-work.webp" muted loop playsinline preload="metadata" aria-label="A knitted navy tie in a neat knot, up close"></video>
+              </div>
               <h3>Work &amp; interviews</h3>
               <p>A suit that fits reads as confidence before you say a word.</p>
             </article>
             <article class="gm-occasion">
-              <div data-sc-tilt="6"><img src="assets/rail-alterations.webp" width="900" height="1200" loading="lazy" decoding="async" alt="A tailor's hands pinning the cuff of a navy suit sleeve on a dress form." /></div>
+              <div class="gm-occasion__media" data-sc-tilt="6">
+                <video class="gm-roll" src="assets/roll-alterations.mp4" poster="assets/rail2-alterations.webp" muted loop playsinline preload="metadata" aria-label="Steel pins set along a chalk line on a navy suit cuff, up close"></video>
+              </div>
               <h3>Alterations</h3>
               <p>Already own the suit? Sleeves, hems, waist, break, and balance, checked in person.</p>
             </article>
-            <div class="gm-rail__note">
-              <p class="sc-body">
-                Plus shirts, ties, pocket squares, jackets, vests, and the details that pull it together.
-              </p>
-            </div>
+            <article class="gm-occasion">
+              <div class="gm-occasion__media" data-sc-tilt="6">
+                <img src="assets/finishing.webp" width="900" height="1191" loading="lazy" decoding="async" alt="Silk ties in navy, slate, and teal beside a white pocket square and cufflinks." />
+              </div>
+              <h3>Finishing pieces</h3>
+              <p>Shirts, ties, pocket squares, vests, and the details that pull it together.</p>
+            </article>
           </div>
         </div>
       </section>
 
-      <!-- 6 · TRUST: macro scrub, the second and last clip -->
+      <!-- 6 · TRUST: macro scrub, the second and last scrubbed clip -->
       <section class="gm-macro" data-sc-act="scrub" data-sc-span="1.7" data-sc-dwell="0.3" data-sc-drift="#f7f5f1" aria-label="Fabric and stitching up close">
         <div data-sc-stage>
           <img class="sc-stage__poster" src="assets/06-poster.webp" alt="A threaded needle resting in deep navy herringbone suit fabric, up close." />
-          <video data-sc-scrub data-sc-src="assets/06.mp4" data-sc-src-mobile="assets/06-m.mp4" muted playsinline></video>
+          <video data-sc-scrub data-sc-src="assets/06.mp4" data-sc-src-mobile="assets/06-m.mp4" muted playsinline aria-hidden="true" tabindex="-1"></video>
           <div class="sc-scrim sc-scrim--trail" aria-hidden="true"></div>
           <div class="sc-copy sc-copy--trail" data-sc-cue="0.12 1">
-            <h2 class="sc-display sc-display--lg" data-sc-kinetic="lines">Fit is checked in person, down to the stitch.</h2>
+            <h2 class="sc-display sc-display--lg">Fit is checked <em>in person</em>, down to the stitch.</h2>
           </div>
         </div>
       </section>
 
-      <!-- 7 · ASSURANCE: real reviews, then the real tailor -->
+      <!-- 7 · ASSURANCE: the Google reviews, scrolled through by hand -->
       <section class="sc-section gm-proof" data-sc-act="flow" data-sc-drift="#f7f5f1" id="reviews" aria-label="Customer reviews and about Gabriel">
         <div class="sc-wrap">
-          <div class="sc-stack" data-sc-in data-sc-stagger="60">
-            <h2 class="sc-display sc-display--lg">People leave feeling looked after.</h2>
-            <p class="sc-body">
-              Public reviews mention patient help, fair prices, quick fixes, and clear advice. Nobody gets pressured.
-            </p>
-          </div>
-
-          <div class="gm-reviews">
-            <article class="gm-review--lead" data-sc-in aria-label="Review from Jason Scott, August 2025">
-              <p class="gm-stars" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-              <blockquote>&ldquo;Kelly was a lifesaver&rdquo;</blockquote>
-              <p>
-                Jason drove in from Boston for a wedding and needed a dress shirt and tie fast. Kelly at the shop
-                measured him and found a match in time.
-              </p>
-              <p class="gm-review-meta" style="margin: var(--sc-4) 0 0">Jason Scott &middot; Aug. 2025</p>
-            </article>
-            <div class="gm-review-side" data-sc-stagger="80">
-              <article aria-label="Review from Derek MacDougall, April 2025">
-                <p class="gm-review-meta">Derek MacDougall &middot; Apr. 2025 &middot; &#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                <h3>Help with a funeral outfit</h3>
-                <p>Derek needed a suit, shirt, tie, and belt. Kelly walked him through the options and kept the total below what he expected.</p>
-              </article>
-              <article aria-label="Review from Dave Sutherland, October 2024">
-                <p class="gm-review-meta">Dave Sutherland &middot; Oct. 2024 &middot; &#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                <h3>Alterations finished in three days</h3>
-                <p>Dave bought a suit, sport coat, and shirt, then noted that the alterations were finished in three days and fit well.</p>
-              </article>
-              <a
-                class="gm-review-meta"
-                style="text-decoration: underline"
-                href="https://www.bestprosintown.com/ma/holden/gabriels-bridal-/comments/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Read public reviews</a>
+          <div class="gm-proof__head" data-sc-in>
+            <div class="sc-stack">
+              <h2 class="sc-display sc-display--lg">People leave feeling <em>looked after</em>.</h2>
+              <p class="sc-body">Real reviews from the shop's Google profile. Scroll through them.</p>
+            </div>
+            <div class="gm-rating">
+              <strong>4.7</strong>
+              <div class="gm-rating__meta">
+                <span class="gm-rating__stars" role="img" aria-label="4.7 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;<span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Gabriel's%20Menswear%201363%20Main%20St%20Holden%20MA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >29 Google reviews</a>
+              </div>
             </div>
           </div>
-
+        </div>
+        <div class="gm-reviews-strip" role="region" aria-label="Customer reviews, horizontally scrollable" tabindex="0">
+          <article class="gm-review">
+            <blockquote>&ldquo;A great selection of beautiful suits&rdquo;</blockquote>
+            <p>&ldquo;Amazing personal service and a great selection of beautiful suits! It's the kind of shop you keep going back to to build your wardrobe, from business casual to formal.&rdquo;</p>
+            <footer><strong>Jackie Faron</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Alterations are perfect&rdquo;</blockquote>
+            <p>&ldquo;Turn around for alterations was 3 days, and alterations are perfect. I will definitely be visiting again as I update my business casual and formal wear.&rdquo;</p>
+            <footer><strong>Dave Sutherland</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Great selection at very good prices&rdquo;</blockquote>
+            <p>&ldquo;The store has great selection at very good prices&hellip; was able to navigate a quick turn getting the suit altered. Shop local.&rdquo;</p>
+            <footer><strong>Christian Lewis</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Fast turnaround for alterations&rdquo;</blockquote>
+            <p>&ldquo;Best personal service one can ask for. Huge inventory and fast turnaround for alterations. Highly recommend.&rdquo;</p>
+            <footer><strong>Jennifer LaRange</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Looking sharp&rdquo;</blockquote>
+            <p>&ldquo;Outstanding service! These guys know how to get you up to speed and looking sharp while forging a true connection with their customers.&rdquo;</p>
+            <footer><strong>Taylor Blair</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;A few quick measurements&rdquo;</blockquote>
+            <p>&ldquo;With a few quick measurements and several excellent recommendations, I left with several different shirts, 2 ties, a new belt&hellip; would highly recommend this place.&rdquo;</p>
+            <footer><strong>Ben Smith</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Walked away happy&rdquo;</blockquote>
+            <p>&ldquo;The perfect combination of helping, guiding, and giving us space&hellip; My husband walked away happy with his new outfit.&rdquo;</p>
+            <footer><strong>Natasha Trapp</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Very high quality&rdquo;</blockquote>
+            <p>&ldquo;The pants are very high quality cotton and suits and everything is very stylish&hellip; Fantastic store and I highly recommend it.&rdquo;</p>
+            <footer><strong>Wayfarer</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+        </div>
+        <div class="sc-wrap">
           <div class="gm-gabriel" id="tailoring">
             <figure data-sc-in>
               <img
@@ -992,7 +1228,7 @@
             </figure>
             <div>
               <div class="sc-stack" data-sc-in data-sc-stagger="60">
-                <h2 class="sc-display sc-display--md">A better fit starts with a real tailor.</h2>
+                <h2 class="sc-display sc-display--md">A better fit starts with <em>a real tailor</em>.</h2>
                 <p class="sc-body">
                   Gabriel learned tailoring from his mother in Turkey and has spent more than thirty years fitting
                   suits, jackets, trousers, and formalwear for the moments people remember.
@@ -1013,11 +1249,11 @@
         </div>
       </section>
 
-      <!-- FAQ: information, compressed -->
+      <!-- FAQ -->
       <section class="sc-section gm-faq" data-sc-act="flow" data-sc-drift="#eef2f4" id="faq" aria-label="Frequently asked questions">
         <div class="sc-wrap">
           <div class="sc-stack" data-sc-in>
-            <h2 class="sc-display sc-display--md">Quick answers before you stop in.</h2>
+            <h2 class="sc-display sc-display--md">Quick answers <em>before you stop in</em>.</h2>
           </div>
           <div style="margin-top: var(--sc-6)" data-sc-stagger="50">
             <details>
@@ -1040,35 +1276,71 @@
         </div>
       </section>
 
-      <!-- 8 · RESOLVE: the close. Last element on the page. -->
-      <section class="gm-close" id="visit" data-sc-act="pin" data-sc-span="1.15" data-sc-drift="#e4ebef" aria-label="Visit Gabriel's Menswear">
-        <div data-sc-stage data-sc-spotlight>
-          <div class="gm-close__inner">
-            <h2 class="sc-display sc-display--lg" data-sc-cue="0 1 0 0" data-sc-kinetic="lines">Get a tailor's answer before you spend more.</h2>
-            <a class="gm-cta gm-cta--big" href="tel:+15088295186" data-sc-magnet="0.26" data-sc-cue="0 1 0 0" data-sc-rise="0">
-              Call (508) 829-5186
-            </a>
-            <div class="gm-close__contact" data-sc-cue="0.05">
+      <!-- VISIT: contact + map -->
+      <section class="sc-section gm-visit" data-sc-act="flow" data-sc-drift="#f7f5f1" id="visit" aria-label="Visit Gabriel's Menswear">
+        <div class="sc-wrap">
+          <div class="sc-stack" data-sc-in>
+            <h2 class="sc-display sc-display--lg">Find us on <em>Main Street</em>.</h2>
+            <p class="sc-body">Call or stop by. A quick visit can answer the big questions.</p>
+          </div>
+          <div class="gm-visit__grid">
+            <aside class="gm-contact" data-sc-in aria-label="Store contact and hours">
+              <div class="gm-contact__row">
+                <span>Phone</span>
+                <a class="gm-contact__phone" href="tel:+15088295186">(508) 829-5186</a>
+              </div>
+              <div class="gm-contact__row">
+                <span>Address</span>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >1363 Main St, Holden, MA 01520</a>
+              </div>
+              <div class="gm-contact__row">
+                <span>Hours</span>
+                <dl class="gm-hours">
+                  <div><dt>Mon&ndash;Fri</dt><dd>11:00 AM&ndash;6:30 PM</dd></div>
+                  <div><dt>Saturday</dt><dd>11:00 AM&ndash;6:00 PM</dd></div>
+                  <div><dt>Sunday</dt><dd>12:00 PM&ndash;4:00 PM</dd></div>
+                </dl>
+              </div>
+              <a class="gm-cta" href="tel:+15088295186">Call (508) 829-5186</a>
+            </aside>
+            <div class="gm-map" data-sc-in>
+              <iframe
+                title="Map to Gabriel's Menswear at 1363 Main St, Holden, MA"
+                src="https://www.google.com/maps?q=1363%20Main%20St%2C%20Holden%2C%20MA%2001520&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
               <a
+                class="gm-map__link"
                 href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
                 target="_blank"
                 rel="noopener noreferrer"
-              >1363 Main St, Holden, MA 01520</a>
-              <span>Walk-ins welcome</span>
+              >Get directions</a>
             </div>
-            <p class="gm-close__hours" data-sc-cue="0.05">
-              <span>Mon&ndash;Fri 11:00&ndash;6:30</span>
-              <span>Sat 11:00&ndash;6:00</span>
-              <span>Sun 12:00&ndash;4:00</span>
-            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLOSE -->
+      <section class="gm-close" data-sc-act="pin" data-sc-span="1.1" data-sc-drift="#e4ebef" aria-label="Call Gabriel's Menswear">
+        <div data-sc-stage data-sc-spotlight>
+          <div class="gm-close__inner">
+            <h2 class="sc-display sc-display--lg" data-sc-cue="0 1 0 0">Get a tailor's answer <em>before you spend more</em>.</h2>
+            <a class="gm-cta gm-cta--big" href="tel:+15088295186" data-sc-magnet="0.26" data-sc-cue="0 1 0 0" data-sc-rise="0">
+              Call (508) 829-5186
+            </a>
           </div>
           <footer class="gm-foot">
-            <span>Gabriel's Menswear &middot; Suits, fittings, accessories, and alterations for the days when fit matters.</span>
+            <span>Gabriel's Menswear &middot; 1363 Main St, Holden, MA &middot; Suits, fittings, accessories, and alterations.</span>
             <a
               href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
               target="_blank"
               rel="noopener noreferrer"
-            >Directions</a>
+            >Get directions</a>
           </footer>
         </div>
       </section>
@@ -1077,6 +1349,45 @@
     <script src="scrollcraft.js"></script>
     <script>
       ScrollCraft.mount(document.body);
+
+      // B-roll rail clips: play only while near the viewport, never under
+      // reduced motion, and stoppable by the visible toggle (WCAG 2.2.2).
+      (function () {
+        var rolls = document.querySelectorAll("video.gm-roll");
+        if (!rolls.length) return;
+        var rm = window.matchMedia("(prefers-reduced-motion: reduce)");
+        var userPaused = false;
+        var near = new WeakSet();
+        function sync() {
+          rolls.forEach(function (v) {
+            if (userPaused || rm.matches || !near.has(v)) { v.pause(); }
+            else { v.play().catch(function () {}); }
+          });
+        }
+        if ("IntersectionObserver" in window) {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) near.add(e.target);
+                else near.delete(e.target);
+              });
+              sync();
+            },
+            { rootMargin: "300px" }
+          );
+          rolls.forEach(function (v) { io.observe(v); });
+        }
+        rm.addEventListener && rm.addEventListener("change", sync);
+        var toggle = document.querySelector("[data-roll-toggle]");
+        if (toggle) {
+          toggle.addEventListener("click", function () {
+            userPaused = !userPaused;
+            toggle.setAttribute("aria-pressed", String(userPaused));
+            toggle.textContent = userPaused ? "Play the clips" : "Pause the clips";
+            sync();
+          });
+        }
+      })();
     </script>
   </body>
 </html>

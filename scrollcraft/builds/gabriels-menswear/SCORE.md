@@ -23,12 +23,30 @@ empty, so the fingerprint gate passes trivially; recorded anyway below.
 
 ## Signature move (= the peak)
 
-**The suit assembles under scroll.** Act 4 pins; five flat-lay pieces (jacket,
-shirt, tie, pocket square, measuring tape) converge from off-frame into a
-composed fitting flat-lay, each piece easing in on its own path driven from
-`--sc-p` by bespoke CSS/JS in the page. In the final third, tailor's chalk
-lines (SVG, stroke-dashoffset driven from `--sc-p`) draw fit marks around the
-lapel and sleeve. Engine untouched.
+**The suit assembles under scroll, then it's worn.** Act 4 pins; five
+alpha-cut flat-lay pieces (jacket, shirt, tie, pocket square, measuring tape;
+u2net background removal) converge from off-frame into a composed fitting
+flat-lay, each easing in on its own path driven from `--sc-p` by bespoke CSS.
+Tailor's chalk lines (SVG, stroke-dashoffset from `--sc-p`) draw fit marks,
+then the flat-lay crossfades into the suit worn at an outdoor wedding (groom
+from behind, no face) with the closing line. Engine untouched.
+
+## Round 2 (2026-08-29, after Harley's feedback)
+
+- No interiors anywhere; every visual is close-up tailoring b-roll or flat-lay,
+  believable as the store's own craft. One shallow-DOF 85mm preamble across the set.
+- Hero clip: lateral glide along suit shoulders on wooden hangers (16:9 + 9:16).
+- Occasions rail is now a b-roll rail: four looping close-up clips (boutonniere,
+  bow tie, knit tie knot, pinned cuff) + finishing flat-lay card, played/paused
+  by IntersectionObserver, posters under reduced motion.
+- HTML wordmark lockup replaced the boxy logo image; scrims cut to whispers and
+  the hero copy moved into the clip's reserved top-left bokeh.
+- Typography voice: every headline pairs navy serif with one italic teal phrase;
+  chalk-stroke SVG underline on the two key words (hero "simple", peak "Handled").
+- Reviews: real Google Business Profile reviews (4.7, 29 reviews, fetched
+  2026-08-29), Kelly/Keith excerpted out per Harley; horizontal scrollable strip
+  of 8 attributed excerpts.
+- Visit section restored with contact panel + Google Maps embed; close slimmed.
 
 ## Score table
 
