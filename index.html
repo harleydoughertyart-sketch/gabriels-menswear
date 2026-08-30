@@ -1630,6 +1630,22 @@
     <script>
       ScrollCraft.mount(document.body);
 
+      // Conversion events: every call, directions, and review-profile click
+      // goes to GA4 directly (gtag) and to the dataLayer for GTM.
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest ? e.target.closest("a") : null;
+        if (!a) return;
+        var h = a.getAttribute("href") || "";
+        var name = null;
+        if (/^tel:/.test(h)) name = "call_click";
+        else if (/google\.com\/maps/.test(h)) name = /1363/.test(h) ? "directions_click" : "reviews_click";
+        if (!name) return;
+        var sec = a.closest("section, header, footer");
+        var loc = sec ? (sec.id || sec.getAttribute("aria-label") || sec.tagName.toLowerCase()) : "page";
+        try { window.dataLayer && window.dataLayer.push({ event: name, link_location: loc }); } catch (_) {}
+        try { window.gtag && window.gtag("event", name, { link_location: loc }); } catch (_) {}
+      });
+
       // Review marquee: duplicate the set once so the -50% loop is seamless.
       (function () {
         var track = document.querySelector(".gm-reviews-track");
