@@ -104,7 +104,7 @@
         color: var(--sc-accent);
       }
       .gm-chalk-u {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M3 4 H 117' stroke='%2333627C' stroke-width='1.7' fill='none' opacity='0.75'/%3E%3Cpath d='M3 1.2 V 6.8 M117 1.2 V 6.8' stroke='%2333627C' stroke-width='1.4' fill='none' opacity='0.75'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M3 4 H 117' stroke='%2333627C' stroke-width='1.7' fill='none' opacity='0.75' stroke-dasharray='2.6 0.5 1.4 0.35 3.4 0.5'/%3E%3Cpath d='M3.3 4.9 H 116' stroke='%2333627C' stroke-width='1.1' fill='none' opacity='0.28' stroke-dasharray='1.8 0.6 2.8 0.5'/%3E%3Cpath d='M3 1.2 V 6.8 M117 1.2 V 6.8' stroke='%2333627C' stroke-width='1.4' fill='none' opacity='0.75'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: 0 96%;
         background-size: 100% 0.16em;
@@ -267,7 +267,15 @@
       }
 
       /* ------------------------------------------------ act 2: the week -- */
-      .gm-week { background: #e7edf1; }
+      .gm-week {
+        background-color: #e7edf1;
+        background-image:
+          linear-gradient(rgba(51, 98, 124, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(51, 98, 124, 0.05) 1px, transparent 1px),
+          linear-gradient(rgba(51, 98, 124, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(51, 98, 124, 0.08) 1px, transparent 1px);
+        background-size: 26px 26px, 26px 26px, 130px 130px, 130px 130px;
+      }
       /* Chalk notations sketching themselves behind the lines: each group
          draws in with its line's window and fades as the next arrives. */
       .gm-notes {
@@ -286,11 +294,12 @@
       .gm-notes path {
         fill: none;
         stroke: var(--sc-accent);
-        stroke-width: 0.35;
+        stroke-width: 0.38;
         stroke-linecap: butt;
-        stroke-dasharray: 1;
+        stroke-dasharray: 0.022 0.004 0.012 0.003 0.028 0.004;
+        filter: drop-shadow(0.25px 0.35px 0 rgba(51, 98, 124, 0.22));
         --d: clamp(0, calc((var(--sc-p, 0) - var(--n0)) * 5), 1);
-        stroke-dashoffset: calc(1 - var(--d));
+        stroke-dashoffset: calc(0.146 * (1 - var(--d)));
       }
       .gm-notes g:nth-child(1) { --n0: 0.0;  --n1: 0.21; }
       .gm-notes g:nth-child(2) { --n0: 0.18; --n1: 0.42; }
@@ -376,8 +385,13 @@
       .gm-assembly .sc-stage {
         display: grid;
         place-items: center;
-        background:
+        background-image:
+          linear-gradient(rgba(51, 98, 124, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(51, 98, 124, 0.045) 1px, transparent 1px),
+          linear-gradient(rgba(51, 98, 124, 0.075) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(51, 98, 124, 0.075) 1px, transparent 1px),
           radial-gradient(120% 100% at 50% 30%, #ffffff 0%, #f4f2ee 58%, #ece9e3 100%);
+        background-size: 26px 26px, 26px 26px, 130px 130px, 130px 130px, 100% 100%;
       }
       .gm-board-wrap {
         width: min(88vh, 96vw, 74rem);
@@ -414,13 +428,13 @@
       .gm-chalk path {
         fill: none;
         stroke: #ffffff;
-        stroke-width: 0.5;
+        stroke-width: 0.52;
         stroke-linecap: butt;
-        stroke-dasharray: 1;
+        stroke-dasharray: 0.022 0.004 0.012 0.003 0.028 0.004;
         opacity: 0.9;
-        filter: drop-shadow(0 0 0.6px rgba(255, 255, 255, 0.7));
+        filter: drop-shadow(0.3px 0.4px 0 rgba(255, 255, 255, 0.35));
         --tc: clamp(0, calc((var(--sc-p, 0) - var(--c0)) * 7), 1);
-        stroke-dashoffset: calc(1 - var(--tc));
+        stroke-dashoffset: calc(0.146 * (1 - var(--tc)));
       }
       .gm-chalk path:nth-child(1) { --c0: 0.50; }
       .gm-chalk path:nth-child(2) { --c0: 0.54; }
@@ -1260,8 +1274,8 @@
           <div class="sc-stack" data-sc-in data-sc-stagger="60">
             <h2 class="sc-display sc-display--lg">Walk in <em>unsure</em>. Gabriel takes it from there.</h2>
             <p class="sc-body">
-              No guessing through racks alone. Tell Gabriel the occasion, and he guides the suit, the fit,
-              and the finishing pieces so the whole look comes together in the shop.
+              You don't need to know your size, your style, or where to start. Tell Gabriel what the
+              day is. He'll pull what works, get the fit right, and send you out the door ready.
             </p>
           </div>
           <figure data-sc-reveal="left" data-sc-reveal-at="0.08 0.42">
@@ -1325,7 +1339,7 @@
                 <video class="gm-roll" src="assets/roll-wedding.mp4" poster="assets/rail2-wedding.webp" muted loop playsinline preload="metadata" aria-label="A white boutonniere pinned to a navy suit lapel, up close"></video>
               </div>
               <h3>Weddings</h3>
-              <p>The look should match the moment. Fitted around your timeline.</p>
+              <p>Groom, groomsman, or guest. Fitted and ready before the big day.</p>
             </article>
             <article class="gm-occasion">
               <div class="gm-occasion__media" data-sc-tilt="6">
@@ -1339,14 +1353,14 @@
                 <video class="gm-roll" src="assets/roll-work.mp4" poster="assets/rail2-work.webp" muted loop playsinline preload="metadata" aria-label="A knitted navy tie in a neat knot, up close"></video>
               </div>
               <h3>Work &amp; interviews</h3>
-              <p>A suit that fits reads as confidence before you say a word.</p>
+              <p>A suit that actually fits makes you look sharp before you say a word.</p>
             </article>
             <article class="gm-occasion">
               <div class="gm-occasion__media" data-sc-tilt="6">
                 <video class="gm-roll" src="assets/roll-alterations.mp4" poster="assets/rail2-alterations.webp" muted loop playsinline preload="metadata" aria-label="Steel pins set along a chalk line on a navy suit cuff, up close"></video>
               </div>
               <h3>Alterations</h3>
-              <p>Already own the suit? Sleeves, hems, waist, break, and balance, checked in person.</p>
+              <p>Already own a suit? Bring it in. Sleeves, hems, waist: Gabriel fixes what doesn't fit.</p>
             </article>
             <article class="gm-occasion">
               <div class="gm-occasion__media" data-sc-tilt="6">
@@ -1381,7 +1395,7 @@
           <div class="gm-proof__head" data-sc-in>
             <div class="sc-stack">
               <h2 class="sc-display sc-display--lg">People leave feeling <em>looked after</em>.</h2>
-              <p class="sc-body">Real reviews from the shop's Google profile.</p>
+              <p class="sc-body">Straight from the shop's Google reviews. Every one of them real.</p>
             </div>
             <div class="gm-rating">
               <strong>4.7</strong>
@@ -1462,18 +1476,18 @@
               <div class="sc-stack" data-sc-in data-sc-stagger="60">
                 <h2 class="sc-display sc-display--md">A better fit starts with <em>a real tailor</em>.</h2>
                 <p class="sc-body">
-                  Gabriel learned tailoring from his mother in Turkey and has spent more than thirty years fitting
-                  suits, jackets, trousers, and formalwear for the moments people remember.
+                  Gabriel learned tailoring from his mother in Turkey. Thirty-plus years later, he's still
+                  fitting suits for weddings, proms, work, and everything in between.
                 </p>
               </div>
               <div class="gm-gabriel-points" data-sc-in data-sc-stagger="80">
                 <article>
-                  <h3>Trained to see the details.</h3>
-                  <p>From trouser break to jacket balance, Gabriel looks at the fit in person and catches the things a rack or online order cannot.</p>
+                  <h3>He checks the fit on you.</h3>
+                  <p>In person, in the mirror. He catches the things an off-the-rack suit or an online order always gets wrong.</p>
                 </article>
                 <article>
-                  <h3>Straight advice, no pressure.</h3>
-                  <p>If alterations will help, he will show you why. If a garment is not worth the work, he will tell you before you spend the money.</p>
+                  <h3>Straight answers, no pressure.</h3>
+                  <p>If a fix is worth it, he'll show you why. If it's not, he'll tell you before you spend a dime.</p>
                 </article>
               </div>
             </div>
@@ -1513,7 +1527,7 @@
         <div class="sc-wrap">
           <div class="sc-stack" data-sc-in>
             <h2 class="sc-display sc-display--lg">Find us on <em>Main Street</em>.</h2>
-            <p class="sc-body">Call or stop by. A quick visit can answer the big questions.</p>
+            <p class="sc-body">Call or just stop by. Ten minutes in the shop answers most questions.</p>
           </div>
           <div class="gm-visit__grid">
             <aside class="gm-contact" data-sc-in aria-label="Store contact and hours">
