@@ -376,9 +376,9 @@
       .gm-board-wrap {
         width: min(88vh, 96vw, 74rem);
         aspect-ratio: 5 / 4;
-        --gone: clamp(0, calc((var(--sc-p, 0) - 0.88) * 14), 1);
+        --gone: clamp(0, calc((var(--sc-p, 0) - 0.8) * 5.5), 1);
         opacity: calc(1 - var(--gone));
-        transform: scale(calc(1 + var(--gone) * 0.05));
+        transform: scale(calc(1 + var(--gone) * 0.07)) translateY(calc(var(--gone) * -2%));
         will-change: transform, opacity;
       }
       .gm-board { position: relative; width: 100%; height: 100%; }
@@ -399,11 +399,11 @@
         will-change: transform, opacity;
       }
       .gm-piece img { width: 100%; height: auto; }
-      .gm-piece--jacket { --w0: 0.0;  --wm: 2.9; --dx: -60vw; --dy: 0vh;   --dr: -10deg; --r0: -1.5deg; width: 56%; left: 2%;  top: 3%; }
-      .gm-piece--shirt  { --w0: 0.12; --wm: 3.1; --dx: 24vw;  --dy: -60vh; --dr: 8deg;   --r0: 1deg;    width: 34%; left: 61%; top: 2%; }
-      .gm-piece--tie    { --w0: 0.25; --wm: 3.4; --dx: 55vw;  --dy: 8vh;   --dr: 14deg;  --r0: 3deg;    width: 26%; left: 68%; top: 40%; }
-      .gm-piece--square { --w0: 0.37; --wm: 3.8; --dx: 20vw;  --dy: 55vh;  --dr: -12deg; --r0: -2deg;   width: 17%; left: 47%; top: 71%; }
-      .gm-piece--tape   { --w0: 0.45; --wm: 4.2; --dx: -30vw; --dy: 50vh;  --dr: 18deg;  --r0: 4deg;    width: 24%; left: 6%;  top: 63%; }
+      .gm-piece--jacket { --w0: 0.0;  --wm: 3.2; --dx: -60vw; --dy: 0vh;   --dr: -10deg; --r0: -1.5deg; width: 56%; left: 2%;  top: 3%; }
+      .gm-piece--shirt  { --w0: 0.10; --wm: 3.4; --dx: 24vw;  --dy: -60vh; --dr: 8deg;   --r0: 1deg;    width: 34%; left: 61%; top: 2%; }
+      .gm-piece--tie    { --w0: 0.22; --wm: 3.6; --dx: 55vw;  --dy: 8vh;   --dr: 14deg;  --r0: 3deg;    width: 26%; left: 68%; top: 40%; }
+      .gm-piece--square { --w0: 0.33; --wm: 3.9; --dx: 20vw;  --dy: 55vh;  --dr: -12deg; --r0: -2deg;   width: 17%; left: 47%; top: 71%; }
+      .gm-piece--tape   { --w0: 0.41; --wm: 4.3; --dx: -30vw; --dy: 50vh;  --dr: 18deg;  --r0: 4deg;    width: 24%; left: 6%;  top: 63%; }
       .gm-chalk { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
       .gm-chalk path {
         fill: none;
@@ -416,14 +416,16 @@
         --tc: clamp(0, calc((var(--sc-p, 0) - var(--c0)) * 7), 1);
         stroke-dashoffset: calc(1 - var(--tc));
       }
-      .gm-chalk path:nth-child(1) { --c0: 0.52; }
-      .gm-chalk path:nth-child(2) { --c0: 0.56; }
-      .gm-chalk path:nth-child(3) { --c0: 0.60; }
-      .gm-chalk path:nth-child(4) { --c0: 0.64; }
+      .gm-chalk path:nth-child(1) { --c0: 0.50; }
+      .gm-chalk path:nth-child(2) { --c0: 0.54; }
+      .gm-chalk path:nth-child(3) { --c0: 0.58; }
+      .gm-chalk path:nth-child(4) { --c0: 0.62; }
       .gm-worn {
         position: absolute;
         inset: 0;
-        opacity: clamp(0, calc((var(--sc-p, 0) - 0.90) * 14), 1);
+        --w: clamp(0, calc((var(--sc-p, 0) - 0.78) * 5.3), 1);
+        --we: calc(var(--w) * var(--w) * (3 - 2 * var(--w)));
+        opacity: var(--we);
         will-change: opacity;
       }
       .gm-worn img {
@@ -432,6 +434,9 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        filter: blur(calc((1 - var(--we)) * 10px));
+        transform: scale(calc(1.06 - var(--we) * 0.06));
+        will-change: filter, transform;
       }
       .gm-worn__wash {
         position: absolute;
@@ -472,6 +477,7 @@
         .gm-chalk path { --tc: 1; stroke-dashoffset: 0; }
         .gm-board-wrap { --gone: 0; opacity: 1; transform: none; }
         .gm-worn { opacity: 0; }
+        .gm-worn img { filter: none; transform: none; }
         .gm-week__tick { transform: scaleX(1); }
       }
 
@@ -1266,7 +1272,7 @@
       </section>
 
       <!-- 4 · DELIGHT, THE PEAK: the suit assembles, then it's worn -->
-      <section class="gm-assembly" data-sc-act="pin" data-sc-span="4.2" data-sc-drift="#f4f2ee" aria-label="A full outfit assembling piece by piece, then worn at a wedding">
+      <section class="gm-assembly" data-sc-act="pin" data-sc-span="4.6" data-sc-drift="#f4f2ee" aria-label="A full outfit assembling piece by piece, then worn at a wedding">
         <div data-sc-stage>
           <div class="gm-board-wrap" aria-hidden="true">
             <div class="gm-board">
@@ -1287,10 +1293,10 @@
             <img src="assets/worn.webp" width="1800" height="1000" loading="lazy" decoding="async" alt="" />
             <div class="gm-worn__wash"></div>
           </div>
-          <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.3 0">
+          <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.58 0 0.22">
             <h2 class="sc-display sc-display--lg">Watch it <em>come together</em>.</h2>
           </div>
-          <div class="sc-copy sc-copy--lead" data-sc-cue="0.94 1 0.3 0.1">
+          <div class="sc-copy sc-copy--lead" data-sc-cue="0.92 1 0.35 0.08">
             <p class="gm-assembled-line">The look, the fit, and the day itself. <em class="gm-chalk-u">Handled.</em></p>
           </div>
         </div>
