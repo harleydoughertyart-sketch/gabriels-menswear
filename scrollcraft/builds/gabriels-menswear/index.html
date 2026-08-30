@@ -378,106 +378,47 @@
         .gm-turn .sc-wrap { grid-template-columns: 1fr; }
       }
 
-      /* ------------------------------------------------ act 4: assembly -- */
-      /* THE SIGNATURE MOVE. Five alpha-cut pieces converge into a fitting
-         flat-lay under the wheel, chalk draws the fit marks, and the act
-         resolves into the suit worn at the wedding. All driven from --sc-p. */
-      .gm-assembly .sc-stage {
-        display: grid;
-        place-items: center;
-        background-image:
-          linear-gradient(rgba(51, 98, 124, 0.045) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(51, 98, 124, 0.045) 1px, transparent 1px),
-          linear-gradient(rgba(51, 98, 124, 0.075) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(51, 98, 124, 0.075) 1px, transparent 1px),
-          radial-gradient(120% 100% at 50% 30%, #ffffff 0%, #f4f2ee 58%, #ece9e3 100%);
-        background-size: 26px 26px, 26px 26px, 130px 130px, 130px 130px, 100% 100%;
-      }
-      .gm-board-wrap {
-        width: min(88vh, 96vw, 74rem);
-        aspect-ratio: 5 / 4;
-        --gone: clamp(0, calc((var(--sc-p, 0) - 0.8) * 5.5), 1);
-        opacity: calc(1 - var(--gone));
-        transform: scale(calc(1 + var(--gone) * 0.07)) translateY(calc(var(--gone) * -2%));
-        will-change: transform, opacity;
-      }
-      .gm-board { position: relative; width: 100%; height: 100%; }
-      .gm-piece {
-        position: absolute;
-        margin: 0;
-        filter: drop-shadow(0 18px 28px rgba(21, 34, 56, 0.16))
-          drop-shadow(0 2px 6px rgba(21, 34, 56, 0.10));
-        --t: clamp(0, calc((var(--sc-p, 0) - var(--w0)) * var(--wm)), 1);
-        --e: calc(var(--t) * var(--t) * (3 - 2 * var(--t)));
-        opacity: var(--e);
-        transform: translate3d(
-            calc((1 - var(--e)) * var(--dx)),
-            calc((1 - var(--e)) * var(--dy)),
-            0
-          )
-          rotate(calc(var(--r0) + (1 - var(--e)) * var(--dr)));
-        will-change: transform, opacity;
-      }
-      .gm-piece img { width: 100%; height: auto; }
-      .gm-piece--jacket { --w0: 0.0;  --wm: 3.2; --dx: -60vw; --dy: 0vh;   --dr: -10deg; --r0: -1.5deg; width: 56%; left: 2%;  top: 3%; }
-      .gm-piece--shirt  { --w0: 0.10; --wm: 3.4; --dx: 24vw;  --dy: -60vh; --dr: 8deg;   --r0: 1deg;    width: 34%; left: 61%; top: 2%; }
-      .gm-piece--tie    { --w0: 0.22; --wm: 3.6; --dx: 55vw;  --dy: 8vh;   --dr: 14deg;  --r0: 3deg;    width: 26%; left: 68%; top: 40%; }
-      .gm-piece--square { --w0: 0.33; --wm: 3.9; --dx: 20vw;  --dy: 55vh;  --dr: -12deg; --r0: -2deg;   width: 17%; left: 47%; top: 71%; }
-      .gm-piece--tape   { --w0: 0.41; --wm: 4.3; --dx: -30vw; --dy: 50vh;  --dr: 18deg;  --r0: 4deg;    width: 24%; left: 6%;  top: 63%; }
-      .gm-chalk { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
-      .gm-chalk path {
-        fill: none;
-        stroke: #ffffff;
-        stroke-width: 0.52;
-        stroke-linecap: butt;
-        stroke-dasharray: 0.022 0.004 0.012 0.003 0.028 0.004;
-        opacity: 0.9;
-        filter: drop-shadow(0.3px 0.4px 0 rgba(255, 255, 255, 0.35));
-        --tc: clamp(0, calc((var(--sc-p, 0) - var(--c0)) * 7), 1);
-        stroke-dashoffset: calc(0.146 * (1 - var(--tc)));
-      }
-      .gm-chalk path:nth-child(1) { --c0: 0.50; }
-      .gm-chalk path:nth-child(2) { --c0: 0.54; }
-      .gm-chalk path:nth-child(3) { --c0: 0.58; }
-      .gm-chalk path:nth-child(4) { --c0: 0.62; }
-      .gm-worn {
-        position: absolute;
-        inset: 0;
-        --w: clamp(0, calc((var(--sc-p, 0) - 0.78) * 5.3), 1);
-        --we: calc(var(--w) * var(--w) * (3 - 2 * var(--w)));
-        opacity: var(--we);
-        will-change: opacity;
-      }
-      .gm-worn img {
+      /* ------------------------------------------------ act 4: the making -- */
+      /* THE TAKEOVER. Four full-bleed cinematic loops cut together by the
+         scroll: chalk on the worn jacket, the tie and bar, the boutonniere,
+         then the suit at the wedding. Layer i fades in over layer i-1. */
+      .gm-made .sc-stage { background: #dfe8ee; }
+      .gm-made__vid {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        filter: blur(calc((1 - var(--we)) * 10px));
-        transform: scale(calc(1.06 - var(--we) * 0.06));
-        will-change: filter, transform;
       }
-      .gm-worn__wash {
-        position: absolute;
-        inset: 0;
+      .gm-made__vid--2 { opacity: clamp(0, calc((var(--sc-p, 0) - 0.24) * 7), 1); will-change: opacity; }
+      .gm-made__vid--3 { opacity: clamp(0, calc((var(--sc-p, 0) - 0.48) * 7), 1); will-change: opacity; }
+      .gm-made__vid--4 { opacity: clamp(0, calc((var(--sc-p, 0) - 0.72) * 7), 1); will-change: opacity; }
+      .gm-made .sc-copy h2 { max-width: 14ch; }
+      /* Half-density washes: just enough ground for the type, no fog. */
+      .gm-made .sc-scrim--lead {
         background: linear-gradient(
           to top right,
-          color-mix(in oklab, var(--sc-canvas) 88%, transparent) 0%,
-          color-mix(in oklab, var(--sc-canvas) 54%, transparent) 34%,
-          transparent 62%);
+          color-mix(in oklab, var(--sc-canvas) 72%, transparent) 0%,
+          color-mix(in oklab, var(--sc-canvas) 38%, transparent) 32%,
+          transparent 56%);
+      }
+      .gm-made .sc-scrim--trail {
+        background: linear-gradient(
+          to top left,
+          color-mix(in oklab, var(--sc-canvas) 72%, transparent) 0%,
+          color-mix(in oklab, var(--sc-canvas) 38%, transparent) 32%,
+          transparent 56%);
       }
       @media (max-width: 860px) {
-        .gm-worn__wash {
+        .gm-made .sc-scrim--lead { background: none; }
+        .gm-made .sc-scrim--trail {
           background: linear-gradient(
             to top,
-            color-mix(in oklab, var(--sc-canvas) 90%, transparent) 0%,
-            color-mix(in oklab, var(--sc-canvas) 58%, transparent) 32%,
-            transparent 58%);
+            color-mix(in oklab, var(--sc-canvas) 68%, transparent) 0%,
+            color-mix(in oklab, var(--sc-canvas) 36%, transparent) 32%,
+            transparent 56%);
         }
       }
-      .gm-assembly .sc-copy--lead { bottom: clamp(2.5rem, 9vh, 6rem); }
-      .gm-assembly h2 { max-width: 13ch; }
       .gm-assembled-line {
         font-family: var(--sc-font-display);
         font-weight: 600;
@@ -489,15 +430,7 @@
         text-wrap: balance;
       }
       .gm-assembled-line em { font-style: italic; color: var(--sc-accent); }
-      @media (max-width: 860px) {
-        .gm-board-wrap { width: min(94vw, 60vh); }
-      }
       @media (prefers-reduced-motion: reduce) {
-        .gm-piece { --e: 1; opacity: 1; }
-        .gm-chalk path { --tc: 1; stroke-dashoffset: 0; }
-        .gm-board-wrap { --gone: 0; opacity: 1; transform: none; }
-        .gm-worn { opacity: 0; }
-        .gm-worn img { filter: none; transform: none; }
         .gm-week__tick { transform: scaleX(1); }
       }
 
@@ -976,9 +909,6 @@
     <noscript>
       <style>
         [data-sc-cue] { opacity: 1 !important; }
-        .gm-piece { opacity: 1 !important; transform: none !important; }
-        .gm-chalk path { stroke-dashoffset: 0 !important; }
-        .gm-worn { display: none !important; }
         video[data-sc-scrub] { display: none; }
         /* without JS nothing pins, so stacked cue layers return to flow */
         [data-sc-stage] { height: auto !important; min-height: 0 !important; }
@@ -986,7 +916,6 @@
         .gm-week__lines { min-height: 0 !important; }
         .gm-week__lines > p { position: static !important; translate: none !important; margin: 0 0 1rem !important; }
         .gm-week .sc-stage, .gm-week [data-sc-stage] { padding-block: 3rem; }
-        .gm-board-wrap { opacity: 1 !important; transform: none !important; }
         .gm-roll-toggle { display: none; }
       </style>
     </noscript>
@@ -1291,33 +1220,23 @@
         </div>
       </section>
 
-      <!-- 4 · DELIGHT, THE PEAK: the suit assembles, then it's worn -->
-      <section class="gm-assembly" data-sc-act="pin" data-sc-span="4.6" data-sc-drift="#f4f2ee" aria-label="A full outfit assembling piece by piece, then worn at a wedding">
+      <!-- 4 · DELIGHT, THE PEAK: the making, cut together by scroll -->
+      <section class="gm-made" data-sc-act="pin" data-sc-span="4.6" data-sc-drift="#dfe8ee" aria-label="The suit fitted, finished, and worn on the wedding day">
         <div data-sc-stage>
-          <div class="gm-board-wrap" aria-hidden="true">
-            <div class="gm-board">
-              <figure class="gm-piece gm-piece--jacket"><img src="assets/piece-jacket.webp" width="900" height="1191" alt="" loading="lazy" decoding="async" /></figure>
-              <figure class="gm-piece gm-piece--shirt"><img src="assets/piece-shirt.webp" width="900" height="1191" alt="" loading="lazy" decoding="async" /></figure>
-              <figure class="gm-piece gm-piece--tie"><img src="assets/piece-tie.webp" width="900" height="1191" alt="" loading="lazy" decoding="async" /></figure>
-              <figure class="gm-piece gm-piece--square"><img src="assets/piece-square.webp" width="900" height="1191" alt="" loading="lazy" decoding="async" /></figure>
-              <figure class="gm-piece gm-piece--tape"><img src="assets/piece-tape.webp" width="900" height="1191" alt="" loading="lazy" decoding="async" /></figure>
-              <svg class="gm-chalk" viewBox="0 0 100 80" aria-hidden="true">
-                <path pathLength="1" d="M 27 11.5 L 25 36" />
-                <path pathLength="1" d="M 12.2 16.5 L 11.4 49.5 M 10.2 18 L 14 15.6 M 9.6 48.6 L 13.4 46.6" />
-                <path pathLength="1" d="M 19.6 44 L 25 49.4 M 24.9 43.7 L 19.7 49.6" />
-                <path pathLength="1" d="M 40.4 15 L 41.3 42 M 38.9 16.2 L 42.2 14.4 M 39.9 41 L 43.2 39.4" />
-              </svg>
-            </div>
-          </div>
-          <div class="gm-worn" aria-hidden="true">
-            <img src="assets/worn.webp" width="1800" height="1000" loading="lazy" decoding="async" alt="" />
-            <div class="gm-worn__wash"></div>
-          </div>
-          <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.58 0 0.22">
+          <video class="gm-roll gm-made__vid" src="assets/mv1.mp4" poster="assets/mv1-poster.webp" muted loop playsinline preload="metadata" aria-label="A tailor drawing chalk fitting lines on a worn navy suit jacket"></video>
+          <video class="gm-roll gm-made__vid gm-made__vid--2" src="assets/mv2.mp4" poster="assets/mv2-poster.webp" muted loop playsinline preload="metadata" aria-label="A deep teal tie with a silver tie bar, up close"></video>
+          <video class="gm-roll gm-made__vid gm-made__vid--3" src="assets/mv3.mp4" poster="assets/mv3-poster.webp" muted loop playsinline preload="metadata" aria-label="Hands pinning a white boutonniere to a navy lapel"></video>
+          <video class="gm-roll gm-made__vid gm-made__vid--4" src="assets/mv4.mp4" poster="assets/mv4-poster.webp" muted loop playsinline preload="metadata" aria-label="The finished navy suit worn at a wedding arch, no face in frame"></video>
+          <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
+          <div class="sc-scrim sc-scrim--trail" aria-hidden="true"></div>
+          <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.26 0 0.28">
             <h2 class="sc-display sc-display--lg">Watch it <em>come together</em>.</h2>
           </div>
-          <div class="sc-copy sc-copy--lead" data-sc-cue="0.92 1 0.35 0.08">
-            <p class="gm-assembled-line">The look, the fit, and the day itself. <em class="gm-chalk-u">Handled.</em></p>
+          <div class="sc-copy sc-copy--trail" data-sc-cue="0.3 0.64 0.2 0.25">
+            <h2 class="sc-display sc-display--lg">Every detail, <em>checked by hand</em>.</h2>
+          </div>
+          <div class="sc-copy sc-copy--lead" data-sc-cue="0.76 1 0.3 0.1">
+            <p class="gm-assembled-line">Then it's <em class="gm-chalk-u">your day</em>.</p>
           </div>
         </div>
       </section>
