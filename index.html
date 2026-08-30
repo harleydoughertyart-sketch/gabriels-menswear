@@ -881,6 +881,12 @@
       @media (prefers-reduced-motion: reduce) {
         .gm-corner { opacity: 0.75; }
       }
+      @media (max-width: 700px) {
+        /* Lift the close block to its optical center and give the headline
+           real air above the bracketed button. */
+        .gm-close__inner { gap: var(--sc-7); padding-bottom: 9vh; }
+        .gm-corner--tl, .gm-corner--tr { top: -18px; }
+      }
 
       /* ------------------------------------------------ footer ----------- */
       .gm-footer {
@@ -1178,7 +1184,7 @@
       </section>
 
       <!-- 2 · RECOGNITION: the week, pinned quick lines -->
-      <section class="gm-week" data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#e7edf1" aria-label="The occasions Gabriel dresses">
+      <section class="gm-week" data-sc-act="pin" data-sc-span="3.6" data-sc-drift="#e7edf1" aria-label="The occasions Gabriel dresses">
         <div data-sc-stage>
           <svg class="gm-notes gm-notes--mobile" viewBox="0 0 60 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             <g>
