@@ -407,6 +407,9 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        /* Stands in for the poster during its late fetch, so the frame is
+           never white while the clip is on its way. */
+        background: #101a2b;
       }
       .gm-made__vid--2 { opacity: clamp(0, calc((var(--sc-p, 0) - 0.24) * 7), 1); will-change: opacity; }
       .gm-made__vid--3 { opacity: clamp(0, calc((var(--sc-p, 0) - 0.48) * 7), 1); will-change: opacity; }
@@ -538,6 +541,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        background: #101a2b;
       }
       .gm-stitch__vid--b {
         opacity: clamp(0, calc((var(--sc-p, 0) - 0.42) * 6), 1);
@@ -1211,10 +1215,10 @@
       <!-- 4 · DELIGHT, THE PEAK: the making, cut together by scroll -->
       <section class="gm-made" data-sc-act="pin" data-sc-span="4.6" data-sc-drift="#dfe8ee" aria-label="The suit fitted, finished, and worn on the wedding day">
         <div data-sc-stage>
-          <video class="gm-roll gm-made__vid" src="assets/mv1.mp4" poster="assets/mv1-poster.webp" muted loop playsinline preload="metadata" aria-label="A tailor drawing chalk fitting lines on a worn navy suit jacket"></video>
-          <video class="gm-roll gm-made__vid gm-made__vid--2" src="assets/mv2.mp4" poster="assets/mv2-poster.webp" muted loop playsinline preload="metadata" aria-label="A deep teal tie with a silver tie bar, up close"></video>
-          <video class="gm-roll gm-made__vid gm-made__vid--3" src="assets/mv3.mp4" poster="assets/mv3-poster.webp" muted loop playsinline preload="metadata" aria-label="Hands pinning a white boutonniere to a navy lapel"></video>
-          <video class="gm-roll gm-made__vid gm-made__vid--4" src="assets/mv4.mp4" poster="assets/mv4-poster.webp" muted loop playsinline preload="metadata" aria-label="The finished navy suit worn at a wedding arch, no face in frame"></video>
+          <video class="gm-roll gm-made__vid" src="assets/mv1.mp4" data-poster="assets/mv1-poster.webp" muted loop playsinline preload="none" aria-label="A tailor drawing chalk fitting lines on a worn navy suit jacket"></video>
+          <video class="gm-roll gm-made__vid gm-made__vid--2" src="assets/mv2.mp4" data-poster="assets/mv2-poster.webp" muted loop playsinline preload="none" aria-label="A deep teal tie with a silver tie bar, up close"></video>
+          <video class="gm-roll gm-made__vid gm-made__vid--3" src="assets/mv3.mp4" data-poster="assets/mv3-poster.webp" muted loop playsinline preload="none" aria-label="Hands pinning a white boutonniere to a navy lapel"></video>
+          <video class="gm-roll gm-made__vid gm-made__vid--4" src="assets/mv4.mp4" data-poster="assets/mv4-poster.webp" muted loop playsinline preload="none" aria-label="The finished navy suit worn at a wedding arch, no face in frame"></video>
           <div class="gm-made__shade gm-made__shade--veil" aria-hidden="true"></div>
           <div class="gm-made__shade gm-made__shade--lead" aria-hidden="true"></div>
           <div class="gm-made__shade gm-made__shade--trail" aria-hidden="true"></div>
@@ -1247,28 +1251,28 @@
             </div>
             <article class="gm-occasion">
               <div class="gm-occasion__media" data-sc-tilt="6">
-                <video class="gm-roll" src="assets/roll-wedding.mp4" poster="assets/rail2-wedding.webp" muted loop playsinline preload="metadata" aria-label="A white boutonniere pinned to a navy suit lapel, up close"></video>
+                <video class="gm-roll" src="assets/roll-wedding.mp4" data-poster="assets/rail2-wedding.webp" muted loop playsinline preload="none" aria-label="A white boutonniere pinned to a navy suit lapel, up close"></video>
               </div>
               <h3>Weddings</h3>
               <p>Groom, groomsman, or guest. Fitted and ready before the big day.</p>
             </article>
             <article class="gm-occasion">
               <div class="gm-occasion__media" data-sc-tilt="6">
-                <video class="gm-roll" src="assets/roll-prom.mp4" poster="assets/rail2-prom.webp" muted loop playsinline preload="metadata" aria-label="A black bow tie against a midnight blue tuxedo lapel, up close"></video>
+                <video class="gm-roll" src="assets/roll-prom.mp4" data-poster="assets/rail2-prom.webp" muted loop playsinline preload="none" aria-label="A black bow tie against a midnight blue tuxedo lapel, up close"></video>
               </div>
               <h3>Prom</h3>
               <p>Stand out for the right reasons, even on a short deadline.</p>
             </article>
             <article class="gm-occasion">
               <div class="gm-occasion__media" data-sc-tilt="6">
-                <video class="gm-roll" src="assets/roll-work.mp4" poster="assets/rail2-work.webp" muted loop playsinline preload="metadata" aria-label="A knitted navy tie in a neat knot, up close"></video>
+                <video class="gm-roll" src="assets/roll-work.mp4" data-poster="assets/rail2-work.webp" muted loop playsinline preload="none" aria-label="A knitted navy tie in a neat knot, up close"></video>
               </div>
               <h3>Work &amp; interviews</h3>
               <p>A suit that actually fits makes you look sharp before you say a word.</p>
             </article>
             <article class="gm-occasion">
               <div class="gm-occasion__media" data-sc-tilt="6">
-                <video class="gm-roll" src="assets/roll-alterations.mp4" poster="assets/rail2-alterations.webp" muted loop playsinline preload="metadata" aria-label="Steel pins set along a chalk line on a navy suit cuff, up close"></video>
+                <video class="gm-roll" src="assets/roll-alterations.mp4" data-poster="assets/rail2-alterations.webp" muted loop playsinline preload="none" aria-label="Steel pins set along a chalk line on a navy suit cuff, up close"></video>
               </div>
               <h3>Alterations</h3>
               <p>Already own a suit? Bring it in. Sleeves, hems, waist: Gabriel fixes what doesn't fit.</p>
@@ -1287,8 +1291,8 @@
       <!-- 6 · TRUST: two sharp full-bleed macro clips, crossfaded by scroll -->
       <section class="gm-stitch" data-sc-act="pin" data-sc-span="2.4" data-sc-drift="#10182a" aria-label="Fabric and stitching up close">
         <div data-sc-stage>
-          <video class="gm-roll gm-stitch__vid" src="assets/m2-a.mp4" poster="assets/m2-a-poster.webp" muted loop playsinline preload="metadata" aria-label="A threaded needle and ivory basting stitch on navy herringbone fabric, sharp and up close"></video>
-          <video class="gm-roll gm-stitch__vid gm-stitch__vid--b" src="assets/m2-b.mp4" poster="assets/m2-b-poster.webp" muted loop playsinline preload="metadata" aria-label="Ivory pick-stitching and a horn button along a navy lapel edge, sharp and up close"></video>
+          <video class="gm-roll gm-stitch__vid" src="assets/m2-a.mp4" data-poster="assets/m2-a-poster.webp" muted loop playsinline preload="none" aria-label="A threaded needle and ivory basting stitch on navy herringbone fabric, sharp and up close"></video>
+          <video class="gm-roll gm-stitch__vid gm-stitch__vid--b" src="assets/m2-b.mp4" data-poster="assets/m2-b-poster.webp" muted loop playsinline preload="none" aria-label="Ivory pick-stitching and a horn button along a navy lapel edge, sharp and up close"></video>
           <div class="gm-stitch__shade gm-stitch__shade--lead" aria-hidden="true"></div>
           <div class="gm-stitch__shade gm-stitch__shade--trail" aria-hidden="true"></div>
           <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.38 0 0.3">
@@ -1548,7 +1552,7 @@
       </div>
       <div class="gm-footer__bottom">
         <span>&copy; 2026 Gabriel's Menswear &middot; Holden, Massachusetts</span>
-        <span>Expert tailoring. Personal service.</span>
+        <span><a href="/privacy">Privacy</a> &middot; Expert tailoring. Personal service.</span>
       </div>
     </footer>
 
@@ -1610,6 +1614,33 @@
         var rolls = document.querySelectorAll("video.gm-roll");
         if (!rolls.length) return;
         var rm = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        // Posters are full-width stills and every one of these clips sits well
+        // below the fold, so they are fetched a couple of screens ahead rather
+        // than during first paint. Full quality, just later.
+        function warm(v) {
+          var p = v.getAttribute("data-poster");
+          if (!p) return;
+          v.removeAttribute("data-poster");
+          v.setAttribute("poster", p);
+          if (v.preload === "none") v.preload = "metadata";
+        }
+        if ("IntersectionObserver" in window) {
+          var warmIo = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                warm(e.target);
+                warmIo.unobserve(e.target);
+              });
+            },
+            { rootMargin: "200% 0px" }
+          );
+          rolls.forEach(function (v) { warmIo.observe(v); });
+        } else {
+          rolls.forEach(warm);
+        }
+
         var userPaused = false;
         var near = new WeakSet();
         function sync() {
