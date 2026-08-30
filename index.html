@@ -863,33 +863,23 @@
         display: inline-block;
         padding: 0.5em 0.25em;
       }
-      /* The chalk ring: sketches itself around the call button as the close
-         pins, in place of any pointer-chasing. */
+      /* Draftsman corner brackets around the call-to-action. CSS borders so
+         they always frame the button exactly, on every browser. */
       .gm-close__cta { position: relative; display: inline-block; }
-      .gm-close__ring {
+      .gm-corner {
         position: absolute;
-        inset: -1.6em -2.4em;
-        width: calc(100% + 4.8em);
-        height: calc(100% + 3.2em);
+        width: 20px;
+        height: 20px;
+        border: 0 solid var(--sc-accent);
         pointer-events: none;
-        overflow: visible;
+        opacity: calc(clamp(0, calc((var(--sc-p, 0) - var(--c0, 0.1)) * 4), 1) * 0.75);
       }
-      .gm-close__ring path {
-        fill: none;
-        stroke: var(--sc-accent);
-        stroke-width: 1.3;
-        stroke-linecap: butt;
-        opacity: 0.75;
-        stroke-dasharray: 1;
-        --rp: clamp(0, calc((var(--sc-p, 0) - var(--r0, 0.12)) * 3), 1);
-        stroke-dashoffset: calc(1 - var(--rp));
-      }
-      .gm-close__ring path:nth-child(1) { --r0: 0.1; }
-      .gm-close__ring path:nth-child(2) { --r0: 0.18; }
-      .gm-close__ring path:nth-child(3) { --r0: 0.26; }
-      .gm-close__ring path:nth-child(4) { --r0: 0.34; }
+      .gm-corner--tl { top: -14px; left: -22px; border-top-width: 1.5px; border-left-width: 1.5px; --c0: 0.08; }
+      .gm-corner--tr { top: -14px; right: -22px; border-top-width: 1.5px; border-right-width: 1.5px; --c0: 0.16; }
+      .gm-corner--br { bottom: -14px; right: -22px; border-bottom-width: 1.5px; border-right-width: 1.5px; --c0: 0.24; }
+      .gm-corner--bl { bottom: -14px; left: -22px; border-bottom-width: 1.5px; border-left-width: 1.5px; --c0: 0.32; }
       @media (prefers-reduced-motion: reduce) {
-        .gm-close__ring path { stroke-dashoffset: 0; }
+        .gm-corner { opacity: 0.75; }
       }
 
       /* ------------------------------------------------ footer ----------- */
@@ -1560,12 +1550,10 @@
           <div class="gm-close__inner">
             <h2 class="sc-display sc-display--lg" data-sc-cue="0 1 0 0">Get a tailor's answer <em>before you spend more</em>.</h2>
             <span class="gm-close__cta" data-sc-cue="0 1 0 0">
-              <svg class="gm-close__ring" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
-                <path pathLength="1" d="M 5 12 V 4.5 H 17" vector-effect="non-scaling-stroke" />
-                <path pathLength="1" d="M 83 4.5 H 95 V 12" vector-effect="non-scaling-stroke" />
-                <path pathLength="1" d="M 95 28 V 35.5 H 83" vector-effect="non-scaling-stroke" />
-                <path pathLength="1" d="M 17 35.5 H 5 V 28" vector-effect="non-scaling-stroke" />
-              </svg>
+              <i class="gm-corner gm-corner--tl" aria-hidden="true"></i>
+              <i class="gm-corner gm-corner--tr" aria-hidden="true"></i>
+              <i class="gm-corner gm-corner--br" aria-hidden="true"></i>
+              <i class="gm-corner gm-corner--bl" aria-hidden="true"></i>
               <a
                 class="gm-cta gm-cta--big"
                 href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
