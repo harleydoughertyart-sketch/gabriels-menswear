@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -104,11 +104,15 @@
         color: var(--sc-accent);
       }
       .gm-chalk-u {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M3 4 H 117' stroke='%2333627C' stroke-width='1.7' fill='none' opacity='0.75' stroke-dasharray='2.6 0.5 1.4 0.35 3.4 0.5'/%3E%3Cpath d='M3.3 4.9 H 116' stroke='%2333627C' stroke-width='1.1' fill='none' opacity='0.28' stroke-dasharray='1.8 0.6 2.8 0.5'/%3E%3Cpath d='M3 1.2 V 6.8 M117 1.2 V 6.8' stroke='%2333627C' stroke-width='1.4' fill='none' opacity='0.75'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M3 4 H 117' stroke='%2333627C' stroke-width='1.7' fill='none' opacity='0.75'/%3E%3Cpath d='M3 1.2 V 6.8 M117 1.2 V 6.8' stroke='%2333627C' stroke-width='1.4' fill='none' opacity='0.75'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: 0 96%;
         background-size: 100% 0.16em;
         padding-bottom: 0.12em;
+      }
+
+      .gm-chalk-u--light {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M3 4 H 117' stroke='%238fc0d8' stroke-width='1.7' fill='none' opacity='0.8'/%3E%3Cpath d='M3 1.2 V 6.8 M117 1.2 V 6.8' stroke='%238fc0d8' stroke-width='1.4' fill='none' opacity='0.8'/%3E%3C/svg%3E");
       }
 
       /* ------------------------------------------------ chrome ----------- */
@@ -121,10 +125,23 @@
         justify-content: space-between;
         gap: var(--sc-4);
         padding: var(--sc-3) max(var(--sc-gutter), env(safe-area-inset-left));
-        background: color-mix(in oklab, var(--sc-canvas) 88%, transparent);
+        background-color: color-mix(in oklab, var(--sc-canvas) 88%, transparent);
         -webkit-backdrop-filter: blur(14px);
         backdrop-filter: blur(14px);
         border-bottom: 1px solid var(--sc-hairline);
+        transition: background-color 300ms var(--sc-ease-out),
+                    border-color 300ms var(--sc-ease-out);
+      }
+      /* The bar normally borrows the drifting page colour, but the two takeover
+         acts are dark because of their own footage, not because the canvas
+         drifted, so the bar has to darken itself or the ivory lockup below
+         lands on a pale bar and vanishes. */
+      .gm-bar--ondark {
+        background-color: rgba(13, 20, 33, 0.74);
+        border-bottom-color: rgba(242, 245, 247, 0.16);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .gm-bar { transition: none; }
       }
       .gm-brand {
         display: flex;
@@ -217,35 +234,27 @@
       /* ------------------------------------------------ hero ------------- */
       /* The hero clip is close-up bokeh with its own pale negative space, so
          the wash is a whisper, not a fog. */
-      /* A column of density under the text column, full height, so every line
-         of the copy block sits on it; the jackets on the right stay untouched. */
-      .gm-hero-scrim {
-        background: linear-gradient(
-          100deg,
-          color-mix(in oklab, var(--sc-canvas) 90%, transparent) 0%,
-          color-mix(in oklab, var(--sc-canvas) 68%, transparent) 30%,
-          color-mix(in oklab, var(--sc-canvas) 30%, transparent) 48%,
-          transparent 64%);
-      }
+      /* The suits stay untouched: the copy lives on a frosted panel. */
+      .gm-hero-scrim { display: none; }
       @media (max-width: 860px) {
-        /* Mobile hero: a frosted panel at the foot of the frame carrying the
-           navy copy. The suits above stay completely untouched. */
-        .gm-hero-scrim { background: none; }
         .gm-hero-copy.gm-hero-copy {
-          top: auto;
           bottom: max(1.1rem, env(safe-area-inset-bottom));
           inset-inline: 0.9rem;
-          background: rgba(247, 245, 241, 0.9);
-          -webkit-backdrop-filter: blur(12px);
-          backdrop-filter: blur(12px);
-          border-radius: 20px;
+          max-width: none;
           padding: 1.4rem 1.25rem;
-          box-shadow: 0 18px 40px -12px rgba(21, 34, 56, 0.3);
         }
       }
-      /* The clip reserves its negative space in the upper left, so the copy
-         lives there, not at the foot of the frame. */
-      .gm-hero-copy { top: clamp(6rem, 15vh, 10rem); bottom: auto; }
+      .gm-hero-copy {
+        top: auto;
+        bottom: clamp(2.5rem, 6vh, 4.5rem);
+        max-width: 34rem;
+        background: rgba(247, 245, 241, 0.9);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        padding: 2rem 2.2rem;
+        box-shadow: 0 18px 40px -12px rgba(21, 34, 56, 0.3);
+      }
       /* Capped below the fluid xl so the teal line never reaches the jackets
          on the right; the wash column only covers the left half. */
       .gm-hero-copy h1 { color: var(--sc-ink); max-width: 12ch; font-size: clamp(2.8rem, 1.9rem + 3.4vw, 4.6rem); }
@@ -266,55 +275,64 @@
         .gm-hero-copy h1 { font-size: var(--sc-t-2xl); }
       }
 
-      /* ------------------------------------------------ act 2: the week -- */
-      .gm-week {
-        background-color: #e7edf1;
-        background-image:
-          linear-gradient(rgba(51, 98, 124, 0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(51, 98, 124, 0.05) 1px, transparent 1px),
-          linear-gradient(rgba(51, 98, 124, 0.08) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(51, 98, 124, 0.08) 1px, transparent 1px);
-        background-size: 26px 26px, 26px 26px, 130px 130px, 130px 130px;
+      /* ------------------------------------------ act 1b: the single voice */
+      /* A customer says the thing the shop would otherwise have to claim
+         about itself. No card, no box, no badge: a benefits grid is a
+         value-brand device and reads cheap under a film like this one. */
+      .gm-voice {
+        background: var(--sc-canvas);
+        padding-block: clamp(3.4rem, 7vw, 6rem);
       }
-      /* Chalk notations sketching themselves behind the lines: each group
-         draws in with its line's window and fades as the next arrives. */
-      .gm-notes {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
+      .gm-voice__inner {
+        max-width: 46rem;
+        margin-inline: auto;
+        text-align: center;
       }
-      .gm-notes g {
-        --oin: clamp(0, calc((var(--sc-p, 0) - var(--n0)) * 8), 1);
-        --oout: clamp(0, calc((var(--n1) + 0.08 - var(--sc-p, 0)) * 8), 1);
-        opacity: calc(var(--oin) * var(--oout) * 0.55);
+      .gm-voice__mark {
+        display: inline-block;
+        font-size: var(--sc-t-xs);
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--sc-accent);
+        text-decoration: none;
+        margin-bottom: clamp(1.2rem, 2.4vw, 1.9rem);
       }
-      .gm-notes g:last-child { --oout: 1; }
-      .gm-notes path {
-        fill: none;
-        stroke: var(--sc-accent);
-        stroke-width: 0.38;
-        stroke-linecap: butt;
-        stroke-dasharray: 0.022 0.004 0.012 0.003 0.028 0.004;
-        filter: drop-shadow(0.25px 0.35px 0 rgba(51, 98, 124, 0.22));
-        --d: clamp(0, calc((var(--sc-p, 0) - var(--n0)) * 5), 1);
-        stroke-dashoffset: calc(0.146 * (1 - var(--d)));
+      a.gm-voice__mark:hover { color: var(--sc-ink); }
+      .gm-voice__quote {
+        margin: 0;
+        font-family: var(--sc-font-display);
+        font-style: italic;
+        font-weight: 500;
+        font-size: clamp(1.35rem, 2.5vw, 2.15rem);
+        line-height: 1.32;
+        letter-spacing: -0.005em;
+        text-wrap: balance;
+        color: var(--sc-ink);
       }
-      .gm-notes g:nth-child(1) { --n0: 0.0;  --n1: 0.21; }
-      .gm-notes g:nth-child(2) { --n0: 0.18; --n1: 0.42; }
-      .gm-notes g:nth-child(3) { --n0: 0.38; --n1: 0.59; }
-      .gm-notes g:nth-child(4) { --n0: 0.57; --n1: 0.78; }
-      .gm-notes g:nth-child(5) { --n0: 0.76; --n1: 1; }
-      .gm-notes--mobile { display: none; }
+      .gm-voice__attr {
+        margin: clamp(1.4rem, 2.4vw, 2rem) 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        font-size: var(--sc-t-xs);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--sc-ink-soft);
+      }
+      .gm-voice__attr .gm-voice__rule {
+        width: clamp(1.4rem, 4vw, 2.4rem);
+        height: 1px;
+        background: var(--sc-hairline);
+      }
+      .gm-voice__stars { letter-spacing: 0.1em; color: var(--sc-accent); }
       @media (max-width: 700px) {
-        .gm-notes--desktop { display: none; }
-        .gm-notes--mobile { display: block; }
+        .gm-voice__attr { letter-spacing: 0.16em; }
       }
-      @media (prefers-reduced-motion: reduce) {
-        .gm-notes g { opacity: 0.35; }
-        .gm-notes path { stroke-dashoffset: 0; }
-      }
+
+      /* ------------------------------------------------ act 2: the week -- */
+      .gm-week { background: #e7edf1; }
       .gm-week .sc-stage {
         display: grid;
         place-items: center;
@@ -393,30 +411,24 @@
       .gm-made__vid--2 { opacity: clamp(0, calc((var(--sc-p, 0) - 0.24) * 7), 1); will-change: opacity; }
       .gm-made__vid--3 { opacity: clamp(0, calc((var(--sc-p, 0) - 0.48) * 7), 1); will-change: opacity; }
       .gm-made__vid--4 { opacity: clamp(0, calc((var(--sc-p, 0) - 0.72) * 7), 1); will-change: opacity; }
-      .gm-made .sc-copy h2 { max-width: 14ch; }
-      /* Half-density washes: just enough ground for the type, no fog. */
-      .gm-made .sc-scrim--lead {
-        background: linear-gradient(
-          to top right,
-          color-mix(in oklab, var(--sc-canvas) 72%, transparent) 0%,
-          color-mix(in oklab, var(--sc-canvas) 38%, transparent) 32%,
-          transparent 56%);
+      /* Dark takeover treatment, same family as the stitch section: the
+         frame darkens toward the foot, ivory type sits on it. No white fog. */
+      .gm-made .sc-copy h2 { max-width: 14ch; color: #f2f5f7; }
+      .gm-made .sc-copy h2 em { color: #8fc0d8; }
+      .gm-made .gm-assembled-line { color: #f2f5f7; }
+      .gm-made .gm-assembled-line em { color: #8fc0d8; }
+      .gm-made__shade { position: absolute; inset: 0; pointer-events: none; }
+      .gm-made__shade--veil { background: rgba(13, 20, 33, 0.2); }
+      .gm-made__shade--lead {
+        background: linear-gradient(to top right, rgba(13, 20, 33, 0.9) 0%, rgba(13, 20, 33, 0.5) 34%, transparent 64%);
       }
-      .gm-made .sc-scrim--trail {
-        background: linear-gradient(
-          to top left,
-          color-mix(in oklab, var(--sc-canvas) 72%, transparent) 0%,
-          color-mix(in oklab, var(--sc-canvas) 38%, transparent) 32%,
-          transparent 56%);
+      .gm-made__shade--trail {
+        background: linear-gradient(to top left, rgba(13, 20, 33, 0.9) 0%, rgba(13, 20, 33, 0.5) 34%, transparent 64%);
       }
       @media (max-width: 860px) {
-        .gm-made .sc-scrim--lead { background: none; }
-        .gm-made .sc-scrim--trail {
-          background: linear-gradient(
-            to top,
-            color-mix(in oklab, var(--sc-canvas) 68%, transparent) 0%,
-            color-mix(in oklab, var(--sc-canvas) 36%, transparent) 32%,
-            transparent 56%);
+        .gm-made__shade--lead { background: none; }
+        .gm-made__shade--trail {
+          background: linear-gradient(to top, rgba(13, 20, 33, 0.92) 0%, rgba(13, 20, 33, 0.55) 32%, transparent 62%);
         }
       }
       .gm-assembled-line {
@@ -1138,59 +1150,35 @@
         </div>
       </section>
 
+      <!-- 1b · THE SINGLE VOICE: one real review, before the story starts -->
+      <section class="gm-voice" data-sc-act="flow" data-sc-drift="#f7f5f1" aria-label="A customer review">
+        <div class="sc-wrap">
+          <figure class="gm-voice__inner" data-sc-in data-sc-stagger="90">
+            <a
+              class="gm-voice__mark"
+              href="https://www.google.com/maps/search/?api=1&query=Gabriel's%20Menswear%201363%20Main%20St%20Holden%20MA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >From the shop&rsquo;s Google reviews</a>
+            <blockquote class="gm-voice__quote">&ldquo;These guys know how to get you up to speed and looking sharp while forging a true connection with their customers.&rdquo;</blockquote>
+            <figcaption class="gm-voice__attr">
+              <span class="gm-voice__rule" aria-hidden="true"></span>
+              Taylor Blair
+              <span class="gm-voice__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="gm-voice__rule" aria-hidden="true"></span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
       <!-- 2 · RECOGNITION: the week, pinned quick lines -->
       <section class="gm-week" data-sc-act="pin" data-sc-span="3.6" data-sc-drift="#e7edf1" aria-label="The occasions Gabriel dresses">
         <div data-sc-stage>
-          <svg class="gm-notes gm-notes--mobile" viewBox="0 0 60 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <g>
-              <path pathLength="1" d="M 12 12 V 19 M 32 12 V 19" />
-              <path pathLength="1" d="M 12 15.5 H 32 M 14.6 14.3 L 12 15.5 L 14.6 16.7 M 29.4 14.3 L 32 15.5 L 29.4 16.7" />
-              <path pathLength="1" d="M 42.4 15.5 a 1.7 1.7 0 1 0 3.4 0 a 1.7 1.7 0 1 0 -3.4 0 M 44.1 12.7 V 18.3 M 41.3 15.5 H 46.9" />
-            </g>
-            <g>
-              <path pathLength="1" d="M 38 30 C 42 24, 47 21, 53 20.6" />
-              <path pathLength="1" d="M 40.2 26.4 l 1.9 1.2 M 44.6 22.9 l 1.4 1.7 M 49.6 20.9 l 0.7 2" />
-            </g>
-            <g>
-              <path pathLength="1" d="M 14 72 V 92 M 12.8 74.3 L 14 72 L 15.2 74.3 M 12.8 89.7 L 14 92 L 15.2 89.7" />
-            </g>
-            <g>
-              <path pathLength="1" d="M 20 84 H 44" stroke-dasharray="0.07 0.045" />
-              <path pathLength="1" d="M 24 82.4 V 85.6 M 40 82.4 V 85.6" />
-            </g>
-            <g>
-              <path pathLength="1" d="M 8 6 V 16 M 52 6 V 16" />
-              <path pathLength="1" d="M 8 11 H 52 M 10.6 9.8 L 8 11 L 10.6 12.2 M 49.4 9.8 L 52 11 L 49.4 12.2 M 30 9.6 V 12.4" />
-            </g>
-          </svg>
-          <svg class="gm-notes gm-notes--desktop" viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <g>
-              <path pathLength="1" d="M 10 8.5 V 15.5 M 26 8.5 V 15.5" />
-              <path pathLength="1" d="M 10 12 H 26 M 12.4 10.9 L 10 12 L 12.4 13.1 M 23.6 10.9 L 26 12 L 23.6 13.1" />
-              <path pathLength="1" d="M 13.5 46 a 1.5 1.5 0 1 0 3 0 a 1.5 1.5 0 1 0 -3 0 M 15 43.6 V 48.4 M 12.6 46 H 17.4" />
-            </g>
-            <g>
-              <path pathLength="1" d="M 76 20 C 79 13.5, 85 10.5, 93 10.2" />
-              <path pathLength="1" d="M 78.3 16.2 l 1.6 1 M 82.5 12.8 l 1.2 1.5 M 87.7 10.8 l 0.6 1.8" />
-            </g>
-            <g>
-              <path pathLength="1" d="M 86 27 V 46 M 84.9 29.2 L 86 27 L 87.1 29.2 M 84.9 43.8 L 86 46 L 87.1 43.8" />
-              <path pathLength="1" d="M 10 26 V 32 H 16" />
-            </g>
-            <g>
-              <path pathLength="1" d="M 32 52 H 68" stroke-dasharray="0.045 0.028" />
-              <path pathLength="1" d="M 36 50.4 V 53.6 M 64 50.4 V 53.6" />
-            </g>
-            <g>
-              <path pathLength="1" d="M 12 44 V 56 M 88 44 V 56" />
-              <path pathLength="1" d="M 12 50 H 88 M 14.6 48.9 L 12 50 L 14.6 51.1 M 85.4 48.9 L 88 50 L 85.4 51.1 M 50 48.6 V 51.4" />
-            </g>
-          </svg>
           <div class="gm-week__lines">
-            <p data-sc-cue="0 0.21 0 0.18">A wedding <em>in three weeks.</em></p>
-            <p data-sc-cue="0.18 0.42 0.1 0.14">Prom <em>on Friday.</em></p>
-            <p data-sc-cue="0.38 0.59 0.15 0.18">An interview <em>Tuesday morning.</em></p>
-            <p data-sc-cue="0.57 0.78 0.15 0.18">A funeral <em>tomorrow.</em></p>
+            <p data-sc-cue="0 0.21 0 0.18">A wedding <em>in three weeks?</em></p>
+            <p data-sc-cue="0.18 0.42 0.1 0.14">Prom <em>on Friday?</em></p>
+            <p data-sc-cue="0.38 0.59 0.15 0.18">An interview <em>Tuesday morning?</em></p>
+            <p data-sc-cue="0.57 0.78 0.15 0.18">A funeral <em>tomorrow?</em></p>
             <p data-sc-cue="0.76 1 0.15 0.12">Whatever the day is, the suit should be <em>the easy part.</em></p>
           </div>
           <span class="gm-week__tick" aria-hidden="true"></span>
@@ -1227,16 +1215,20 @@
           <video class="gm-roll gm-made__vid gm-made__vid--2" src="assets/mv2.mp4" poster="assets/mv2-poster.webp" muted loop playsinline preload="metadata" aria-label="A deep teal tie with a silver tie bar, up close"></video>
           <video class="gm-roll gm-made__vid gm-made__vid--3" src="assets/mv3.mp4" poster="assets/mv3-poster.webp" muted loop playsinline preload="metadata" aria-label="Hands pinning a white boutonniere to a navy lapel"></video>
           <video class="gm-roll gm-made__vid gm-made__vid--4" src="assets/mv4.mp4" poster="assets/mv4-poster.webp" muted loop playsinline preload="metadata" aria-label="The finished navy suit worn at a wedding arch, no face in frame"></video>
-          <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
-          <div class="sc-scrim sc-scrim--trail" aria-hidden="true"></div>
+          <div class="gm-made__shade gm-made__shade--veil" aria-hidden="true"></div>
+          <div class="gm-made__shade gm-made__shade--lead" aria-hidden="true"></div>
+          <div class="gm-made__shade gm-made__shade--trail" aria-hidden="true"></div>
           <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.26 0 0.28">
             <h2 class="sc-display sc-display--lg">Watch it <em>come together</em>.</h2>
           </div>
-          <div class="sc-copy sc-copy--trail" data-sc-cue="0.3 0.64 0.2 0.25">
+          <div class="sc-copy sc-copy--trail" data-sc-cue="0.3 0.52 0.2 0.25">
             <h2 class="sc-display sc-display--lg">Every detail, <em>checked by hand</em>.</h2>
           </div>
-          <div class="sc-copy sc-copy--lead" data-sc-cue="0.76 1 0.3 0.1">
-            <p class="gm-assembled-line">Then it's <em class="gm-chalk-u">your day</em>.</p>
+          <div class="sc-copy sc-copy--lead" data-sc-cue="0.55 0.74 0.2 0.25">
+            <h2 class="sc-display sc-display--lg">Ready for <em>the moment</em>.</h2>
+          </div>
+          <div class="sc-copy sc-copy--trail" data-sc-cue="0.78 1 0.3 0.1">
+            <h2 class="sc-display sc-display--lg">One less thing <em class="gm-chalk-u gm-chalk-u--light">to worry about</em>.</h2>
           </div>
         </div>
       </section>
@@ -1351,11 +1343,6 @@
             <blockquote>&ldquo;Fast turnaround for alterations&rdquo;</blockquote>
             <p>&ldquo;Best personal service one can ask for. Huge inventory and fast turnaround for alterations. Highly recommend.&rdquo;</p>
             <footer><strong>Jennifer LaRange</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
-          </article>
-          <article class="gm-review">
-            <blockquote>&ldquo;Looking sharp&rdquo;</blockquote>
-            <p>&ldquo;Outstanding service! These guys know how to get you up to speed and looking sharp while forging a true connection with their customers.&rdquo;</p>
-            <footer><strong>Taylor Blair</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
           </article>
           <article class="gm-review">
             <blockquote>&ldquo;A few quick measurements&rdquo;</blockquote>
@@ -1573,7 +1560,7 @@
       // ivory while a dark section occupies the top of the viewport.
       (function () {
         var bar = document.querySelector(".gm-bar");
-        var darks = document.querySelectorAll(".gm-turn, .gm-stitch");
+        var darks = document.querySelectorAll(".gm-turn, .gm-stitch, .gm-made");
         if (!bar || !darks.length || !("IntersectionObserver" in window)) return;
         var active = new Set();
         var io = new IntersectionObserver(
