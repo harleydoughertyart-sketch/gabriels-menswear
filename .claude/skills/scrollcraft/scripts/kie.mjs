@@ -30,6 +30,12 @@ const MODELS = {
   still:     "seedream/5-pro-text-to-image",
   stillEdit: "seedream/5-pro-image-to-image",
   shot:      "kling/v2-1-pro",
+  dance:     "bytedance/seedance-2-5",
+  // Gemini 3 Pro Image. Note the missing provider prefix: "google/nano-banana-pro"
+  // is rejected as unsupported, the bare name is what the API accepts.
+  banana:    "nano-banana-pro",
+  gpt:       "gpt-image-2-text-to-image",
+  gptEdit:   "gpt-image-2-image-to-image",
 };
 
 // ---------------------------------------------------------------- key ----
@@ -187,12 +193,78 @@ try {
     await download(urls[0], out);
     console.log(out);
 
+  } else if (cmd === "gpt") {
+    const [prompt, out] = rest;
+    if (!prompt || !out) {
+      throw new Error('usage: kie.mjs gpt "<prompt>" <out.png> [--ar 16:9] [--res 2K] [--ref a.png]');
+    }
+    const refs = flags(rest, "--ref");
+    const input = {
+      prompt,
+      aspect_ratio: flag(rest, "--ar", "16:9"),
+      resolution: flag(rest, "--res", "2K"),
+    };
+    // 5:4, 4:5, 3:1, 1:3 and 9:21 are 1K-only on this model.
+    if (refs.length) input.image_input = await Promise.all(refs.map(asUrl));
+    const id = await createTask(refs.length ? MODELS.gptEdit : MODELS.gpt, input);
+    const urls = await waitTask(id, { label: path.basename(out) });
+    await download(urls[0], out);
+    console.log(out);
+
+  } else if (cmd === "banana") {
+    const [prompt, out] = rest;
+    if (!prompt || !out) {
+      throw new Error('usage: kie.mjs banana "<prompt>" <out.png> [--ar 16:9] [--res 2K] [--ref a.png ...]');
+    }
+    const refs = flags(rest, "--ref");
+    const input = {
+      prompt,
+      aspect_ratio: flag(rest, "--ar", "16:9"),
+      resolution: flag(rest, "--res", "2K"),
+      // lowercase only: "PNG" is rejected as out of range even though the
+      // playground labels the control with capitals.
+      output_format: "png",
+    };
+    if (refs.length) input.image_input = await Promise.all(refs.map(asUrl));
+    const id = await createTask(MODELS.banana, input);
+    const urls = await waitTask(id, { label: path.basename(out) });
+    await download(urls[0], out);
+    console.log(out);
+
+  } else if (cmd === "dance") {
+    const [prompt, head, out] = rest;
+    if (!prompt || !head || !out) {
+      throw new Error('usage: kie.mjs dance "<prompt>" <first.png> <out.mp4> [--last b.png] [--dur 5] [--res 720p] [--ar 16:9] [--draft]');
+    }
+    // seedance takes first/last frame natively, so pinning both ends is a
+    // supported feature here rather than the workaround it is on kling.
+    const input = {
+      prompt,
+      first_frame_url: await asUrl(head),
+      duration: Number(flag(rest, "--dur", "5")),
+      // --draft renders at 480p: same composition, a fraction of the cost, for
+      // finding out whether a shot works before paying for the real one.
+      resolution: rest.includes("--draft") ? "480p" : flag(rest, "--res", "1080p"),
+      // seedance rejects a fixed ratio whenever a first frame is supplied: the
+      // frame decides the shape. "adaptive" is the only value it accepts here.
+      aspect_ratio: flag(rest, "--ar", "adaptive"),
+      output_format: "mp4",
+      generate_audio: false,
+    };
+    const last = flag(rest, "--last");
+    if (last) input.last_frame_url = await asUrl(last);
+    const id = await createTask(MODELS.dance, input);
+    const urls = await waitTask(id, { label: path.basename(out), timeoutMs: 20 * 60 * 1000 });
+    await download(urls[0], out);
+    console.log(out);
+
   } else {
     console.error(`scrollcraft asset generator
 
   node kie.mjs probe
   node kie.mjs still "<prompt>" <out.png> [--ar 16:9] [--ref ref.png]
   node kie.mjs shot  "<prompt>" <head.png> <out.mp4> [--tail tail.png] [--dur 5]
+  node kie.mjs dance "<prompt>" <first.png> <out.mp4> [--last b.png] [--dur 5] [--res 720p] [--ar 16:9] [--draft]
 `);
     process.exit(1);
   }
