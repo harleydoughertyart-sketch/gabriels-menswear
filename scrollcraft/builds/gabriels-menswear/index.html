@@ -1161,6 +1161,7 @@
             <a
               class="gm-voice__mark"
               href="https://www.google.com/maps/search/?api=1&query=Gabriel's%20Menswear%201363%20Main%20St%20Holden%20MA"
+              data-event="reviews_click"
               target="_blank"
               rel="noopener noreferrer"
             >From the shop&rsquo;s Google reviews</a>
@@ -1318,6 +1319,7 @@
                 <span class="gm-rating__stars" role="img" aria-label="4.7 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;<span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
                 <a
                   href="https://www.google.com/maps/search/?api=1&query=Gabriel's%20Menswear%201363%20Main%20St%20Holden%20MA"
+              data-event="reviews_click"
                   target="_blank"
                   rel="noopener noreferrer"
                 >29 Google reviews</a>
@@ -1545,6 +1547,7 @@
           <a href="#faq">FAQ</a>
           <a
             href="https://www.google.com/maps/search/?api=1&query=Gabriel's%20Menswear%201363%20Main%20St%20Holden%20MA"
+              data-event="reviews_click"
             target="_blank"
             rel="noopener noreferrer"
           >Reviews on Google</a>
@@ -1586,9 +1589,11 @@
         var a = e.target.closest ? e.target.closest("a") : null;
         if (!a) return;
         var h = a.getAttribute("href") || "";
-        var name = null;
-        if (/^tel:/.test(h)) name = "call_click";
-        else if (/google\.com\/maps/.test(h)) name = /1363/.test(h) ? "directions_click" : "reviews_click";
+        var name = a.getAttribute("data-event");
+        if (!name) {
+          if (/^tel:/.test(h)) name = "call_click";
+          else if (/google\.com\/maps/.test(h)) name = "directions_click";
+        }
         if (!name) return;
         var sec = a.closest("section, header, footer");
         var loc = sec ? (sec.id || sec.getAttribute("aria-label") || sec.tagName.toLowerCase()) : "page";
