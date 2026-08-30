@@ -133,7 +133,13 @@
         gap: 3px;
         text-decoration: none;
         color: var(--sc-ink);
+        transition: color 240ms var(--sc-ease-out);
       }
+      .gm-brand__row { transition: color 240ms var(--sc-ease-out); }
+      /* While a dark act (navy interlude, stitch close-ups) sits under the
+         bar, the drift paints the bar dark too, so the lockup goes ivory. */
+      .gm-bar--ondark .gm-brand { color: #f2f5f7; }
+      .gm-bar--ondark .gm-brand__row { color: #7db2cc; }
       .gm-brand__name {
         font-family: var(--sc-font-display);
         font-weight: 600;
@@ -1629,6 +1635,26 @@
     <script src="scrollcraft.js"></script>
     <script>
       ScrollCraft.mount(document.body);
+
+      // The fixed bar inherits the drift colour, so flip the wordmark to
+      // ivory while a dark section occupies the top of the viewport.
+      (function () {
+        var bar = document.querySelector(".gm-bar");
+        var darks = document.querySelectorAll(".gm-turn, .gm-stitch");
+        if (!bar || !darks.length || !("IntersectionObserver" in window)) return;
+        var active = new Set();
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) active.add(e.target);
+              else active.delete(e.target);
+            });
+            bar.classList.toggle("gm-bar--ondark", active.size > 0);
+          },
+          { rootMargin: "0px 0px -92% 0px" }
+        );
+        darks.forEach(function (el) { io.observe(el); });
+      })();
 
       // Conversion events: every call, directions, and review-profile click
       // goes to GA4 directly (gtag) and to the dataLayer for GTM.
