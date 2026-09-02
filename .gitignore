@@ -18,3 +18,14 @@ scrollcraft/builds/*/out3/
 msm.html
 scrollcraft/builds/*/out4/
 scrollcraft/builds/*/out5/
+
+# Unrelated work parked in this folder
+builds/
+marketing/
+pins/
+_local/
+.claude/
+
+# Generated
+scrollcraft/builds/*/out6/
+.github/media/*.webm

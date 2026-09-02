@@ -1,0 +1,92 @@
+{
+  "theme": {
+    "extend": {
+      "colors": {
+        "primary": "#211a16",
+        "secondary": "#75685e",
+        "tertiary": "#7a2e2a",
+        "neutral": "#f7f0e6",
+        "paper": "#fff8ee",
+        "white": "#ffffff",
+        "charcoal": "#2b211c",
+        "walnut": "#5c3b2f",
+        "brass": "#a97a43",
+        "brassSoft": "#e2c89f",
+        "line": "#dfd1bf",
+        "secondaryOnDark": "#3c332e"
+      },
+      "fontFamily": {
+        "h1": [
+          "Newsreader"
+        ],
+        "h2": [
+          "Newsreader"
+        ],
+        "h3": [
+          "IBM Plex Sans"
+        ],
+        "body-md": [
+          "IBM Plex Sans"
+        ],
+        "eyebrow": [
+          "IBM Plex Sans"
+        ],
+        "blockquote": [
+          "Newsreader"
+        ]
+      },
+      "fontSize": {
+        "h1": [
+          "4.875rem",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "650"
+          }
+        ],
+        "h2": [
+          "3.5rem",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "650"
+          }
+        ],
+        "h3": [
+          "1.375rem",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "700"
+          }
+        ],
+        "body-md": [
+          "1rem",
+          {
+            "fontWeight": "400"
+          }
+        ],
+        "eyebrow": [
+          "0.75rem",
+          {
+            "letterSpacing": "0em",
+            "fontWeight": "700"
+          }
+        ],
+        "blockquote": [
+          "1.5rem",
+          {
+            "fontWeight": "400"
+          }
+        ]
+      },
+      "borderRadius": {
+        "sm": "6px"
+      },
+      "spacing": {
+        "xs": "10px",
+        "sm": "18px",
+        "md": "20px",
+        "lg": "24px",
+        "xl": "48px"
+      }
+    }
+  }
+}

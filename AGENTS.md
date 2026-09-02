@@ -5,7 +5,7 @@
 Use this folder as the active project:
 
 ```powershell
-D:\gabriels-menswear
+D:\Gabriels Menswear
 ```
 
 The old working folder at `C:\Users\Harley\Documents\New project` is now just the original build workspace.
@@ -36,6 +36,12 @@ http://127.0.0.1:4173/index.html
 
 ```powershell
 node --check .\script.js
+```
+
+Re-record the README scroll capture after a visual change:
+
+```powershell
+node scripts/capture-scroll.cjs
 ```
 
 The page also contains JSON-LD for local business and FAQ. Keep visible FAQ text and FAQ schema answers in sync.
