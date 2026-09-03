@@ -8,8 +8,6 @@ One pass down the whole page, desktop beside phone, sped up to fit here:
 
 ![The whole page scrolling, desktop beside phone](.github/media/journey.gif)
 
-<video src="https://github.com/harleydoughertyart-sketch/gabriels-menswear/raw/main/.github/media/journey.mp4" controls muted playsinline width="100%"></video>
-
 **[Watch it at reading speed, 46 seconds →](.github/media/journey.mp4)**
 
 ---
