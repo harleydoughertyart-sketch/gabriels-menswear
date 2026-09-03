@@ -4,9 +4,13 @@ A scroll-driven site for a menswear shop on Main Street. Video scrubs frame by f
 
 Built for Gabriel Sr. at 1363 Main Street, Holden, Massachusetts. Live at [gabriels-menswear.vercel.app](https://gabriels-menswear.vercel.app).
 
-![The homepage scroll, from the hero scrub into the pinned week](.github/media/scroll.gif)
+One pass down the whole page, desktop beside phone, sped up to fit here:
 
-**[Watch the full 34-second scroll →](.github/media/scroll.mp4)**
+![The whole page scrolling, desktop beside phone](.github/media/journey.gif)
+
+<video src="https://github.com/harleydoughertyart-sketch/gabriels-menswear/raw/main/.github/media/journey.mp4" controls muted playsinline width="100%"></video>
+
+**[Watch it at reading speed, 46 seconds →](.github/media/journey.mp4)**
 
 ---
 
@@ -135,7 +139,8 @@ Change the FAQ copy and change the schema answer with it. They have to agree.
 | [`scrollcraft.css`](scrollcraft.css) | Stages, stickiness, cue and kinetic styles |
 | [`index.html`](index.html) | The page and its JSON-LD |
 | [`styles.css`](styles.css) | The shop's own type and layout |
-| [`scripts/capture-scroll.cjs`](scripts/capture-scroll.cjs) | Records the scroll at the top of this page |
+| [`scripts/capture-journey.cjs`](scripts/capture-journey.cjs) | Records the desktop and phone passes at the top of this page |
+| [`scripts/capture-scroll.cjs`](scripts/capture-scroll.cjs) | Records a shorter desktop-only pass |
 | [`scripts/capture-stills.cjs`](scripts/capture-stills.cjs) | Screenshots the positions used above |
 | [`DESIGN.md`](DESIGN.md) | Colour, type and spacing, read back out of the shipping site |
 
@@ -156,10 +161,10 @@ Open `http://127.0.0.1:4173/index.html`.
 Re-record the media after a visual change:
 
 ```powershell
-npm i -D playwright; npx playwright install chromium; node scripts/capture-scroll.cjs; node scripts/capture-stills.cjs
+npm i -D playwright; npx playwright install chromium; node scripts/capture-journey.cjs; node scripts/capture-stills.cjs
 ```
 
-Both scripts read `URL` and `OUT` from the environment. `capture-scroll.cjs` also takes `TO`, `SECONDS`, `W` and `H`. The GIF above came from `TO=5100 SECONDS=15`, the long capture from `TO=11900 SECONDS=32`.
+Every script reads `URL` and `OUT` from the environment. `capture-journey.cjs` takes `SECONDS` and records both viewports in step; ffmpeg stands the two recordings side by side and speeds the result up for the GIF. `capture-scroll.cjs` takes `TO`, `SECONDS`, `W` and `H` for a single-viewport pass over part of the page.
 
 ---
 
