@@ -1,20 +1,64 @@
 # Gabriel's Menswear
 
-A scroll-driven site for a menswear shop on Main Street in Holden, Massachusetts. Scrolling is the timeline: video scrubs frame by frame under the wheel, sections pin and hold while their copy advances, a rail pans sideways, and the page background travels through the palette as you go.
+A scroll-driven site for a menswear shop on Main Street. Video scrubs frame by frame under the wheel, sections pin while their copy advances, and a rail of occasions pans sideways as you travel down the page.
 
-![The homepage scroll, from the hero scrub through the pinned week](.github/media/scroll.gif)
+Built for Gabriel Sr. at 1363 Main Street, Holden, Massachusetts. Live at [gabriels-menswear.vercel.app](https://gabriels-menswear.vercel.app).
 
-[Full 34-second capture](.github/media/scroll.mp4) · [Live site](https://gabriels-menswear.vercel.app)
+![The homepage scroll, from the hero scrub into the pinned week](.github/media/scroll.gif)
 
-## What this is
+**[Watch the full 34-second scroll →](.github/media/scroll.mp4)**
 
-Gabriel Sr. fits suits, runs alterations, and dresses people for weddings, proms, and funerals. The brief was a shop site that reads as a real local business and still earns a second look. No framework and no build step. Three files do the work: `index.html`, `scrollcraft.css`, `scrollcraft.js`.
+---
 
-The homepage runs 18,132px tall at 1280x800, about 23 viewport heights, across 10 scroll acts.
+## The problem
 
-## The scroll engine
+Gabriel Sr. dresses Holden for weddings, proms, first interviews and funerals. He has worked out of the same shop for years, and the people who need him find him by asking someone who already knows him.
 
-`scrollcraft.js` is 1,167 lines of vanilla JavaScript with zero dependencies. You mark up sections with `data-sc-*` attributes and the engine drives them from a single `requestAnimationFrame` loop.
+Two versions of this site fail. A template with a stock photo and an address gets found and forgotten. A showpiece that hides the phone number under an animation wins nothing for a man who needs a suit by Saturday.
+
+The constraint that shaped the rest: **someone lands on a phone, needs a funeral suit tomorrow, and has to reach the shop in one tap.** The header CTA never leaves the screen, the hero carries the number in plain text, and the page still works with the motion switched off.
+
+The rest of it is the part that earns a second look.
+
+## What you get
+
+The hero holds a clip of the rack. Scroll and the footage advances against your wheel instead of running on its own clock, so you set the pace.
+
+![The hero at rest](.github/media/01-hero.jpg)
+
+![The same clip, further into the scrub](.github/media/02-hero-scrubbed.jpg)
+
+Then the page sticks. The week arrives one line at a time, each question sitting alone on a pale ground while the background drifts colour underneath it.
+
+![The pinned week](.github/media/03-week.jpg)
+
+![The turn](.github/media/04-turn.jpg)
+
+The wedding act runs a fitting from chalk mark to finished sleeve across four and a half viewport heights of scroll.
+
+![The wedding act opening](.github/media/05-wedding.jpg)
+
+![Mid wedding act](.github/media/06-wedding-mid.jpg)
+
+The occasions rail breaks the vertical. You keep scrolling down and the shelf travels left, the one move on the page that argues with the direction of your hand.
+
+![The rail panning sideways](.github/media/07-rail.jpg)
+
+Then it closes in tight on the cloth before handing you the reviews, the FAQ and the way in.
+
+![The stitch pin](.github/media/08-stitch.jpg)
+
+![Reviews](.github/media/09-reviews.jpg)
+
+![The visit block](.github/media/10-visit.jpg)
+
+---
+
+## How it works
+
+No framework and no build step. Three files carry the page: `index.html`, `scrollcraft.css`, and `scrollcraft.js`.
+
+`scrollcraft.js` is 1,167 lines of vanilla JavaScript with zero dependencies. You mark a section up with `data-sc-*` attributes and one `requestAnimationFrame` loop drives it.
 
 ```html
 <section data-sc-act="scrub" data-sc-span="2.2" data-sc-drift="#f7f5f1">
@@ -28,43 +72,80 @@ The homepage runs 18,132px tall at 1280x800, about 23 viewport heights, across 1
 </section>
 ```
 
-Four act types cover the page:
+Four act types cover the homepage's ten acts:
 
-| Act | What it does | Used for |
-|---|---|---|
-| `scrub` | Sticks a stage and scrubs a clip's `currentTime` against scroll | The hero |
+| Act | What it does | Where |
+| --- | --- | --- |
+| `scrub` | Sticks a stage and drives a clip's `currentTime` from scroll | The hero |
 | `pin` | Sticks a stage for `data-sc-span` viewport heights while cues fire | The week, the wedding, the stitch |
 | `pan` | Translates a wide rail sideways as you scroll down | The occasions rail |
-| `flow` | Normal document flow with a one-shot reveal on entry | Reviews, FAQ, visit |
+| `flow` | Ordinary document flow with a one-shot reveal on entry | Reviews, FAQ, visit |
 
-Every act exposes a normalized progress `p` from 0 to 1 and publishes it as the `--sc-p` custom property, so CSS can read the same clock the JavaScript does. `data-sc-span` is measured in viewport heights, which keeps the timing honest across screen sizes.
+Every act exposes a normalized progress from 0 to 1 and publishes it as the `--sc-p` custom property, so a stylesheet reads the same clock the JavaScript does. `data-sc-span` counts viewport heights, which holds the timing together from a phone to a 27-inch monitor.
 
-Devices that hang off `p`:
+Devices that hang off that progress:
 
-- `data-sc-scrub` seeks a video. Clips load as blobs so seeks land where you ask.
-- `data-sc-kinetic="lines|words|chars"` splits a headline and staggers the pieces.
-- `data-sc-cue="0.18 0.42 0.1 0.14"` fades and rises a block inside a window of the act.
-- `data-sc-drift="#e7edf1"` interpolates the page background toward a colour while the act is on screen.
-- `data-sc-pan`, `data-sc-parallax`, `data-sc-reveal`, `data-sc-count` handle the rest.
-- `data-sc-tilt`, `data-sc-magnet`, `data-sc-spotlight` answer the pointer instead of the scroll.
+| Attribute | Effect |
+| --- | --- |
+| `data-sc-scrub` | Seeks a video against scroll |
+| `data-sc-kinetic` | Splits a headline into lines, words or characters and staggers them |
+| `data-sc-cue="0.18 0.42 0.1 0.14"` | Fades and rises a block inside a window of the act |
+| `data-sc-drift="#e7edf1"` | Interpolates the page background toward a colour |
+| `data-sc-pan`, `data-sc-parallax` | Sideways travel and depth |
+| `data-sc-reveal`, `data-sc-count` | Clip-path wipes and number blooms |
+| `data-sc-tilt`, `data-sc-magnet`, `data-sc-spotlight` | Answer the pointer rather than the scroll |
 
-One smoothed clock drives every scrub clip on the page. Each frame, the loop moves a clip's `currentTime` a fixed fraction of the way toward where the scroll says it should be. That deliberate lag is what keeps the video from stuttering when someone flicks the wheel.
+A `worldflight` mode chains several clips into one continuous camera move and crossfades the seams, so a run of pinned sections reads as one place.
 
-A `worldflight` mode chains several clips into one continuous camera move and crossfades the seams, so a run of pinned sections reads as one world.
+### Three things harder than they sound
 
-## Decisions worth reading the code for
+**A video will not seek where you point it.** Hand a `<video>` an ordinary `src` and the browser streams it, so a seek lands on whichever keyframe it happens to hold. The engine fetches each clip and loads it as a blob first. That costs a wait on entry and buys frame-accurate scrubbing for the rest of the act.
 
-**Reduced motion gets its own version of the page.** Under `prefers-reduced-motion: reduce`, cues still fade so the copy still arrives in order, translation collapses, and the video clips are never fetched at all. The poster frame holds. Pointer effects switch off.
+**Following the scroll exactly looks broken.** An early version set `currentTime` straight from scroll position, and a flick of the wheel turned the footage into a strobe. One clock now moves every clip a fixed fraction of the way toward its target each frame. That deliberate lag is the difference between footage that tracks your hand and footage that stutters.
 
-**Mobile gets different files.** `data-sc-src-mobile` serves a lighter cut of each clip, and pointer effects are gated behind `(hover: hover) and (pointer: fine)`, so a phone never downloads work it cannot use.
+**The capture script fights the stylesheet.** `scrollcraft.css` sets `scroll-behavior: smooth` for the anchor links in the nav. A wheel ignores that property, so nobody notices. A scripted `scrollTo` obeys it, and the first recording crawled at a third speed with every frame animating against the last. `scripts/capture-scroll.cjs` overrides it, which is the only way the recording matches what a visitor sees.
 
-**The markup stays semantic.** Sections carry `aria-label`, headings nest in order, and there is a skip link. The kinetic text splitter rebuilds headlines from spans but leaves the accessible name intact.
+---
 
-**Structured data covers the whole shop.** `MensClothingStore` and `LocalBusiness`, opening hours, a service and offer catalog, `FAQPage` matching the visible FAQ, `BreadcrumbList`, `WebSite`, and `WebPage`. Keep the visible FAQ text and the FAQ schema answers in sync when either changes.
+## Motion off, and phones
+
+Reduced motion gets its own version of the page rather than a dead one. Cues still fade, so the copy arrives in the order Gabriel's writer put it. Translation collapses. The clips are never fetched and the poster frame holds, which turns the heaviest page on the site into the lightest one.
+
+Phones get different files. `data-sc-src-mobile` serves a lighter cut of each clip, and the pointer effects sit behind `(hover: hover) and (pointer: fine)`, so a phone downloads no work it cannot use.
+
+<p>
+  <img src=".github/media/01-hero-mobile.jpg" width="31%" alt="The hero on a phone">
+  <img src=".github/media/03-week-mobile.jpg" width="31%" alt="The pinned week on a phone">
+  <img src=".github/media/07-rail-mobile.jpg" width="31%" alt="The occasions rail on a phone">
+</p>
+
+The kinetic splitter rebuilds a headline out of per-line spans and leaves the accessible name intact, so a screen reader hears the sentence instead of eleven fragments.
+
+## Getting found
+
+A shop site earns its keep in the search result, so the page carries the structured data to match: `MensClothingStore` and `LocalBusiness` with opening hours and a postal address, a service and offer catalog, `FAQPage` mirroring the visible FAQ, plus `BreadcrumbList`, `WebSite` and `WebPage`.
+
+Change the FAQ copy and change the schema answer with it. They have to agree.
+
+## The code
+
+| File | What it holds |
+| --- | --- |
+| [`scrollcraft.js`](scrollcraft.js) | The engine. Acts, cues, the scrub clock, worldflight, pointer effects |
+| [`scrollcraft.css`](scrollcraft.css) | Stages, stickiness, cue and kinetic styles |
+| [`index.html`](index.html) | The page and its JSON-LD |
+| [`styles.css`](styles.css) | The shop's own type and layout |
+| [`scripts/capture-scroll.cjs`](scripts/capture-scroll.cjs) | Records the scroll at the top of this page |
+| [`scripts/capture-stills.cjs`](scripts/capture-stills.cjs) | Screenshots the positions used above |
+| [`DESIGN.md`](DESIGN.md) | Colour, type and spacing, read back out of the shipping site |
+
+The header comment in `scrollcraft.js` documents the whole attribute vocabulary. Start there.
+
+## Built with
+
+Plain HTML, CSS and JavaScript · no framework, no build step, no animation library · Newsreader and IBM Plex Sans · Playwright and ffmpeg for the captures · Vercel
 
 ## Running it
-
-Static files, so any server works.
 
 ```powershell
 python -m http.server 4173 --bind 127.0.0.1
@@ -72,37 +153,14 @@ python -m http.server 4173 --bind 127.0.0.1
 
 Open `http://127.0.0.1:4173/index.html`.
 
-Check the one loose script before committing:
+Re-record the media after a visual change:
 
 ```powershell
-node --check .\script.js
+npm i -D playwright; npx playwright install chromium; node scripts/capture-scroll.cjs; node scripts/capture-stills.cjs
 ```
 
-## Recording the scroll capture
+Both scripts read `URL` and `OUT` from the environment. `capture-scroll.cjs` also takes `TO`, `SECONDS`, `W` and `H`. The GIF above came from `TO=5100 SECONDS=15`, the long capture from `TO=11900 SECONDS=32`.
 
-`scripts/capture-scroll.cjs` drives the page with an eased scroll in headless Chromium and records the result, so the clip in this README can be regenerated after any change.
+---
 
-```powershell
-npm i -D playwright; npx playwright install chromium; node scripts/capture-scroll.cjs
-```
-
-It reads `URL`, `OUT`, `TO` (scroll target in px), `SECONDS`, `W` and `H` from the environment. The GIF above came from `TO=5100 SECONDS=15`, the full capture from `TO=11900 SECONDS=32`, both converted with ffmpeg.
-
-## Layout
-
-```
-index.html          the page, including its JSON-LD
-scrollcraft.js      the scroll engine (no dependencies)
-scrollcraft.css     stage, stickiness, cue and kinetic styles
-styles.css          the shop's own type and layout
-script.js           nav, FAQ toggles, small page behaviour
-assets/             clips, posters, photography, favicons
-DESIGN.md           colour, type and spacing tokens
-tokens.json         the same tokens as JSON
-scripts/            capture and setup scripts
-scrollcraft/        the build brief, score notes and asset generators
-```
-
-## Deployment
-
-Vercel, connected to `main`. Pushing deploys. `AGENTS.md` carries the project IDs and the manual deploy path.
+Built for a working shop, and still serving it. Ask me if you want to do something with any of it: [harleydoughertyart@gmail.com](mailto:harleydoughertyart@gmail.com).
