@@ -64,13 +64,16 @@
    - section_view (section_name) once per section, when it reaches the upper half of the screen, so
      reports show how far down each page people read.
    link_location and section_name are the id or label of the closest section, header, footer or the
-   bottom action bar. Each event goes to GA4 directly (gtag) and to the dataLayer for GTM. */
+   bottom action bar. Each event goes to GA4 directly (gtag), to the dataLayer for GTM, and by name to
+   Microsoft Clarity. */
 (function () {
   function send(name, params) {
     var push = { event: name };
     for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k)) push[k] = params[k];
     try { window.dataLayer && window.dataLayer.push(push); } catch (_) {}
     try { window.gtag && window.gtag('event', name, params); } catch (_) {}
+    // Clarity takes the name only; its recordings can then be filtered to visits that called, booked and so on.
+    try { window.clarity && window.clarity('event', name); } catch (_) {}
   }
   function words(el) {
     return ((el && (el.innerText || el.textContent)) || '').replace(/\s+/g, ' ').trim().slice(0, 100);

@@ -46,14 +46,16 @@
         return function (fn) { queue.push(fn); flush(); };
       })();
 
-      // Calls made before the tags arrive queue in dataLayer and are sent then.
+      // Calls made before the tags arrive queue in dataLayer (Google) and clarity.q
+      // (Microsoft Clarity, recordings and heatmaps) and are sent then.
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-GBHF2MRV3Z");
       dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
       gmAfterFirstPaint(function () {
-        ["https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", "https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q"].forEach(function (src) {
+        ["https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", "https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q", "https://www.clarity.ms/tag/ywmsd790se"].forEach(function (src) {
           var s = document.createElement("script");
           s.async = true;
           s.src = src;
@@ -206,8 +208,9 @@
     
   </header>
 
-  <main><p class="eyebrow">Gabriel’s Menswear</p><h1>Cookies and website services</h1><p class="updated">Updated 9 October 2026</p><p>Cookies are small files a service can save in your browser. This site uses Google Analytics and loads Google Tag Manager automatically.</p>
+  <main><p class="eyebrow">Gabriel’s Menswear</p><h1>Cookies and website services</h1><p class="updated">Updated 12 October 2026</p><p>Cookies are small files a service can save in your browser. This site uses Google Analytics and Microsoft Clarity and loads Google Tag Manager automatically.</p>
 <h2>Analytics</h2><p>Google Analytics may use cookies such as <code>_ga</code> to distinguish visits and measure site use. The site records interactions such as calls, directions and fitting-link clicks. Exact cookie names and duration depend on the Google services and account settings in use.</p>
+<h2>Heatmaps and visit replays</h2><p>Microsoft Clarity records how visitors scroll, tap and move through the pages, shown to the shop as heatmaps and replays of visits, so it can see what is hard to find or use. It may use cookies such as <code>_clck</code> and <code>_clsk</code> to connect the pages of one visit. What you type into the fitting request form is masked and not recorded. Read <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft’s privacy statement</a>.</p>
 <h2>Maps, fonts and external links</h2><p>Google Maps and fonts make requests to Google when loaded. Opening a Google review or directions link takes you to Google, where its own privacy and cookie settings apply.</p>
 <h2>Fitting requests</h2><p>Sending a fitting request connects to FormSubmit. Its service may use cookies for security and service operation. Read <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit’s privacy terms</a>.</p><h2>Your choices</h2><p>Use your browser settings to block or clear cookies. Google provides an <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Analytics opt-out browser add-on</a>. There is currently no on-site preference control; optional analytics is not held back pending a choice.</p><p>Read the <a href="/privacy">privacy policy</a> for more about how the website works.</p><p>Questions? Call <a href="tel:+15088295186">(508) 829-5186</a> or visit Gabriel’s Menswear, 1363 Main St, Holden, MA 01520.</p></main>
 

@@ -62,14 +62,16 @@
         return function (fn) { queue.push(fn); flush(); };
       })();
 
-      // Calls made before the tags arrive queue in dataLayer and are sent then.
+      // Calls made before the tags arrive queue in dataLayer (Google) and clarity.q
+      // (Microsoft Clarity, recordings and heatmaps) and are sent then.
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-GBHF2MRV3Z");
       dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
       gmAfterFirstPaint(function () {
-        ["https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", "https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q"].forEach(function (src) {
+        ["https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", "https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q", "https://www.clarity.ms/tag/ywmsd790se"].forEach(function (src) {
           var s = document.createElement("script");
           s.async = true;
           s.src = src;

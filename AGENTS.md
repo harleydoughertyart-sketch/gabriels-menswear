@@ -60,6 +60,7 @@ The page also contains JSON-LD for local business and FAQ. Keep visible FAQ text
 - `assets/gm-nav.js`, loaded on every page, is the one tracker: `call_click`, `directions_click`, `reviews_click` and `book_click` (with `link_location` and `link_text`), `tab_select` (`tab_name`), `faq_open` (`faq_question`) and `section_view` (`section_name`, once per section). A link's `data-event` overrides the name. Do not add a second listener elsewhere, or events count twice.
 - GA4 custom dimensions exist for `link_location`, `fitting_for`, `occasion`, `tab_name`, `faq_question` and `section_name`. A new event parameter needs its own custom dimension before it shows in reports.
 - The fitting form sends `generate_lead` (`fitting_for`, `occasion`) when it is sent to FormSubmit.
+- Microsoft Clarity (project `ywmsd790se`, heatmaps and visit replays) loads with GA4 after first paint in every page head. `gm-nav.js` passes each event name to Clarity too, so replays can be filtered to visits that called, booked or sent a request. The fitting form carries `data-clarity-mask`. The cookies and privacy pages describe Clarity; keep them in step if a tracking service is added or removed.
 
 ## Deployment
 
