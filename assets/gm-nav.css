@@ -1,0 +1,318 @@
+/* Gabriel's Menswear: the header nav and the phone menu.
+
+   Every page links this one file (index.html, privacy.html and the four webflow pages), so the nav
+   is written once and reads the same everywhere. It styles .gm-nav* and .gm-footnav; beyond them it
+   only makes room in the bar on small phones, keeps privacy.html's own bar at its height, and gives
+   the shared footer links and the header wordmark 44px tap areas on phones (the last sections).
+   Every value falls back to the brand's own, so it also works on privacy.html, which loads no
+   scrollcraft.css. The behaviour is assets/gm-nav.js.
+
+   Markup (the same on every page; aria-current="page" on the current page's link):
+   <nav class="gm-nav" aria-label="Main">
+     <button class="gm-nav__toggle" type="button" aria-expanded="false" aria-controls="gm-nav-list"
+       aria-label="Menu">...</button>
+     <ul class="gm-nav__list" id="gm-nav-list">
+       <li><a class="gm-nav__link" href="/tailoring">Tailoring</a></li> ... Weddings, Prom
+       <li class="gm-nav__call"><a class="gm-nav__link" href="tel:+15088295186">Call (508) 829-5186</a></li>
+       <li><a class="gm-nav__book" href="/book#schedule" data-event="book_click">Book a fitting</a></li>
+     </ul>
+   </nav>
+   From 861px the links sit in the bar; up to 860px they fold into a panel under the bar. */
+
+.gm-nav {
+  --gm-nav-ink: var(--sc-ink, #152238);
+  --gm-nav-accent: var(--sc-accent, #33627c);
+  --gm-nav-line: var(--sc-hairline, rgba(21, 34, 56, 0.12));
+  --gm-nav-line-strong: var(--sc-hairline-strong, rgba(21, 34, 56, 0.22));
+  --gm-nav-ease: var(--sc-ease-out, cubic-bezier(0.23, 1, 0.32, 1));
+  --gm-nav-size: var(--sc-t-sm, clamp(0.875rem, 0.84rem + 0.18vw, 0.95rem));
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  font-family: var(--sc-font-text, "Archivo", system-ui, sans-serif);
+  line-height: 1.62;
+}
+/* The bar a nav sits in is the menu's frame. Zero specificity: a fixed bar (.gm-bar) stays fixed. */
+:where(header:has(> .gm-nav)) { position: relative; }
+
+.gm-nav__list {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.gm-nav__list > li { margin: 0; padding: 0; }
+
+.gm-nav__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.7em;
+  border-radius: 6px;
+  color: var(--gm-nav-ink);
+  font-size: var(--gm-nav-size);
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 240ms var(--gm-nav-ease);
+}
+.gm-nav__link:hover { color: var(--gm-nav-accent); }
+/* The current page: teal, with the house chalk mark under it (a line with two end ticks). */
+.gm-nav__link[aria-current="page"] {
+  color: var(--gm-nav-accent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M3 4 H 117' stroke='%2333627C' stroke-width='1.7' fill='none' opacity='0.75'/%3E%3Cpath d='M3 1.2 V 6.8 M117 1.2 V 6.8' stroke='%2333627C' stroke-width='1.4' fill='none' opacity='0.75'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 50% calc(50% + 0.95em);
+  background-size: calc(100% - 1.4em) 0.32em;
+}
+
+/* Book a fitting: the nav's one button, the home page's ghost pill. */
+.gm-nav__book {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-left: 0.55rem;
+  /* 1px less than .gm-cta's padding, for the border: the pill is exactly as tall as Get directions,
+     so the bar keeps the home page's height. */
+  padding: calc(0.72em - 1px) 1.35em;
+  border: 1px solid var(--gm-nav-line-strong);
+  border-radius: var(--sc-r-pill, 999px);
+  background: transparent;
+  color: var(--gm-nav-ink);
+  font-size: var(--gm-nav-size);
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 140ms var(--gm-nav-ease), border-color 240ms var(--gm-nav-ease),
+    color 240ms var(--gm-nav-ease), transform 140ms var(--gm-nav-ease);
+}
+.gm-nav__book:hover { background: color-mix(in oklab, var(--gm-nav-ink) 6%, transparent); }
+.gm-nav__book:active { transform: scale(0.96); }
+.gm-nav__book[aria-current="page"] { border-color: var(--gm-nav-accent); color: var(--gm-nav-accent); }
+
+.gm-nav__call { display: none; }
+.gm-nav__toggle { display: none; }
+
+/* While a dark act sits under the bar (gm-bar--ondark), the links go ivory like the wordmark. */
+@media (min-width: 861px) {
+  .gm-bar--ondark .gm-nav__link { color: #f2f5f7; }
+  .gm-bar--ondark .gm-nav__link:hover,
+  .gm-bar--ondark .gm-nav__link[aria-current="page"] { color: #8fc0d8; }
+  .gm-bar--ondark .gm-nav__link[aria-current="page"] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M3 4 H 117' stroke='%238fc0d8' stroke-width='1.7' fill='none' opacity='0.8'/%3E%3Cpath d='M3 1.2 V 6.8 M117 1.2 V 6.8' stroke='%238fc0d8' stroke-width='1.4' fill='none' opacity='0.8'/%3E%3C/svg%3E");
+  }
+  .gm-bar--ondark .gm-nav__book { color: #f2f5f7; border-color: rgba(242, 245, 247, 0.4); }
+  .gm-bar--ondark .gm-nav__book:hover { background: rgba(242, 245, 247, 0.1); }
+  .gm-bar--ondark .gm-nav__book[aria-current="page"] { color: #8fc0d8; border-color: #8fc0d8; }
+}
+.gm-bar--ondark .gm-nav :focus-visible { outline-color: #8fc0d8; }
+
+/* ------------------------------------------------------------ phone menu -- */
+@media (max-width: 860px) {
+  .gm-nav__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--gm-nav-line-strong);
+    border-radius: var(--sc-r-pill, 999px);
+    background: transparent;
+    color: var(--gm-nav-ink);
+    cursor: pointer;
+    transition: color 240ms var(--gm-nav-ease), border-color 240ms var(--gm-nav-ease);
+  }
+  .gm-nav__toggle:active { transform: scale(0.94); }
+  .gm-nav__toggle svg { display: block; width: 20px; height: 20px; }
+  .gm-nav__toggle path { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+  .gm-nav__toggle .gm-nav__shut { display: none; }
+  .gm-nav__toggle[aria-expanded="true"] .gm-nav__bars { display: none; }
+  .gm-nav__toggle[aria-expanded="true"] .gm-nav__shut { display: inline; }
+  .gm-bar--ondark .gm-nav__toggle { color: #f2f5f7; border-color: rgba(242, 245, 247, 0.4); }
+
+  /* The panel hangs from the bottom of the bar, full width, and scrolls if a short screen needs it. */
+  .gm-nav__list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 70;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding: 0.35rem max(var(--sc-gutter, clamp(1.25rem, 5vw, 5.5rem)), env(safe-area-inset-left)) 1.25rem;
+    background: #f7f5f1;
+    border-bottom: 1px solid var(--gm-nav-line);
+    box-shadow: 0 22px 36px -22px rgba(21, 34, 56, 0.35);
+  }
+  .gm-nav--open .gm-nav__list { display: flex; }
+  .gm-nav__list > li { border-bottom: 1px solid var(--gm-nav-line); }
+  .gm-nav__list > li:last-child { border-bottom: 0; }
+  .gm-nav__link {
+    display: flex;
+    min-height: 52px;
+    padding: 0 0.25rem;
+    font-size: var(--sc-t-base, clamp(1rem, 0.96rem + 0.22vw, 1.125rem));
+  }
+  .gm-nav__link[aria-current="page"] {
+    background: none;
+    box-shadow: inset 3px 0 0 var(--gm-nav-accent);
+    padding-left: 0.9rem;
+  }
+  .gm-nav__call { display: block; }
+  .gm-nav__call .gm-nav__link { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .gm-nav__book {
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+    margin: 0.9rem 0 0;
+    border: 0;
+    background: var(--gm-nav-accent);
+    color: var(--sc-accent-ink, #ffffff);
+    font-size: var(--sc-t-base, clamp(1rem, 0.96rem + 0.22vw, 1.125rem));
+  }
+  .gm-nav__book:hover { background: #2a5269; }
+  .gm-nav__book[aria-current="page"] { color: #ffffff; box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.55); }
+
+  /* The panel follows the bar: dark while a dark act is under it. */
+  .gm-bar--ondark .gm-nav__list { background: #111a2b; border-bottom-color: rgba(242, 245, 247, 0.14); }
+  .gm-bar--ondark .gm-nav__list > li { border-bottom-color: rgba(242, 245, 247, 0.14); }
+  .gm-bar--ondark .gm-nav__link { color: #f2f5f7; }
+  .gm-bar--ondark .gm-nav__link[aria-current="page"] { color: #8fc0d8; box-shadow: inset 3px 0 0 #8fc0d8; }
+}
+/* Room for the Menu button in the fixed bar on small phones, so the wordmark, the button and Get
+   directions fit without the bar spilling: tighter gaps from 420px down, then shorter rules beside
+   MENSWEAR and a slimmer Get directions pill on the narrowest screens. */
+@media (max-width: 420px) {
+  .gm-bar > .gm-brand { margin-right: -10px; }
+  .gm-bar > .gm-nav { margin-right: -10px; }
+}
+@media (max-width: 389px) {
+  .gm-bar .gm-brand__row::before,
+  .gm-bar .gm-brand__row::after { width: 0.9em; }
+  .gm-bar > .gm-cta { padding-inline: 1em; }
+}
+@media (max-width: 340px) {
+  .gm-bar .gm-brand__row::before,
+  .gm-bar .gm-brand__row::after { display: none; }
+  .gm-bar > .gm-cta { padding-inline: 0.8em; }
+}
+/* privacy.html's own bar (header.bar, not fixed) keeps its height and stays on one line: from 861px
+   the Book pill takes the size of that page's own Get directions pill (.cta), and on the narrowest
+   phones the gaps and the pill's sides tighten so the Menu button fits beside them. */
+@media (min-width: 861px) {
+  header.bar > .gm-nav .gm-nav__book { padding: calc(0.7rem - 1px) 1.2rem; font-size: 0.85rem; line-height: 1.65; }
+}
+@media (max-width: 379px) {
+  header.bar:has(> .gm-nav) { column-gap: 0.375rem; }
+  header.bar:has(> .gm-nav) > .cta { padding-inline: 0.75rem; }
+}
+@media (max-width: 339px) {
+  header.bar:has(> .gm-nav) { padding-inline: 1rem; }
+}
+/* Without JavaScript the toggle could not open anything: hide it, and the footer's links serve. */
+@media (scripting: none) {
+  .gm-nav__toggle { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gm-nav__link, .gm-nav__book, .gm-nav__toggle { transition: none; }
+}
+
+/* ---------------------------------------- privacy.html's footer link row -- */
+.gm-footnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.1rem;
+  margin: 0.35rem 0 0.5rem;
+}
+.gm-footnav a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+
+/* ------------------------------------------- tap areas in the shared parts -- */
+/* On phones and tablets every footer link is a 44px row (the navy footer on index.html and the four
+   webflow pages), and the header wordmark's tap area reaches 44px without moving it. */
+@media (max-width: 860px) {
+  .gm-footer .gm-footer__col a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0.2em; }
+  .gm-bar > .gm-brand { padding-block: 7px; margin-block: -7px; }
+  header.bar > .brand { padding-block: 2px; margin-block: -2px; }
+}
+
+/* Selected comparison option 3: two generous pills, no enclosing bar. */
+.gm-has-actions { --gm-actions-space:calc(96px + env(safe-area-inset-bottom)); scroll-padding-bottom:calc(var(--gm-actions-space) + 16px); }
+.gm-has-actions body { padding-bottom:var(--gm-actions-space); }
+.gm-actions { position:fixed; z-index:45; inset:auto 0 0; display:flex; justify-content:center; align-items:center; gap:12px; padding:20px 20px calc(20px + env(safe-area-inset-bottom)); box-sizing:border-box; background:#f7f5f1; border-top:1px solid rgba(21,34,56,.06); pointer-events:none; font:400 18px/1.2 Archivo,Arial,sans-serif; }
+.gm-actions__link { display:flex; gap:8px; justify-content:center; align-items:center; min-width:0; width:280px; min-height:56px; padding:0 22px; box-sizing:border-box; border-radius:999px; background:#f7f5f1; color:#152238; text-decoration:none; white-space:nowrap; pointer-events:auto; box-shadow:0 1px 3px #15223818; transition:background-color 160ms ease-out,transform 160ms ease-out; }
+.gm-actions__link--primary { background:#33627c; color:#fff; }
+.gm-actions__link:focus-visible { outline:3px solid #75a9c4; outline-offset:3px; }
+.gm-actions__link:active { transform:scale(.96); }
+@media(hover:hover) { .gm-actions__link:hover { background:#e7edf0; } .gm-actions__link--primary:hover { background:#284f65; } }
+.gm-has-actions .gm-nav__list { max-height:calc(100dvh - 90px - var(--gm-actions-space)); }
+.gm-has-actions :is(input,select,textarea,button) { scroll-margin-bottom:calc(var(--gm-actions-space) + 16px); }
+@media(max-width:600px) {
+ .gm-has-actions { --gm-actions-space:calc(84px + env(safe-area-inset-bottom)); }
+ .gm-actions { padding:14px 12px calc(14px + env(safe-area-inset-bottom)); gap:8px; font-size:16px; }
+ .gm-actions__link { width:auto; padding:0 12px; flex:1; }
+ .gm-actions__link--primary { flex:1.25; }
+ .gm-has-actions .gm-hero-copy.gm-hero-copy { bottom:calc(var(--gm-actions-space) + 12px); }
+}
+@media(prefers-reduced-motion:reduce) { .gm-actions__link { transition:none; } .gm-actions__link:active { transform:none; } }
+.gm-site-footer { box-sizing:border-box; max-width:none; width:100%; margin:0; padding:64px max(24px,5.5vw) 20px; background:#152238; color:#f7f5f1; font:400 14px/1.6 Archivo,Arial,sans-serif; }
+.gm-site-footer * { box-sizing:border-box; }
+.gm-site-footer__grid { display:grid; grid-template-columns:1.4fr .8fr 1fr 1.2fr; gap:40px; max-width:1400px; margin:auto; }
+.gm-site-footer h2 { margin:0 0 16px; color:#afc8d6; font:500 12px/1.4 Archivo,Arial,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+.gm-site-footer a { color:inherit; text-decoration:none; display:flex; align-items:center; width:fit-content; min-height:44px; }
+.gm-site-footer a:hover { color:#b6d7e8; }
+.gm-site-footer a:focus-visible { outline:2px solid #b6d7e8; outline-offset:4px; border-radius:4px; }
+.gm-site-footer .gm-site-footer__brand { display:block; font:400 30px/1.1 "Playfair Display",Georgia,serif; letter-spacing:.04em; }
+.gm-site-footer__brand span { display:block; margin-top:8px; font:500 10px/1.4 Archivo,Arial,sans-serif; letter-spacing:.35em; text-transform:uppercase; color:#b6d7e8; }
+.gm-site-footer__intro p { font:400 24px/1.35 "Playfair Display",Georgia,serif; margin:24px 0 0; }
+.gm-site-footer__intro em { color:#b6d7e8; }
+.gm-site-footer address { font-style:normal; }
+.gm-site-footer dl { margin:0; }
+.gm-site-footer dl div { display:flex; justify-content:space-between; gap:20px; padding:9px 0; }
+.gm-site-footer dd { margin:0; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.gm-site-footer__hours p { font-size:12px; color:#bdc9d0; margin:16px 0 0; }
+.gm-site-footer__legal { max-width:1400px; margin:44px auto 0; padding-top:16px; border-top:1px solid #ffffff25; display:flex; align-items:center; gap:24px; color:#bdc9d0; font-size:12px; }
+.gm-site-footer__legal a { margin-left:auto; }
+@media(max-width:1000px) { .gm-site-footer__grid { grid-template-columns:1fr 1fr; gap:40px 32px; } }
+@media(max-width:480px) { .gm-site-footer { padding-top:42px; } .gm-site-footer__grid { grid-template-columns:1fr 1fr; gap:32px 16px; } .gm-site-footer__intro { grid-column:1/-1; } .gm-site-footer__hours { grid-column:1/-1; max-width:320px; } .gm-site-footer__legal { flex-wrap:wrap; gap:4px 16px; margin-top:32px; } .gm-site-footer__legal span:nth-child(2) { display:none; } }
+/* Full-screen film controls clear the fixed navigation edge at every viewport. */
+@media(min-width:701px) {
+ .gm-has-actions .wf-tailoring-hero-controls,
+ .gm-has-actions .wf-weddings-hero__utilities,
+ .gm-has-actions .wf-prom-hero__utilities { bottom:calc(var(--gm-actions-space) + 12px); }
+ .gm-has-actions .wf-weddings-hero__copy,
+ .gm-has-actions .wf-prom-hero__copy { bottom:calc(var(--gm-actions-space) + 102px); }
+}
+
+/* Frosted backing separates the selected two pills from passing page copy. */
+@supports ((backdrop-filter:blur(10px)) or (-webkit-backdrop-filter:blur(10px))) { .gm-actions { background:rgba(247,245,241,.45); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); } }
+@media(prefers-reduced-transparency:reduce) { .gm-actions { background:#f7f5f1; backdrop-filter:none; -webkit-backdrop-filter:none; } }
+/* Desktop has the full header navigation; keep persistent actions on touch layouts. */
+@media(min-width:861px){
+ .gm-has-actions{--gm-actions-space:0px;scroll-padding-bottom:16px}
+ .gm-actions{display:none}
+ .gm-has-actions body{padding-bottom:0}
+}
+/* Desktop refinement: a calm, consistent masthead above every film. */
+@media(min-width:861px){
+ html body .gm-bar.gm-bar.gm-bar{height:76px;min-height:76px;padding:12px clamp(28px,5vw,80px);gap:28px;background:rgba(247,245,241,.97)!important;border-bottom:1px solid #15223812!important;box-shadow:none!important;backdrop-filter:blur(12px)!important;color:#152238!important}
+ html body .gm-bar .gm-brand,html body .gm-bar .gm-brand__name{color:#152238!important}
+ html body .gm-bar .gm-brand__row{color:#33627c!important}
+ html body .gm-bar .gm-brand__name{font-size:22px;font-weight:500;letter-spacing:.09em}
+ html body .gm-bar .gm-nav__list{gap:14px}
+ html body .gm-bar .gm-nav__link{font-size:14px;font-weight:400;padding:0 9px;color:#344356!important;border-radius:999px;letter-spacing:.01em}
+ html body .gm-bar .gm-nav__link:hover{color:#33627c!important;background:#33627c08}
+ html body .gm-bar .gm-nav__link[aria-current=page]{color:#33627c!important;background-image:linear-gradient(#33627c,#33627c);background-size:18px 1px;background-position:50% calc(100% - 6px)}
+ html body .gm-bar .gm-nav__book{margin-left:12px;min-height:46px;padding:0 24px;border:1px solid #33627c;background:#33627c;color:#fff!important;font-size:14px;font-weight:500}
+ html body .gm-bar .gm-nav__book:hover{background:#284f65}
+ html body .gm-bar .gm-nav :focus-visible{outline-color:#33627c}
+}
+@media(min-width:861px) and (max-width:1100px){html body .gm-bar{gap:16px;padding-inline:28px}html body .gm-bar .gm-nav__list{gap:4px}html body .gm-bar .gm-nav__book{margin-left:8px;padding-inline:19px}}

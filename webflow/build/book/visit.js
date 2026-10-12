@@ -1,0 +1,1 @@
+/* Hours and map are ordinary readable content. */

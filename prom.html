@@ -1,0 +1,427 @@
+<!doctype html>
+<!-- /prom: wf assemble builds prom.html from this shell (webflow/build/prom/_shell.html, the integrator's) and the section files beside it. Edit those, never prom.html. The header and footer are the same on every page: a change to them goes into all four shells, index.html and privacy.html. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Prom Suits and Fittings in Holden, MA | Gabriel's Menswear</title>
+    <meta name="description" content="Prom suits fitted by Gabriel Sr., Senior Master Tailor, at 1363 Main St in Holden, MA. No need to know your size. Walk in, book a fitting or call." />
+    <link rel="canonical" href="https://gabrielsmenswear.com/prom" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Prom Suits and Fittings in Holden, MA | Gabriel's Menswear" />
+    <meta property="og:description" content="Prom suits fitted by Gabriel Sr., Senior Master Tailor, at 1363 Main St in Holden, MA. No need to know your size. Walk in, book a fitting or call." />
+    <meta property="og:site_name" content="Gabriel's Menswear" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gabrielsmenswear.com/prom" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://gabrielsmenswear.com/assets/og-prom.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A navy suit jacket sleeve with three cuff buttons, hanging in window light." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Prom Suits and Fittings in Holden, MA | Gabriel's Menswear" />
+    <meta name="twitter:description" content="Prom suits fitted by Gabriel Sr., Senior Master Tailor, at 1363 Main St in Holden, MA. No need to know your size. Walk in, book a fitting or call." />
+    <meta name="twitter:image" content="https://gabrielsmenswear.com/assets/og-prom.jpg" />
+    <meta name="twitter:image:alt" content="A navy suit jacket sleeve with three cuff buttons, hanging in window light." />
+    <meta name="theme-color" content="#f7f5f1" />
+    <meta name="color-scheme" content="light" />
+    <script>
+      // Work that can wait for the first screen. Runs once the page has loaded
+      // and its largest image or text block has painted, so analytics and
+      // background video never share a phone's bandwidth with the hero.
+      window.gmAfterFirstPaint = (function () {
+        var queue = [], painted = false, loaded = document.readyState === "complete";
+        function flush() {
+          if (!painted || !loaded) return;
+          queue.splice(0).forEach(function (fn) { setTimeout(fn, 0); });
+        }
+        var types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [];
+        if (types.indexOf("largest-contentful-paint") > -1) {
+          new PerformanceObserver(function (list, observer) {
+            observer.disconnect(); painted = true; flush();
+          }).observe({ type: "largest-contentful-paint", buffered: true });
+        } else painted = true;
+        addEventListener("load", function () {
+          loaded = true; flush();
+          // A tab opened in the background reports no paint until it is shown.
+          setTimeout(function () { painted = true; flush(); }, 3000);
+        }, { once: true });
+        return function (fn) { queue.push(fn); flush(); };
+      })();
+
+      // Calls made before the tags arrive queue in dataLayer and are sent then.
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-GBHF2MRV3Z");
+      dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      gmAfterFirstPaint(function () {
+        ["https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", "https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q"].forEach(function (src) {
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = src;
+          document.head.appendChild(s);
+        });
+      });
+    </script>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <style>
+      /* Playfair Display and Archivo (SIL Open Font License), served from this
+         site rather than Google Fonts: two fewer connections before first paint. */
+      @font-face{font-family:"Playfair Display";font-style:normal;font-weight:500 700;font-display:swap;src:url(/assets/fonts/playfair-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Playfair Display";font-style:normal;font-weight:500 700;font-display:swap;src:url(/assets/fonts/playfair-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+      @font-face{font-family:"Playfair Display";font-style:italic;font-weight:500 600;font-display:swap;src:url(/assets/fonts/playfair-italic-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Playfair Display";font-style:italic;font-weight:500 600;font-display:swap;src:url(/assets/fonts/playfair-italic-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+      @font-face{font-family:"Archivo";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/archivo-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Archivo";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/archivo-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+    </style>
+    
+    <link rel="stylesheet" href="/scrollcraft.css" />
+    <link rel="stylesheet" href="/assets/gm-site.css" />
+    <link rel="stylesheet" href="/assets/gm-nav.css" />
+    <noscript>
+      <style>
+        /* without JS the engine never reveals flow content, so show it */
+        [data-sc-in], [data-sc-stagger] > * { opacity: 1 !important; transform: none !important; }
+        [data-sc-cue] { opacity: 1 !important; }
+      </style>
+    </noscript>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://gabrielsmenswear.com/prom#webpage",
+      "url": "https://gabrielsmenswear.com/prom",
+      "name": "Prom Suits and Fittings in Holden, MA | Gabriel's Menswear",
+      "description": "Prom suits fitted by Gabriel Sr., Senior Master Tailor, at 1363 Main St in Holden, MA. No need to know your size. Walk in, book a fitting or call.",
+      "isPartOf": {
+        "@id": "https://gabrielsmenswear.com/#website"
+      },
+      "about": {
+        "@id": "https://gabrielsmenswear.com/#business"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://gabrielsmenswear.com/assets/prom-r14-hero-matched-r45-poster.webp",
+        "width": 1280,
+        "height": 720
+      },
+      "breadcrumb": {
+        "@id": "https://gabrielsmenswear.com/prom#breadcrumb"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://gabrielsmenswear.com/prom#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://gabrielsmenswear.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Prom",
+          "item": "https://gabrielsmenswear.com/prom"
+        }
+      ]
+    },
+    {
+      "@type": "ClothingStore",
+      "@id": "https://gabrielsmenswear.com/#business",
+      "name": "Gabriel's Menswear",
+      "alternateName": "Main Street Menswear",
+      "url": "https://gabrielsmenswear.com/",
+      "image": "https://gabrielsmenswear.com/assets/og-hero.jpg",
+      "logo": "https://gabrielsmenswear.com/assets/logo-header.webp",
+      "description": "Gabriel's Menswear in Holden, Massachusetts offers suits, wedding and prom menswear, fittings, accessories, and suit alterations.",
+      "telephone": "+15088295186",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1363 Main St",
+        "addressLocality": "Holden",
+        "addressRegion": "MA",
+        "postalCode": "01520",
+        "addressCountry": "US"
+      },
+      "hasMap": "https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Holden"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Central Massachusetts"
+        }
+      ],
+      "employee": {
+        "@type": "Person",
+        "name": "Gabriel Sr.",
+        "jobTitle": "Owner and Senior Master Tailor",
+        "knowsAbout": [
+          "Suit fittings",
+          "Suit alterations",
+          "Formalwear",
+          "Menswear"
+        ]
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "11:00",
+          "closes": "18:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "11:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "12:00",
+          "closes": "16:00"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://gabrielsmenswear.com/prom#service",
+      "name": "Prom suit fittings",
+      "serviceType": "Prom menswear fittings",
+      "url": "https://gabrielsmenswear.com/prom",
+      "provider": {
+        "@id": "https://gabrielsmenswear.com/#business"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Holden"
+      }
+    }
+  ]
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need to know my size?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Come in, try on a suit, and I’ll check the fit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I bring a suit I own?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Bring it in. I’ll check the fit and tell you whether it’s worth altering."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What will it cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The garment, fabric and alterations affect the price. I’ll explain the cost before you decide."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if prom is soon?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Call me with the prom date. I’ll tell you whether there’s time for the suit and alterations."
+      }
+    }
+  ]
+}</script>
+  <link rel="stylesheet" href="/assets/gm-reviews.css" />
+<link rel="stylesheet" href="/assets/gm-service-proof.css"><script src="/assets/gm-service-proof.js" defer></script><link rel="stylesheet" href="/assets/gm-section-actions.css"><link rel="stylesheet" href="/assets/gm-media-tone.css"><link rel="stylesheet" href="/assets/wf/prom.css"><script src="/assets/gm-photo-match-r45.js" defer></script></head>
+  <body class="gm-prom-r14">
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MJCMX83Q"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="sc-grain" aria-hidden="true"></div>
+
+    <header class="gm-bar">
+      <a class="gm-brand" href="/" aria-label="Gabriel's Menswear home">
+        <span class="gm-brand__name">Gabriel's</span>
+        <span class="gm-brand__row" aria-hidden="true">
+          <span class="gm-brand__sub">Menswear</span>
+        </span>
+      </a>
+      <nav class="gm-nav" aria-label="Main">
+        <button class="gm-nav__toggle" type="button" aria-expanded="false" aria-controls="gm-nav-list" aria-label="Menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="gm-nav__bars" d="M3.5 7h17M3.5 12h17M3.5 17h17" /><path class="gm-nav__shut" d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+        <ul class="gm-nav__list" id="gm-nav-list">
+<li><a class="gm-nav__link" href="/">Home</a></li>
+          <li><a class="gm-nav__link" href="/tailoring">Tailoring</a></li>
+          <li><a class="gm-nav__link" href="/weddings">Weddings</a></li>
+          <li><a class="gm-nav__link" href="/prom" aria-current="page">Prom</a></li>
+          <li class="gm-nav__call"><a class="gm-nav__link" href="tel:+15088295186">Call (508) 829-5186</a></li>
+          <li><a class="gm-nav__book" href="/book#schedule" data-event="book_click">Request a fitting</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" tabindex="-1">
+<!-- wf:generated by wf assemble from webflow/build/prom/ in spec order; edit those fragments, never this file -->
+<!-- wf:section hero -->
+<section class="wf-prom-hero" data-wf-key="hero" id="top" aria-labelledby="wf-prom-hero-title">
+ <div class="wf-prom-hero__media"><picture><source media="(max-width:700px)" srcset="/assets/prom-r14-hero-matched-r45-mobile-poster.webp"><img src="/assets/prom-r14-hero-matched-r45-poster.webp" width="1280" height="720" alt="Illustrative young adult wearing a dark suit in architectural light" fetchpriority="high"></picture><video muted loop playsinline preload="none" data-desktop="/assets/prom-r14-hero-matched-r45.mp4" data-mobile="/assets/prom-r14-hero-matched-r45-mobile.mp4" aria-label="Illustrative formalwear movement in a hotel corridor"></video></div>
+ <div class="wf-prom-hero__copy"><h1 id="wf-prom-hero-title">Prom suits <em>that fit.</em></h1><p class="wf-prom-hero__desktop-copy">Tell me the prom date. I’ll help you choose a suit, then check the fit on you.</p><p class="wf-prom-hero__mobile-copy">Tell me the prom date. I’ll help you choose a suit and check the fit.</p><div class="gm-hero-pair"><a class="gm-hero-pair__primary" href="/book#schedule" data-event="book_click">Request a fitting</a><a class="gm-hero-pair__secondary" href="https://www.google.com/maps/dir/?api=1&amp;destination=1363%20Main%20St%2C%20Holden%2C%20MA%2001520" target="_blank" rel="noopener noreferrer" data-event="directions_click">Get directions</a></div></div>
+ <div class="wf-prom-hero__utilities"><button class="gm-video-focus-control" type="button" data-prom-video-toggle hidden>Pause film</button></div>
+</section>
+<!-- /wf:section hero -->
+<!-- wf:section size -->
+<section class="wf-prom-size" data-wf-key="size" id="size" aria-labelledby="wf-prom-size-title"><div class="wf-prom-size__copy"><h2 id="wf-prom-size-title">Don’t know your size?<br><em>Come in anyway.</em></h2><p>Try it on. I’ll check the fit.</p></div></section>
+<!-- /wf:section size -->
+<!-- wf:section fitting -->
+<section class="wf-prom-fitting" data-wf-key="fitting" id="fitting" aria-labelledby="wf-prom-fitting-title"><header class="wf-prom-fitting__heading"><fieldset hidden><legend class="gm-sr-only">Your starting point</legend><label><input type="radio" name="prom-start" value="existing"><span>I have a suit</span></label><label><input type="radio" name="prom-start" value="new" checked><span>I need a suit</span></label></fieldset><h2 id="wf-prom-fitting-title">Let’s start<br><em>with you.</em></h2></header><div class="wf-prom-fitting__panels"><article class="wf-prom-fitting__panel" data-start="existing"><picture><source media="(max-width:700px)" srcset="/assets/prom-existing-suit-r40-mobile.webp"><img src="/assets/prom-existing-suit-r40.webp" alt="Blue suit jacket with a white shirt and dark tie on a hanger" width="1200" height="2138" loading="lazy" decoding="async"></picture><div class="wf-prom-fitting__answer"><h3>I have a suit</h3><p>Bring it in. I’ll check the fit and tell you whether alterations are worth the money before you spend.</p><nav class="gm-section-actions" aria-label="Plan your fitting"><a class="gm-section-actions__primary" href="/book#booking-preview" data-event="book_click">Request a fitting</a></nav></div></article><article class="wf-prom-fitting__panel" data-start="new"><picture><source media="(max-width:700px)" srcset="/assets/prom-r14-new-mobile.webp"><img src="/assets/prom-r14-new.webp" alt="Illustrative young adult adjusting a bow tie in a dark suit" width="1600" height="2400" loading="lazy" decoding="async"></picture><div class="wf-prom-fitting__answer"><h3>I need a suit</h3><p>Try on a suit. I’ll check the fit and explain the price before you decide.</p><nav class="gm-section-actions" aria-label="Plan your fitting"><a class="gm-section-actions__primary" href="/book#booking-preview" data-event="book_click">Request a fitting</a></nav></div></article></div></section>
+<!-- /wf:section fitting -->
+<!-- wf:section gabriel -->
+<section class="wf-prom-gabriel" data-wf-key="gabriel" id="gabriel" aria-labelledby="wf-prom-gabriel-title">
+ <figure class="wf-prom-gabriel__portrait"><img src="/assets/gabriel-portrait-cool-960.webp" srcset="/assets/gabriel-portrait-cool-480.webp 480w, /assets/gabriel-portrait-cool-720.webp 720w, /assets/gabriel-portrait-cool-960.webp 960w" sizes="(max-width:700px) 100vw, 52vw" width="960" height="1200" loading="lazy" decoding="async" alt="Gabriel Sr., Owner and Senior Master Tailor, smiling in a navy suit."></figure>
+ <div class="wf-prom-gabriel__copy"><h2 id="wf-prom-gabriel-title">I’m <em>Gabriel.</em></h2><p>My mother taught me tailoring in Turkey. Thirty-plus years later, I’m still checking the fit in person, in the mirror.</p><div class="wf-prom-gabriel__identity">Owner · Senior Master Tailor</div></div>
+</section>
+<section class="gm-service-proof" id="reviews" aria-label="Customer reviews" ><div class="gm-service-proof__head"><h2>People leave feeling <em>taken care of.</em></h2><p>From the shop’s Google reviews.<br><a href="https://www.google.com/maps/place/?q=place_id:ChIJAVZgsEf_44kRuA7mnlKGpow" target="_blank" rel="noopener noreferrer">Read Google reviews</a></p></div><div class="gm-reviews-strip" role="region" aria-label="Customer reviews" tabindex="0"><div class="gm-reviews-track"><div class="gm-reviews-set">
+          <article class="gm-review">
+            <blockquote>&ldquo;A great selection of beautiful suits&rdquo;</blockquote>
+            <p>&ldquo;Amazing personal service and a great selection of beautiful suits! It's the kind of shop you keep going back to to build your wardrobe, from business casual to formal.&rdquo;</p>
+            <footer><strong>Jackie Faron</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Alterations are perfect&rdquo;</blockquote>
+            <p>&ldquo;Turn around for alterations was 3 days, and alterations are perfect. I will definitely be visiting again as I update my business casual and formal wear.&rdquo;</p>
+            <footer><strong>Dave Sutherland</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Great selection at very good prices&rdquo;</blockquote>
+            <p>&ldquo;The store has great selection at very good prices&hellip; was able to navigate a quick turn getting the suit altered. Shop local.&rdquo;</p>
+            <footer><strong>Christian Lewis</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Fast turnaround for alterations&rdquo;</blockquote>
+            <p>&ldquo;Best personal service one can ask for. Huge inventory and fast turnaround for alterations. Highly recommend.&rdquo;</p>
+            <footer><strong>Jennifer LaRange</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;A few quick measurements&rdquo;</blockquote>
+            <p>&ldquo;With a few quick measurements and several excellent recommendations, I left with several different shirts, 2 ties, a new belt&hellip; would highly recommend this place.&rdquo;</p>
+            <footer><strong>Ben Smith</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Walked away happy&rdquo;</blockquote>
+            <p>&ldquo;The perfect combination of helping, guiding, and giving us space&hellip; My husband walked away happy with his new outfit.&rdquo;</p>
+            <footer><strong>Natasha Trapp</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Very high quality&rdquo;</blockquote>
+            <p>&ldquo;The pants are very high quality cotton and suits and everything is very stylish&hellip; Fantastic store and I highly recommend it.&rdquo;</p>
+            <footer><strong>Wayfarer</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          </div></div></div></section>
+<!-- /wf:section gabriel -->
+<!-- wf:section start -->
+<section class="sc-section gm-visit" data-wf-key="start" id="start" aria-label="Visit Gabriel's Menswear">
+        <div class="sc-wrap">
+          <div class="sc-stack">
+            <h2 class="sc-display sc-display--lg">Find us on <em>Main Street</em>.</h2>
+            <p class="sc-body">Call or just stop by. Ten minutes in the shop answers most questions.</p>
+          </div>
+          <div class="gm-visit__grid">
+            <aside class="gm-contact" aria-label="Store contact and hours">
+              <div class="gm-contact__row">
+                <span>Phone</span>
+                <a class="gm-contact__phone" href="tel:+15088295186">(508) 829-5186</a>
+              </div>
+              <div class="gm-contact__row">
+                <span>Address</span>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >1363 Main St, Holden, MA 01520</a>
+              </div>
+              <div class="gm-contact__row">
+                <span>Hours</span>
+                <dl class="gm-hours">
+                  <div><dt>Mon&ndash;Fri</dt><dd>11:00 AM&ndash;6:30 PM</dd></div>
+                  <div><dt>Saturday</dt><dd>11:00 AM&ndash;6:00 PM</dd></div>
+                  <div><dt>Sunday</dt><dd>12:00 PM&ndash;4:00 PM</dd></div>
+                </dl>
+              </div>
+              <a
+                class="gm-cta"
+                href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Get directions</a><span class="gm-section-actions gm-section-actions--inline"><a class="gm-section-actions__primary" href="/book#booking-preview">Request a fitting</a></span>
+            </aside>
+            <div class="gm-map">
+              <iframe
+                title="Map to Gabriel's Menswear at 1363 Main St, Holden, MA"
+                src="https://www.google.com/maps?q=1363%20Main%20St%2C%20Holden%2C%20MA%2001520&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+              <a
+                class="gm-map__link"
+                href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Get directions</a>
+            </div>
+          </div>
+
+</div></section>
+<section class="gm-service-faq" aria-label="Frequently asked questions"><div class="gm-service-faq__inner"><h2>Quick answers <em>before you stop in.</em></h2><div><details name="prom-faq" ><summary>Do I need to know my size?</summary><p>No. Come in, try on a suit, and I’ll check the fit.</p></details><details name="prom-faq" ><summary>Can I bring a suit I own?</summary><p>Yes. Bring it in. I’ll check the fit and tell you whether it’s worth altering.</p></details><details name="prom-faq" id="cost"><summary>What will it cost?</summary><p>The garment, fabric and alterations affect the price. I’ll explain the cost before you decide.</p></details><details name="prom-faq" ><summary>What if prom is soon?</summary><p>Call me with the prom date. I’ll tell you whether there’s time for the suit and alterations.</p></details></div></div></section>
+<!-- /wf:section start -->
+    </main>
+
+    <footer class="gm-site-footer">
+  <div class="gm-site-footer__grid">
+    <div class="gm-site-footer__intro"><a class="gm-site-footer__brand" href="/">Gabriel’s <span>Menswear</span></a><p>Personal service.<br>A <em>better fit.</em></p></div>
+    <nav aria-label="Footer"><h2>Explore</h2><a href="/">Home</a><a href="/tailoring">Tailoring</a><a href="/weddings">Weddings</a><a href="/prom">Prom</a><a href="/book#schedule">Request a fitting</a></nav>
+    <div><h2>Find me</h2><address><a href="https://www.google.com/maps/dir/?api=1&amp;destination=1363%20Main%20St%2C%20Holden%2C%20MA%2001520" target="_blank" rel="noopener noreferrer">1363 Main Street<br>Holden, MA 01520</a><a href="tel:+15088295186">(508) 829-5186</a></address></div>
+    <div class="gm-site-footer__hours"><h2>Shop hours</h2><dl><div><dt>Mon–Fri</dt><dd>11 AM–6:30 PM</dd></div><div><dt>Saturday</dt><dd>11 AM–6 PM</dd></div><div><dt>Sunday</dt><dd>12 PM–4 PM</dd></div></dl><p>Call to confirm before you visit.</p></div>
+  </div>
+  <div class="gm-site-footer__legal"><span>© 2026 Gabriel’s Menswear</span><span>Holden, Massachusetts</span><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a><a href="/terms">Website terms</a></div>
+</footer>
+
+
+    <script src="/assets/gm-video-lifecycle-r46.js"></script>
+    <script src="/scrollcraft.js" defer></script>
+    <script src="/assets/gm-site.js" defer></script>
+    <script src="/assets/gm-nav.js" defer></script>
+    <script src="/assets/gm-reviews.js" defer></script>
+    <script src="/assets/wf/prom.js" defer></script>
+</body>
+</html>
+

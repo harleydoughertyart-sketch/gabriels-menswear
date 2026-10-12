@@ -1,2 +1,32 @@
-docs/
+# Allowlist: nothing at the root deploys unless it is re-included below.
+# Agent notes, run folders, build experiments, scripts and README media live in
+# this folder too; ignoring by default keeps a new one off the public site.
+# A new public root file (not .html, not under assets/) has to be added here.
+/*
 
+# Pages
+!/*.html
+# Archived copy of another business's site, not a Gabriel's page
+/msm.html
+
+# Everything the pages load
+!/assets
+!/scrollcraft.css
+!/scrollcraft.js
+
+# Served at fixed paths
+!/favicon.ico
+!/robots.txt
+!/sitemap.xml
+!/llms.txt
+
+# Deploy config (read by Vercel, never served)
+!/vercel.json
+
+# Nothing under assets/ is documentation
+/assets/**/*.md
+
+# Static production build entry
+!/scripts
+/scripts/*
+!/scripts/build-site.mjs

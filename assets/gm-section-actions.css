@@ -1,0 +1,11 @@
+/* Desktop section actions. Mobile retains its approved controls and dock. */
+.gm-section-actions{display:none}
+@media(min-width:861px){
+ .gm-section-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:28px;position:relative;z-index:3}
+ .gm-section-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 22px;border:1px solid #33627c;border-radius:999px;background:#33627c;color:#fff;font:500 14px/1.4 Archivo,Arial,sans-serif;text-decoration:none;white-space:nowrap;transition:background-color .16s,color .16s}
+ .gm-section-actions a+a{background:transparent;color:#152238;border-color:#15223866}
+ .gm-section-actions a:hover{background:#244d64;color:#fff}.gm-section-actions a:focus-visible{outline:3px solid #77a8c2;outline-offset:4px}
+ .gm-section-actions--dark a{background:#f7f5f1;color:#152238;border-color:#f7f5f1}.gm-section-actions--dark a+a{background:#10182a55;color:#f7f5f1;border-color:#f7f5f199}.gm-section-actions--dark a:hover{background:#dbe9f0;color:#152238}
+ .gm-section-actions--center{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){.gm-section-actions a{transition:none}}

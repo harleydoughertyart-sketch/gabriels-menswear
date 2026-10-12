@@ -1,0 +1,303 @@
+/* book / fitting: what happens at a fitting. A three-panel fitting mirror drawn in HTML and CSS (the
+   home page's "In person, in the mirror"), with a tailor's tape over its left wing in one inline SVG;
+   three numbered steps in the home FAQ's hairline rhythm; the price line under step 3; one Google review
+   in the home page's review card, its quote marks and stars drawn here.
+   Phones: h2, mirror, steps, price line, card. From 861px, on the page's 12-column grid (the one
+   schedule and bring use): the mirror centred in columns 1 to 6, the words in 8 to 12, so they start
+   on the line of the doors above and the photo below; the mirror sits centred against the words.
+   The motion: the mirror's wings swing open from nearly folded once, as it enters (the engine's
+   data-sc-in adds .sc-in), and the steps rise in order (data-sc-stagger). Transform and opacity only.
+   Reduced motion, or no engine: the mirror stands open and the steps simply show. No script. Light only. */
+
+.wf-book-fitting {
+  /* the ground is a literal: the engine's drift rewrites --sc-canvas while the page scrolls */
+  background: #eef2f4;
+  --wf-book-fitting-ink: #152238;
+  --wf-book-fitting-num: var(--sc-t-xl);
+  --wf-book-fitting-numcol: calc(var(--wf-book-fitting-num) * 0.75);
+  --wf-book-fitting-gap: var(--sc-4);
+}
+
+/* -------------------------------------------------------------------------------- the mirror -- */
+/* A 4:3 box (it never shifts while the wings move) holding three panels on one floor line. Sizes are
+   in % and cqi (1% of the drawing's width), so the whole drawing scales as one. */
+.wf-book-fitting__mirror {
+  --wf-book-fitting-frame: 3px;
+  --wf-book-fitting-foot: 4px;
+  position: relative;
+  width: min(66.67vw, 18.75rem);
+  aspect-ratio: 4 / 3;
+  margin: var(--sc-6) auto 0;
+  container-type: inline-size;
+}
+@supports (width: 1cqi) {
+  .wf-book-fitting__mirror {
+    --wf-book-fitting-frame: clamp(2.5px, 1.15cqi, 3.5px);
+    --wf-book-fitting-foot: 1.6cqi;
+  }
+}
+/* the floor: a 1px line that fades out at both ends */
+.wf-book-fitting__mirror::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(81 97 122 / 0.35) 14%, rgb(81 97 122 / 0.35) 86%, transparent);
+}
+
+.wf-book-fitting__panel {
+  position: absolute;
+  bottom: var(--wf-book-fitting-foot);
+  border: var(--wf-book-fitting-frame) solid var(--wf-book-fitting-ink);
+  border-radius: 6px;
+  background: linear-gradient(#ffffff, #e7edf1);
+}
+/* two short feet under each panel, standing on the floor line */
+.wf-book-fitting__panel::after {
+  content: "";
+  position: absolute;
+  top: calc(100% + var(--wf-book-fitting-frame));
+  inset-inline: 12%;
+  height: var(--wf-book-fitting-foot);
+  background:
+    linear-gradient(var(--wf-book-fitting-ink), var(--wf-book-fitting-ink)) 0 0 / 10px 100% no-repeat,
+    linear-gradient(var(--wf-book-fitting-ink), var(--wf-book-fitting-ink)) 100% 0 / 10px 100% no-repeat;
+}
+
+/* The centre: 38% of the width, about 1 to 1.75, arched, with one soft diagonal highlight; its glass
+   shades a touch toward both edges, so it reads as glass rather than a window. */
+.wf-book-fitting__centre {
+  left: 31%;
+  width: 38%;
+  height: 88.67%;
+  border-radius: 999px 999px 6px 6px;
+  background:
+    linear-gradient(114deg, transparent 33%, rgb(255 255 255 / 0.55) 35.5%, rgb(255 255 255 / 0.55) 43%, transparent 45.5%),
+    linear-gradient(90deg, rgb(21 34 56 / 0.07), transparent 30%, transparent 70%, rgb(21 34 56 / 0.07)),
+    linear-gradient(#ffffff, #e7edf1);
+}
+
+/* The wings: 30% of the width and 88% of the centre's height, hinged on the centre's edges and turned
+   toward the viewer; each one's glass darkens a little toward its hinge, the side that faces away. */
+.wf-book-fitting__wing {
+  width: 30%;
+  height: 78%;
+}
+.wf-book-fitting__wing--l {
+  left: 1%;
+  border-top-left-radius: 50% 25.64%;
+  background: linear-gradient(90deg, transparent 35%, rgb(21 34 56 / 0.08)), linear-gradient(#ffffff, #e7edf1);
+  transform-origin: 100% 50%;
+  transform: perspective(900px) rotateY(24deg);
+}
+.wf-book-fitting__wing--r {
+  left: 69%;
+  border-top-right-radius: 50% 25.64%;
+  background: linear-gradient(270deg, transparent 35%, rgb(21 34 56 / 0.08)), linear-gradient(#ffffff, #e7edf1);
+  transform-origin: 0 50%;
+  transform: perspective(900px) rotateY(-24deg);
+}
+
+/* the tape over the left wing: a teal band with a pale tick every 6px and a metal end */
+.wf-book-fitting__tape {
+  position: absolute;
+  top: calc(-1 * var(--wf-book-fitting-frame));
+  left: calc(-1 * var(--wf-book-fitting-frame));
+  width: calc(100% + 2 * var(--wf-book-fitting-frame));
+  height: calc(100% + 2 * var(--wf-book-fitting-frame));
+  overflow: visible;
+}
+.wf-book-fitting__tape-band,
+.wf-book-fitting__tape-ticks {
+  fill: none;
+}
+.wf-book-fitting__tape-band {
+  stroke: #33627c;
+  stroke-width: 6.9;
+}
+.wf-book-fitting__tape-ticks {
+  stroke: #f7f5f1;
+  stroke-width: 3.2;
+  stroke-dasharray: 0.77 3.85;
+}
+.wf-book-fitting__tape-end {
+  fill: var(--wf-book-fitting-ink);
+}
+
+/* --------------------------------------------------------------------------------- the steps -- */
+/* role="list" in the HTML: Safari drops list semantics from a list without bullets. The list holds
+   still; its steps rise in order (data-sc-stagger). */
+.wf-book-fitting__steps {
+  margin: var(--sc-5) 0 0;
+  padding: 0;
+  list-style: none;
+  opacity: 1;
+  transform: none;
+}
+.wf-book-fitting__step {
+  display: grid;
+  grid-template-columns: var(--wf-book-fitting-numcol) minmax(0, 1fr);
+  column-gap: var(--wf-book-fitting-gap);
+  align-items: baseline;
+  padding-block: var(--sc-4);
+}
+.wf-book-fitting__step + .wf-book-fitting__step {
+  border-top: 1px solid var(--sc-hairline-strong);
+}
+/* the price line belongs to step 3, so step 3 keeps only a little room under it */
+.wf-book-fitting__step:last-child {
+  padding-bottom: var(--sc-1);
+}
+.wf-book-fitting__n {
+  font-family: var(--sc-font-display);
+  font-weight: 600;
+  font-size: var(--wf-book-fitting-num);
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--sc-accent);
+}
+.wf-book-fitting__t {
+  font-size: var(--sc-t-base);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--sc-ink);
+  text-wrap: pretty;
+}
+
+.wf-book-fitting__price {
+  margin: 0;
+  padding-left: calc(var(--wf-book-fitting-numcol) + var(--wf-book-fitting-gap));
+  font-size: var(--sc-t-sm);
+  line-height: 1.5;
+  color: var(--sc-ink-soft);
+  text-wrap: balance;
+}
+
+/* -------------------------------------------------------------------------------- the review -- */
+/* The home page's review card (.gm-review, shared), sized by the column here instead of the home
+   rail's fixed width. A quote with no body text under it gets more room above the hairline. */
+.wf-book-fitting__review {
+  width: auto;
+  margin: var(--sc-7) 0 0;
+  gap: var(--sc-5);
+}
+.wf-book-fitting .wf-book-fitting__quote { text-wrap: balance; }
+.wf-book-fitting__quote p { margin: 0; }
+/* The quote marks are drawn, not typed, and hang: the opening mark sits in the card's padding, so
+   every line of the quote starts on the edge of the name under it. */
+.wf-book-fitting__quote p::before {
+  content: "\201C";
+  content: "\201C" / "";
+  position: absolute;
+  translate: -100% 0;
+}
+.wf-book-fitting__quote p::after {
+  content: "\201D";
+  content: "\201D" / "";
+}
+/* the name and the five stars over a hairline (the home page's card footer) */
+.wf-book-fitting__by {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sc-3);
+  padding-top: var(--sc-3);
+  border-top: 1px solid var(--sc-hairline);
+  font-size: var(--sc-t-sm);
+  line-height: 1.3;
+}
+.wf-book-fitting__name {
+  font-weight: 600;
+  color: var(--sc-ink);
+}
+/* Five drawn stars: 1em tiles with four 0.2em gaps (mask-repeat space spreads them over 5.8em); a
+   mask, so their colour is the element's own background. */
+.wf-book-fitting__stars {
+  --wf-book-fitting-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 .9l2.47 6.6 7.04.31-5.52 4.39 1.89 6.79L10 15.1l-5.88 3.89 1.89-6.79-5.52-4.39 7.04-.31z' stroke='%23000' stroke-width='.9' stroke-linejoin='round'/%3E%3C/svg%3E");
+  flex: none;
+  display: inline-block;
+  width: 5.8em;
+  height: 1em;
+  font-size: 0.8125rem;
+  background: var(--sc-accent);
+  -webkit-mask: var(--wf-book-fitting-star) 0 50% / 1em 1em space no-repeat;
+  mask: var(--wf-book-fitting-star) 0 50% / 1em 1em space no-repeat;
+}
+
+/* ---------------------------------------------------------------------------------- 600px up -- */
+/* The words keep a 30rem measure on the left edge, and the mirror centres over them. */
+@media (min-width: 600px) {
+  .wf-book-fitting__steps,
+  .wf-book-fitting__price,
+  .wf-book-fitting__review {
+    max-width: 30rem;
+  }
+  .wf-book-fitting__mirror {
+    margin-inline: calc((min(100%, 30rem) - 18.75rem) / 2) 0;
+  }
+}
+
+/* --------------------------------------------------------------------------------- 861px up -- */
+@media (min-width: 861px) {
+  .wf-book-fitting__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--sc-5);
+    align-items: start;
+  }
+  .wf-book-fitting__title,
+  .wf-book-fitting__steps,
+  .wf-book-fitting__price,
+  .wf-book-fitting__review {
+    grid-column: 8 / span 5;
+    max-width: none;
+  }
+  .wf-book-fitting__title { grid-row: 1; }
+  .wf-book-fitting__steps { grid-row: 2; margin-top: var(--sc-6); }
+  .wf-book-fitting__price { grid-row: 3; }
+  .wf-book-fitting__review { grid-row: 4; }
+  .wf-book-fitting__mirror {
+    grid-column: 1 / span 6;
+    grid-row: 1 / span 4;
+    align-self: center;
+    width: min(100%, 26rem);
+    margin: 0 auto;
+  }
+}
+
+/* --------------------------------------------------------------------------------- the motion -- */
+/* Folded only once the engine has mounted and until the mirror enters; without the engine the
+   wings simply stand open. The swing is declared on the entered state, so the fold itself is never
+   animated. It waits 180ms for the engine's fade to bring the folded mirror up, so the opening is
+   seen rather than lost in the fade; the right wing follows 90ms after the left. */
+@media (prefers-reduced-motion: no-preference) {
+  .sc-ready .wf-book-fitting__mirror:not(.sc-in) .wf-book-fitting__wing--l {
+    transform: perspective(900px) rotateY(72deg);
+  }
+  .sc-ready .wf-book-fitting__mirror:not(.sc-in) .wf-book-fitting__wing--r {
+    transform: perspective(900px) rotateY(-72deg);
+  }
+  .wf-book-fitting__mirror.sc-in .wf-book-fitting__wing {
+    transition: transform 800ms var(--sc-ease-out) 180ms;
+  }
+  .wf-book-fitting__mirror.sc-in .wf-book-fitting__wing--r {
+    transition-delay: 270ms;
+  }
+}
+/* Reduced motion: the engine already drops the rise and shortens the fade to 220ms; the three steps
+   fade in together (the engine's stagger delays are inline, hence !important). */
+@media (prefers-reduced-motion: reduce) {
+  .wf-book-fitting__steps > .wf-book-fitting__step {
+    transition-delay: 0ms !important;
+  }
+}
+
+/* Windows high contrast drops backgrounds and shadows: outline the card, and draw the stars in the
+   system's text colour (the mirror keeps its frames, which are borders). */
+@media (forced-colors: active) {
+  .wf-book-fitting__review { outline: 1px solid CanvasText; }
+  .wf-book-fitting__stars {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+}

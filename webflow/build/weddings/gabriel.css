@@ -1,0 +1,24 @@
+.wf-weddings-gabriel{display:grid;grid-template-columns:1.08fr 1fr;align-items:center;background:#f7f5f1;color:#152238}
+.wf-weddings-gabriel__portrait{margin:0}.wf-weddings-gabriel__portrait img{display:block;width:100%;height:min(860px,90svh);object-fit:cover;object-position:center 30%}
+.wf-weddings-gabriel__copy{padding:clamp(40px,6vw,88px)}.wf-weddings-gabriel__copy h2{font:400 clamp(54px,4.6vw,68px)/1.08 "Playfair Display",Georgia,serif;letter-spacing:-.035em;margin:0 0 28px}.wf-weddings-gabriel__copy h2 em{color:#33627c}.wf-weddings-gabriel__copy p{font:400 22px/1.6 "Playfair Display",Georgia,serif;max-width:30ch;margin:0}.wf-weddings-gabriel__identity{font:400 12px/1.6 Archivo,Arial,sans-serif;color:#51617a;margin-top:30px}
+@media(max-width:700px){.wf-weddings-gabriel{display:block}.wf-weddings-gabriel__portrait img{height:auto;aspect-ratio:4/5}.wf-weddings-gabriel__copy{padding:40px 24px 56px}.wf-weddings-gabriel__copy h2{font-size:clamp(46px,12.5vw,54px)}.wf-weddings-gabriel__copy p{font-size:20px;line-height:1.5}}
+/* R26 desktop refinement; phone rules remain unchanged. */
+@media(min-width:861px){
+.wf-weddings-gabriel{grid-template-columns:1fr 1fr}.wf-weddings-gabriel__portrait img{height:80svh;min-height:640px;max-height:900px}.wf-weddings-gabriel__copy{padding:clamp(48px,6vw,112px)}.wf-weddings-gabriel__copy h2{font-size:clamp(60px,4.8vw,84px)}.wf-weddings-gabriel__copy p{font-size:clamp(22px,1.5vw,28px);max-width:30ch}
+}
+
+/* R30: a bounded portrait and a short, readable introduction. */
+@media(min-width:861px){
+.wf-weddings-gabriel{padding:80px max(6%,calc((100vw - 1180px)/2));box-sizing:border-box}
+.wf-weddings-gabriel{display:grid;grid-template-columns:minmax(300px,430px) minmax(0,1fr);gap:clamp(60px,6vw,100px);align-items:center;min-height:0}
+.wf-weddings-gabriel__portrait{align-self:center;width:100%;margin:0}
+.wf-weddings-gabriel__portrait img{width:100%;height:auto;min-height:0;max-height:none;aspect-ratio:4/5;object-fit:cover;object-position:center}
+.wf-weddings-gabriel__copy{padding:0;max-width:500px}
+.wf-weddings-gabriel__copy h2{font-size:clamp(54px,4.2vw,68px);line-height:1.08;margin-bottom:24px}
+.wf-weddings-gabriel__copy p:not([class$='__identity']){font-size:24px;line-height:1.5;max-width:29ch}
+.wf-weddings-gabriel__identity{font-size:12px;line-height:1.6;letter-spacing:.04em}
+}
+
+
+.wf-weddings-gabriel__portrait img{border-radius:18px}
+

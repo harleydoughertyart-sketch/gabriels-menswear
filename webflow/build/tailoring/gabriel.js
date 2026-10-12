@@ -1,0 +1,1 @@
+/* Gabriel is a static portrait panel. Shared cinema integration owns takeover motion. */

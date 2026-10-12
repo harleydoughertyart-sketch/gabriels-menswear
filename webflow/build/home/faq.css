@@ -1,0 +1,13 @@
+.wf-home-faq{background:#f7f5f1;color:#152238;padding:clamp(4.5rem,9vw,9rem) clamp(1.25rem,5vw,5.5rem)}
+.wf-home-faq__layout{max-width:82rem;margin:auto;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(3rem,8vw,8rem)}
+.wf-home-faq h2{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:clamp(2.8rem,4.9vw,4.75rem);letter-spacing:-.04em;line-height:1.07;margin:0 0 1.5rem;text-wrap:balance}
+.wf-home-faq header p{font-size:1.125rem;line-height:1.65;color:#51617a;max-width:30ch;text-wrap:pretty}
+.wf-home-faq header a{display:inline-flex;align-items:center;gap:2rem;min-height:48px;margin-top:1rem;color:#33627c;text-underline-offset:6px;font-weight:600;transition:transform 160ms cubic-bezier(.23,1,.32,1)}
+.wf-home-faq details{border-top:1px solid #15223826}.wf-home-faq details:last-child{border-bottom:1px solid #15223826}
+.wf-home-faq summary{min-height:80px;padding:.6rem 0;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;list-style:none;cursor:pointer;font-size:clamp(1.1rem,1.5vw,1.35rem);font-weight:600;line-height:1.4}
+.wf-home-faq summary::-webkit-details-marker{display:none}.wf-home-faq__plus{flex:0 0 36px;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:#e8eef0;font-size:1.45rem;font-weight:400;transition:transform 180ms cubic-bezier(.23,1,.32,1),background-color 180ms ease}
+.wf-home-faq details[open] .wf-home-faq__plus{transform:rotate(45deg);background:#d4e2e8}
+.wf-home-faq details p{line-height:1.75;font-size:1.05rem;color:#51617a;max-width:51ch;margin:0 3rem 1.75rem 0;text-wrap:pretty}
+.wf-home-faq :is(a,summary):focus-visible{outline:3px solid #33627c;outline-offset:5px}.wf-home-faq a:active{transform:scale(.96)}
+@media(max-width:760px){.wf-home-faq__layout{grid-template-columns:1fr;gap:2.25rem}.wf-home-faq h2{max-width:12ch}.wf-home-faq summary{min-height:76px}.wf-home-faq details p{margin-right:0}}
+@media(prefers-reduced-motion:reduce){.wf-home-faq__plus,.wf-home-faq a{transition:none}.wf-home-faq a:active{transform:none}}

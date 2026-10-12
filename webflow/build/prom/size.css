@@ -1,0 +1,10 @@
+.wf-prom-size{position:relative;background:#f7f5f1;color:#152238;padding:100px max(24px,5.55vw)}
+.wf-prom-size__copy{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:8vw}
+.wf-prom-size h2{font:400 clamp(54px,4.6vw,68px)/1.08 "Playfair Display",Georgia,serif;letter-spacing:-.035em;margin:0;text-wrap:balance}.wf-prom-size h2 em{color:#33627c}
+.wf-prom-size p{font:400 22px/1.5 "Playfair Display",Georgia,serif;max-width:32ch;margin:0;text-wrap:pretty}
+@media(max-width:700px){.wf-prom-size{padding:64px 24px}.wf-prom-size__copy{display:block}.wf-prom-size h2{font-size:clamp(46px,12.5vw,54px);margin-bottom:24px}.wf-prom-size p{font-size:20px}}
+
+/* R26 desktop refinement; phone rules remain unchanged. */
+@media(min-width:861px){
+.wf-prom-size{padding-block:clamp(64px,5vw,88px)}.wf-prom-size__copy{display:block;max-width:780px;text-align:center}.wf-prom-size h2{font-size:clamp(56px,4.2vw,64px);max-width:none}.wf-prom-size p{font-size:23px;margin:24px auto 0}
+}

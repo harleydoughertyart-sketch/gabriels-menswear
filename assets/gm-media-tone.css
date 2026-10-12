@@ -1,0 +1,5 @@
+/* Full-width Gabriel portraits meet the phone edge without pale corner wedges. */
+@media(max-width:860px){main :is(.gm-gabriel figure,.gm-gabriel figure picture,.gm-gabriel img){border-radius:0!important}}
+@media(max-width:700px){main :is(.wf-tailoring-gabriel__portrait,.wf-weddings-gabriel__portrait,.wf-prom-gabriel__portrait,.wf-book-portrait),main :is(.wf-tailoring-gabriel__portrait,.wf-weddings-gabriel__portrait,.wf-prom-gabriel__portrait,.wf-book-portrait) :is(picture,img){border-radius:0!important}}
+
+

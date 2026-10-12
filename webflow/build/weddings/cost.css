@@ -1,0 +1,263 @@
+/* weddings/cost: the page's one navy chapter (the home page's .gm-turn treatment), a straight answer
+   about money. Three things set the price, drawn as a sum with no number in it: the garment, the fabric
+   and the work, joined by one teal line into the sentence they lead to.
+   Phone: the h2, the three factors as rows (icon left, label right) between hairlines, a short teal stem
+   down to the sentence, then the details row and the call link. From 600px the factors stand in a row
+   and a bracket gathers them into the stem. From 1080px the h2 and, under it, the details and the call
+   take the left column (5fr); the sum takes the right (7fr).
+   The motion: the factors settle in one after another (data-sc-stagger="90"), then the line and its
+   sentence (data-sc-in, one beat later). Transform and opacity only, once. Reduced motion: all of it
+   at once, no fade. The section paints its own ground (the engine's drift rewrites --sc-canvas) and
+   re-sets the house tokens on itself only, so the shared rules it relies on (the focus ring, selection)
+   turn light on navy. Light only: no dark-mode rules. */
+.wf-weddings-cost {
+  --sc-ink: #f2f5f7;
+  --sc-ink-soft: #b7c4d4;
+  --sc-hairline: rgba(242, 245, 247, 0.14);
+  --sc-accent: #8fc0d8;
+  --sc-accent-ink: #152238;
+  /* the drawn line: the stem, the bracket and its ends */
+  --wf-weddings-cost-line: #8fc0d8;
+  --wf-weddings-cost-stroke: 1.5px;
+  --wf-weddings-cost-gap: clamp(1rem, 3vw, 2.5rem);
+  background: #152238;
+  color: var(--sc-ink);
+}
+
+.wf-weddings-cost__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* "You hear the options" then the accent phrase: the measure keeps the break by sense where it fits */
+.wf-weddings-cost__title { max-width: 11em; }
+.wf-weddings-cost__title em { color: #7db2cc; }
+
+/* ------------------------------------------------------------------ the factors -- */
+.wf-weddings-cost__factors {
+  margin: var(--sc-7) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--sc-hairline);
+}
+.wf-weddings-cost__factor {
+  display: flex;
+  align-items: center;
+  gap: var(--sc-4);
+  min-height: 3.75rem;
+  padding-block: var(--sc-3);
+  border-bottom: 1px solid var(--sc-hairline);
+}
+.wf-weddings-cost__icon {
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: #8fc0d8;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* set like the steps' titles above: the display face, so the factors and their sum read as one line */
+.wf-weddings-cost__label {
+  font-family: var(--sc-font-display);
+  font-size: var(--sc-t-lg);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--sc-ink);
+}
+
+/* ------------------------------------------------------- the line and the sum -- */
+/* Phone: one stem from the middle of the last hairline down to the sentence. */
+.wf-weddings-cost__total { text-align: center; }
+.wf-weddings-cost__join {
+  position: relative;
+  display: block;
+  height: 2.5rem;
+}
+.wf-weddings-cost__join::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - var(--wf-weddings-cost-stroke) / 2);
+  width: var(--wf-weddings-cost-stroke);
+  background: var(--wf-weddings-cost-line);
+}
+.wf-weddings-cost__result {
+  margin: var(--sc-3) 0 0;
+  font-family: var(--sc-font-display);
+  font-size: var(--sc-t-lg);
+  font-weight: 600;
+  line-height: 1.32;
+  letter-spacing: -0.005em;
+  color: var(--sc-ink);
+  text-wrap: balance;
+}
+.wf-weddings-cost__line { display: block; }
+
+/* ------------------------------------------------------------------ the details -- */
+.wf-weddings-cost__more { margin-top: var(--sc-7); }
+/* The home page's FAQ row, recoloured for navy. */
+.wf-weddings-cost__why { border-block: 1px solid var(--sc-hairline); }
+.wf-weddings-cost__summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sc-4);
+  padding-block: var(--sc-4);
+  list-style: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--sc-ink);
+  transition: color 140ms var(--sc-ease-out);
+}
+.wf-weddings-cost__summary::-webkit-details-marker { display: none; }
+/* the FAQ's plus, drawn rather than typed, so no "+" joins the summary's accessible name */
+.wf-weddings-cost__summary::after {
+  content: "";
+  flex: none;
+  align-self: center;
+  width: 0.8em;
+  height: 0.8em;
+  margin-inline-end: 0.1em;
+  background:
+    linear-gradient(#8fc0d8, #8fc0d8) center / 100% 1.5px no-repeat,
+    linear-gradient(#8fc0d8, #8fc0d8) center / 1.5px 100% no-repeat;
+  transition: rotate 160ms var(--sc-ease-out);
+}
+.wf-weddings-cost__why[open] > .wf-weddings-cost__summary::after { rotate: 45deg; }
+@media (hover: hover) and (pointer: fine) {
+  .wf-weddings-cost__summary:hover { color: #8fc0d8; }
+}
+.wf-weddings-cost__list {
+  display: grid;
+  gap: var(--sc-2);
+  margin: 0;
+  padding: 0 0 var(--sc-5);
+  list-style: none;
+  color: var(--sc-ink-soft);
+  text-wrap: pretty;
+}
+.wf-weddings-cost__why[open] .wf-weddings-cost__list { animation: wf-weddings-cost-open 240ms var(--sc-ease-out); }
+@keyframes wf-weddings-cost-open {
+  from { opacity: 0; }
+}
+.wf-weddings-cost__term { font-weight: 600; color: var(--sc-ink); }
+.wf-weddings-cost__worth {
+  margin-top: var(--sc-2);
+  padding-top: var(--sc-3);
+  border-top: 1px solid var(--sc-hairline);
+  color: var(--sc-ink);
+}
+
+/* ------------------------------------------------------------------ the call -- */
+.wf-weddings-cost__call {
+  margin: var(--sc-4) 0 0;
+  color: var(--sc-ink-soft);
+}
+.wf-weddings-cost__tel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--sc-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: rgba(143, 192, 216, 0.7);
+  transition: color 140ms var(--sc-ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .wf-weddings-cost__tel:hover { color: #8fc0d8; }
+}
+
+/* ------------------------------------------------------------- from 600px -- */
+/* The factors stand in a row, each icon over its label, and a bracket gathers them: an arm up to each
+   outer factor, a tooth up to the middle one, and the stem down to the sentence. The bracket spans
+   from the first column's middle to the last one's: half a column in from each side. */
+@media (min-width: 600px) {
+  .wf-weddings-cost__factors,
+  .wf-weddings-cost__total,
+  .wf-weddings-cost__more { max-width: 46rem; }
+  .wf-weddings-cost__factors {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--wf-weddings-cost-gap);
+    border-top: 0;
+  }
+  .wf-weddings-cost__factor {
+    flex-direction: column;
+    gap: var(--sc-3);
+    min-height: 0;
+    padding: 0;
+    border-bottom: 0;
+    text-align: center;
+  }
+  .wf-weddings-cost__icon { width: 3rem; height: 3rem; }
+  .wf-weddings-cost__join {
+    height: 3.5rem;
+    margin: var(--sc-4) calc((100% - 2 * var(--wf-weddings-cost-gap)) / 6) 0;
+  }
+  .wf-weddings-cost__join::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 50%;
+    border: var(--wf-weddings-cost-stroke) solid var(--wf-weddings-cost-line);
+    border-top: 0;
+    border-radius: 0 0 var(--sc-r-md) var(--sc-r-md);
+  }
+  .wf-weddings-cost__result { font-size: var(--sc-t-xl); line-height: 1.25; }
+}
+
+/* ------------------------------------------------------------ from 1080px -- */
+/* Left (5fr): the h2, and under it the details and the call. Right (7fr): the sum, its factors level
+   with the h2. Not from 860px as the other sections switch: below 1080 the left column breaks the h2
+   into four lines and the right one wraps "The garment" and the sentence, so up to there the single
+   column above holds. */
+@media (min-width: 1080px) {
+  .wf-weddings-cost__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-areas:
+      "title factors"
+      "title total"
+      "more  total";
+    column-gap: clamp(3rem, 7vw, 7rem);
+    align-items: start;
+  }
+  .wf-weddings-cost__title { grid-area: title; }
+  .wf-weddings-cost__factors { grid-area: factors; margin-top: 0; }
+  .wf-weddings-cost__total { grid-area: total; }
+  .wf-weddings-cost__more { grid-area: more; }
+  .wf-weddings-cost__icon { width: 3.5rem; height: 3.5rem; }
+}
+
+/* Forced colours drop drawn backgrounds: the stem and the plus take the system text colour. */
+@media (forced-colors: active) {
+  .wf-weddings-cost__join::after,
+  .wf-weddings-cost__summary::after { forced-color-adjust: none; }
+  .wf-weddings-cost__join::after { background: CanvasText; }
+  .wf-weddings-cost__summary::after {
+    background:
+      linear-gradient(CanvasText, CanvasText) center / 100% 1.5px no-repeat,
+      linear-gradient(CanvasText, CanvasText) center / 1.5px 100% no-repeat;
+  }
+}
+
+/* ------------------------------------------------------------- the reveal -- */
+/* The line and its sentence come in one beat after the third factor (3 x 90ms). */
+.wf-weddings-cost__total[data-sc-in] { transition-delay: 270ms; }
+/* Reduced motion: everything in place at once, no fade, nothing turning. */
+@media (prefers-reduced-motion: reduce) {
+  .wf-weddings-cost [data-sc-in],
+  .wf-weddings-cost [data-sc-stagger] > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .wf-weddings-cost__summary,
+  .wf-weddings-cost__summary::after,
+  .wf-weddings-cost__tel { transition: none; }
+  .wf-weddings-cost__why[open] .wf-weddings-cost__list { animation: none; }
+}

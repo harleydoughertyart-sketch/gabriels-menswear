@@ -1,0 +1,63 @@
+.wf-tailoring-experience{position:relative;background:#172129;color:#f7f5f1;font-family:"Playfair Display",Georgia,serif}
+.wf-tailoring-experience__beat{position:relative;min-height:810px;height:90svh;margin:0;isolation:isolate;overflow:hidden;background:#172129}
+.wf-tailoring-experience picture{position:absolute;inset:0;display:block;z-index:-2}
+.wf-tailoring-experience img{display:block;width:100%;height:100%;object-fit:cover}
+.wf-tailoring-experience__copy{position:absolute;left:5.55%;bottom:100px;width:430px;max-width:calc(100% - 48px);opacity:var(--copy-opacity,1)}
+.wf-tailoring-experience h2{margin:0 0 24px;font:400 60px/1.08 "Playfair Display",Georgia,serif;letter-spacing:-.03em;text-wrap:balance}
+.wf-tailoring-experience h2 em{color:#b6d7e8;font-style:italic}
+.wf-tailoring-experience p{max-width:30ch;margin:0;color:inherit;font-size:19px;font-weight:400;line-height:1.5;text-wrap:pretty}
+.wf-tailoring-experience figcaption{position:absolute;bottom:22px;left:24px;font:400 11px/1.5 Archivo,Arial,sans-serif;color:#fff;opacity:var(--copy-opacity,1)}
+.wf-tailoring-experience__cloth:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 10% 85%,#111e2866,transparent 65%);z-index:-1}
+.wf-tailoring-experience__stitch .wf-tailoring-experience__copy{left:34%;bottom:72px}
+.wf-tailoring-experience__stitch img{object-position:60% 43%}
+.wf-tailoring-experience__cuff img{object-position:center 40%}
+.wf-tailoring-experience__cuff .wf-tailoring-experience__copy{left:auto;right:5.55%;top:36px;bottom:auto;width:410px}
+.wf-tailoring-experience__cuff:after{content:"";position:absolute;inset:0 0 40% 48%;background:radial-gradient(ellipse at 65% 25%,#101713b3,transparent 75%);z-index:-1}
+.wf-tailoring-experience.is-sequenced .wf-tailoring-experience__beat{position:sticky;top:var(--beat-top,var(--experience-top,80px))}
+.wf-tailoring-experience.is-sequenced .wf-tailoring-experience__beat:not(:last-child){margin-bottom:45svh}
+@media(max-width:700px){
+ .wf-tailoring-experience__beat{height:calc(100svh - var(--experience-top,72px));min-height:730px}
+ .wf-tailoring-experience__copy{left:24px;top:44px;bottom:auto;width:342px}
+ .wf-tailoring-experience h2{font-size:clamp(46px,12.8vw,52px);margin-bottom:22px;line-height:1.08}
+ .wf-tailoring-experience p{font-size:19px;line-height:1.48;max-width:30ch}
+ .wf-tailoring-experience__cloth img{object-position:62% center}
+ .wf-tailoring-experience__cloth:after{inset:0 0 42%;background:linear-gradient(180deg,#10192388,transparent)}
+ .wf-tailoring-experience__stitch img{object-position:65% top}
+ .wf-tailoring-experience__stitch .wf-tailoring-experience__copy{left:24px;top:auto;bottom:78px}
+ .wf-tailoring-experience__stitch:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(0deg,#0d1926dd,transparent);z-index:-1}
+ .wf-tailoring-experience__cuff .wf-tailoring-experience__copy{left:24px;right:auto;top:36px;width:342px}
+ .wf-tailoring-experience__cuff img{object-position:50% 50%}
+ .wf-tailoring-experience__cuff:after{inset:0 0 40%;background:linear-gradient(180deg,#101713a3,transparent)}
+ .wf-tailoring-experience figcaption{bottom:22px;font-size:11px}
+}
+
+@media(max-height:650px){.wf-tailoring-experience__beat{min-height:760px}.wf-tailoring-experience.is-sequenced .wf-tailoring-experience__beat{position:relative;top:auto}}
+@media(prefers-reduced-motion:reduce){.wf-tailoring-experience.is-sequenced .wf-tailoring-experience__beat{position:relative;top:auto;margin-bottom:0}.wf-tailoring-experience__copy,.wf-tailoring-experience figcaption{opacity:1!important}.wf-tailoring-experience img{transform:none!important}}
+
+
+/* Flow-sized phone copy grows the photographic figure when text is enlarged. */
+@media(max-width:700px){
+ .wf-tailoring-experience__beat{display:grid;height:auto;min-height:max(730px,calc(100svh - var(--experience-top,72px)))}
+ .wf-tailoring-experience__copy{position:relative;inset:auto!important;align-self:start;width:auto!important;max-width:none;padding:44px 24px 400px}
+}
+
+/* R26 desktop refinement; phone rules remain unchanged. */
+@media(min-width:861px){
+.wf-tailoring-experience__beat{height:calc(100svh - 80px);min-height:660px;max-height:1080px}.wf-tailoring-experience__copy{width:560px;bottom:clamp(72px,10svh,112px)}.wf-tailoring-experience h2{font-size:clamp(62px,4.8vw,86px);line-height:1.06;max-width:12ch}.wf-tailoring-experience p{font-size:clamp(22px,1.4vw,26px);max-width:30ch}.wf-tailoring-experience__cuff .wf-tailoring-experience__copy{width:540px;top:72px}.wf-tailoring-experience__stitch .wf-tailoring-experience__copy{left:8%;bottom:72px}.wf-tailoring-experience__stitch:after{content:"";position:absolute;inset:35% 40% 0 0;z-index:-1;background:linear-gradient(0deg,#101b2ac9,transparent)}
+}
+
+
+/* R28: top-aligned stories with a short, physical reading dwell. */
+.wf-tailoring-experience__stage{display:flow-root}
+.wf-tailoring-experience.is-sequenced .wf-tailoring-experience__beat{margin-bottom:45svh}
+.wf-tailoring-experience .wf-tailoring-experience__copy{left:5.55%;right:auto;top:64px;bottom:auto;width:560px}
+.wf-tailoring-experience .wf-tailoring-experience__beat:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 12% 12%,#101923bd,transparent 72%);z-index:-1;pointer-events:none}
+@media(max-width:860px){
+ .wf-tailoring-experience__beat{display:grid;min-height:calc(100svh - var(--experience-top,68px));height:auto}
+ .wf-tailoring-experience .wf-tailoring-experience__copy{position:relative;inset:auto!important;align-self:start;width:auto!important;max-width:none;padding:36px 24px 200px}
+ .wf-tailoring-experience .wf-tailoring-experience__beat:after{background:linear-gradient(180deg,#101923c9,transparent 68%)}
+}
+@media(prefers-reduced-motion:reduce){.wf-tailoring-experience.is-sequenced .wf-tailoring-experience__beat{margin-bottom:0}}
+
+.wf-tailoring-experience.is-sequenced .wf-tailoring-experience__beat:last-child{margin-bottom:0}.wf-tailoring-experience.is-sequenced .wf-tailoring-experience__stage:after{content:'';display:block;height:45svh}
+@media(prefers-reduced-motion:reduce){.wf-tailoring-experience.is-sequenced .wf-tailoring-experience__stage:after{display:none}}

@@ -3,24 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy Policy | Gabriel's Menswear</title>
-  <meta name="description" content="How gabrielsmenswear.com handles visitor information. The site takes no personal details and uses Google Analytics to count visits.">
+  <title>Privacy policy | Gabriel’s Menswear</title>
+  <meta name="description" content="How this website handles information, analytics and third-party services.">
   <link rel="canonical" href="https://gabrielsmenswear.com/privacy">
   <meta name="robots" content="index, follow">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+      /* Playfair Display and Archivo (SIL Open Font License), served from this
+         site rather than Google Fonts: two fewer connections before first paint. */
+      @font-face{font-family:"Playfair Display";font-style:normal;font-weight:500 700;font-display:swap;src:url(/assets/fonts/playfair-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Playfair Display";font-style:normal;font-weight:500 700;font-display:swap;src:url(/assets/fonts/playfair-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+      @font-face{font-family:"Playfair Display";font-style:italic;font-weight:500 600;font-display:swap;src:url(/assets/fonts/playfair-italic-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Playfair Display";font-style:italic;font-weight:500 600;font-display:swap;src:url(/assets/fonts/playfair-italic-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+      @font-face{font-family:"Archivo";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/archivo-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Archivo";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/archivo-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+    </style>
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MJCMX83Q');</script>
+  <script>
+      // Work that can wait for the first screen. Runs once the page has loaded
+      // and its largest image or text block has painted, so analytics and
+      // background video never share a phone's bandwidth with the hero.
+      window.gmAfterFirstPaint = (function () {
+        var queue = [], painted = false, loaded = document.readyState === "complete";
+        function flush() {
+          if (!painted || !loaded) return;
+          queue.splice(0).forEach(function (fn) { setTimeout(fn, 0); });
+        }
+        var types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [];
+        if (types.indexOf("largest-contentful-paint") > -1) {
+          new PerformanceObserver(function (list, observer) {
+            observer.disconnect(); painted = true; flush();
+          }).observe({ type: "largest-contentful-paint", buffered: true });
+        } else painted = true;
+        addEventListener("load", function () {
+          loaded = true; flush();
+          // A tab opened in the background reports no paint until it is shown.
+          setTimeout(function () { painted = true; flush(); }, 3000);
+        }, { once: true });
+        return function (fn) { queue.push(fn); flush(); };
+      })();
+
+      // Calls made before the tags arrive queue in dataLayer and are sent then.
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      gmAfterFirstPaint(function () {
+        ["https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q"].forEach(function (src) {
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = src;
+          document.head.appendChild(s);
+        });
+      });
+    </script>
   <!-- End Google Tag Manager -->
+  <link rel="stylesheet" href="/assets/gm-nav.css">
+  <script src="/assets/gm-nav.js" defer></script>
   <style>
     :root {
       --canvas: #f7f5f1;
@@ -135,7 +176,7 @@
     footer a { color: var(--ink-soft); }
     footer p { margin: 0 0 0.35rem; }
   </style>
-</head>
+<meta property="og:title" content="Privacy policy | Gabriel’s Menswear"><meta property="og:description" content="How this website handles information, analytics and third-party services."><meta property="og:type" content="website"><meta property="og:url" content="https://gabrielsmenswear.com/privacy"><meta property="og:image" content="https://gabrielsmenswear.com/assets/og-hero.jpg"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://gabrielsmenswear.com/privacy#webpage","url":"https://gabrielsmenswear.com/privacy","name":"Privacy policy","description":"How this website handles information, analytics and third-party services.","isPartOf":{"@id":"https://gabrielsmenswear.com/#website"},"about":{"@id":"https://gabrielsmenswear.com/#business"},"inLanguage":"en-US"}</script><link rel="stylesheet" href="/assets/gm-media-tone.css"><script src="/assets/gm-photo-match-r45.js" defer></script></head>
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJCMX83Q"
@@ -147,121 +188,40 @@
       <span class="brand__name">Gabriel's</span>
       <span class="brand__sub" aria-hidden="true">Menswear</span>
     </a>
-    <a
-      class="cta"
-      href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
-      target="_blank"
-      rel="noopener noreferrer"
-    >Get directions</a>
+    <nav class="gm-nav" aria-label="Main">
+      <button class="gm-nav__toggle" type="button" aria-expanded="false" aria-controls="gm-nav-list" aria-label="Menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="gm-nav__bars" d="M3.5 7h17M3.5 12h17M3.5 17h17" /><path class="gm-nav__shut" d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <ul class="gm-nav__list" id="gm-nav-list">
+
+        <li><a class="gm-nav__link" href="/tailoring">Tailoring</a></li>
+        <li><a class="gm-nav__link" href="/weddings">Weddings</a></li>
+        <li><a class="gm-nav__link" href="/prom">Prom</a></li>
+        <li class="gm-nav__call"><a class="gm-nav__link" href="tel:+15088295186">Call (508) 829-5186</a></li>
+        <li><a class="gm-nav__book" href="/book#schedule" data-event="book_click">Book a fitting</a></li>
+      </ul>
+    </nav>
+    
   </header>
 
-  <main>
-    <p class="eyebrow">Gabriel&rsquo;s Menswear</p>
-    <h1>Privacy Policy</h1>
-    <p class="updated">Last updated 30 August 2026</p>
+  <main><p class="eyebrow">Gabriel’s Menswear</p><h1>Privacy policy</h1><p class="updated">Updated 9 October 2026</p><p>This explains what happens when you use this website.</p>
+<h2>Fitting requests</h2><p>When you submit a fitting request, the contact details and fitting information you enter are sent to FormSubmit for delivery by email to the website’s designated recipient. This can include your name, contact preference, occasion, date and group details. They are used to respond to your request. A request does not reserve an appointment. There is no online checkout or customer account.</p>
+<p>FormSubmit and the receiving email provider process the request. FormSubmit states that it retains submissions in its archive for 30 days. Copies delivered by email are separate from that archive. Read <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit’s privacy terms</a>. Do not include payment details or sensitive personal information. Call the shop if you need to check that a request was received.</p><h2>Visits and clicks</h2><p>The site loads Google Analytics and Google Tag Manager automatically. Analytics can record pages visited, device and browser details, approximate location, how you arrived, and clicks on calls, directions and fitting links. Cookies may be used to distinguish visits. Your browser sends connection information, including your IP address, to services it loads.</p>
+<h2>Other services</h2><p>Google Maps embeds, Google Fonts and Google review links connect to Google. The hosting provider receives requests needed to serve the site and may keep technical logs. These providers handle information under their own policies.</p><p>Read <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google’s privacy policy</a> and <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Vercel’s privacy policy</a>.</p>
+<h2>Your browser choices</h2><p>You can block or delete cookies in your browser, or use <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google’s Analytics opt-out add-on</a>. The site does not currently have an on-site cookie preference control. See <a href="/cookies">Cookies and website services</a>.</p>
+<h2>Calling or visiting</h2><p>Information you provide by phone or in the shop is separate from this website. Ask Gabriel directly about information held by the shop.</p>
+<h2>Updates and questions</h2><p>Contact the shop about a request you have sent or to ask about information held in connection with it. This policy will be updated if the website’s services change.</p><p>Questions? Call <a href="tel:+15088295186">(508) 829-5186</a> or visit Gabriel’s Menswear, 1363 Main St, Holden, MA 01520.</p></main>
 
-    <p>
-      This page explains what happens to your information when you visit
-      gabrielsmenswear.com. The short version: the site does not ask you for
-      anything. There is no form to fill in, no account to make, and nothing to
-      buy here. We use Google Analytics to count visits so we know whether the
-      site is doing its job.
-    </p>
+  <footer class="gm-site-footer">
+  <div class="gm-site-footer__grid">
+    <div class="gm-site-footer__intro"><a class="gm-site-footer__brand" href="/">Gabriel’s <span>Menswear</span></a><p>Personal service.<br>A <em>better fit.</em></p></div>
+    <nav aria-label="Footer"><h2>Explore</h2><a href="/">Home</a><a href="/tailoring">Tailoring</a><a href="/weddings">Weddings</a><a href="/prom">Prom</a><a href="/book#schedule">Request a fitting</a></nav>
+    <div><h2>Find me</h2><address><a href="https://www.google.com/maps/dir/?api=1&amp;destination=1363%20Main%20St%2C%20Holden%2C%20MA%2001520" target="_blank" rel="noopener noreferrer">1363 Main Street<br>Holden, MA 01520</a><a href="tel:+15088295186">(508) 829-5186</a></address></div>
+    <div class="gm-site-footer__hours"><h2>Shop hours</h2><dl><div><dt>Mon–Fri</dt><dd>11 AM–6:30 PM</dd></div><div><dt>Saturday</dt><dd>11 AM–6 PM</dd></div><div><dt>Sunday</dt><dd>12 PM–4 PM</dd></div></dl><p>Call to confirm before you visit.</p></div>
+  </div>
+  <div class="gm-site-footer__legal"><span>© 2026 Gabriel’s Menswear</span><span>Holden, Massachusetts</span><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a><a href="/terms">Website terms</a></div>
+</footer>
 
-    <h2>What we do not collect</h2>
-    <p>
-      The site has no contact form, no newsletter signup, no login, and no
-      checkout. We do not ask for your name, email address, phone number, or
-      payment details anywhere on this website, and we have no way to receive
-      them through it.
-    </p>
-
-    <h2>What is collected automatically</h2>
-    <p>
-      We use Google Analytics, loaded through Google Tag Manager, to understand
-      how people use the site. It sets cookies in your browser and records
-      things like:
-    </p>
-    <ul>
-      <li>which pages you looked at, and how long you stayed</li>
-      <li>the type of device and browser you used</li>
-      <li>a rough location, worked out from your IP address, usually no more precise than the town or region</li>
-      <li>how you arrived here, for example from a search engine or a link</li>
-      <li>whether you tapped the call button, the directions link, or the link to our Google reviews</li>
-    </ul>
-    <p>
-      That last one tells us how many people the site sends to the shop. It
-      records that a tap happened, not who did it.
-    </p>
-    <p>
-      This information is handled by Google as described in
-      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google&rsquo;s Privacy Policy</a>
-      and
-      <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener noreferrer">how Google uses data from sites that use its services</a>.
-    </p>
-
-    <h2>What we do with it</h2>
-    <p>
-      We look at it in aggregate to see which parts of the site are useful and
-      which are not. We do not sell it, rent it, or share it with anyone for
-      their own marketing.
-    </p>
-
-    <h2>Turning it off</h2>
-    <p>
-      You can block or delete cookies in your browser settings. Google also
-      publishes a
-      <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">browser add-on that opts you out of Google Analytics</a>
-      on every site you visit. The site works fine either way.
-    </p>
-
-    <h2>Links to other places</h2>
-    <p>
-      Some links here take you to Google Maps or to our Google Business Profile.
-      Once you are there, that site&rsquo;s own privacy policy applies, not this
-      one.
-    </p>
-
-    <h2>Children</h2>
-    <p>
-      This site is meant for a general audience and is not directed at children
-      under 13. We do not knowingly collect information from them.
-    </p>
-
-    <h2>When we call or fit you</h2>
-    <p>
-      Anything you tell us in the shop or over the phone, such as your
-      measurements, what you are shopping for, or when you need it, is used to
-      do the work you asked for. That happens offline and is not connected to
-      this website.
-    </p>
-
-    <h2>Changes</h2>
-    <p>
-      If we add something to the site that collects more than this, such as an
-      online booking form, we will update this page and change the date at the
-      top.
-    </p>
-
-    <h2>Questions</h2>
-    <p>
-      Call the shop at <a href="tel:+15088295186">(508) 829-5186</a> or stop in
-      at 1363 Main St, Holden, MA 01520.
-    </p>
-
-    <div class="note">
-      <p>
-        <strong>A note on scope.</strong> This describes the website only. It is
-        a plain-language summary written to match what the site actually does,
-        not legal advice. If the shop starts collecting customer details online,
-        running ad remarketing, or selling through the site, have it reviewed.
-      </p>
-    </div>
-  </main>
-
-  <footer>
-    <p>Gabriel&rsquo;s Menswear &middot; 1363 Main St, Holden, MA 01520 &middot; <a href="tel:+15088295186">(508) 829-5186</a></p>
-    <p><a href="/">Back to the site</a></p>
-  </footer>
 </body>
 </html>
+

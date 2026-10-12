@@ -45,6 +45,14 @@ node scripts/capture-scroll.cjs
 ```
 
 The page also contains JSON-LD for local business and FAQ. Keep visible FAQ text and FAQ schema answers in sync.
+`llms.txt` restates the same facts for AI search; update it when hours, phone, services or FAQ answers change.
+
+## Speed
+
+- `scripts/build-site.mjs` inlines each page's local stylesheets into `dist/`. Source pages keep their `<link>` tags.
+- Each page head defines `gmAfterFirstPaint`. GTM, GA4 and the home page's clips start only after the first screen has painted.
+- Fonts are self-hosted in `assets/fonts/`. Do not re-add Google Fonts links.
+- `/assets` media is cached for a year (`vercel.json`). Replace an image or clip under a new file name, never in place.
 
 ## Deployment
 

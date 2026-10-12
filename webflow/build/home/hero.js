@@ -1,0 +1,1 @@
+/* Hero remains readable and actionable before scripts load. */

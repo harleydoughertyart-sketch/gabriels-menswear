@@ -1,0 +1,365 @@
+/* Gabriel's Menswear: the shared stylesheet for the pages webflow builds (/tailoring, /weddings, /prom,
+   /book). The design source is the live home page: everything above "new for these pages" is a copy of
+   index.html's inline <style> (index.html keeps its own and does not load this file), with the same
+   names and values, so a section here looks exactly like its twin on the home page.
+
+   Each new page loads, in order: scrollcraft.css (Nate Herk's engine, never edited), this file,
+   assets/gm-nav.css (the header nav and phone menu, shared with index.html and privacy.html), and its
+   own assets/wf/<page>.css. Scripts: scrollcraft.js, assets/gm-site.js, assets/gm-nav.js, then
+   assets/wf/<page>.js; /book also loads assets/booking.js in its head.
+
+   For section builders (use these as they are; never restyle them globally):
+   * Tokens: the --sc-* set below on top of scrollcraft.css's type ramp, spacing, radii and easing.
+   * Type: .sc-display (600) with --md / --lg / --xl, .sc-lede, .sc-body; one <em> per h1 or h2 turns
+     italic teal. .gm-eyebrow for the small uppercase teal label.
+   * .gm-chalk-u (the chalk underline: a line with two end ticks) and .gm-chalk-u--light on navy.
+   * Buttons: .gm-cta (teal pill), .gm-cta--ghost (outlined), .gm-cta--big (the close's size).
+   * The home page's proof pieces: .gm-rating (with __meta, __stars), .gm-review (blockquote, p,
+     footer, __stars), .gm-hours (a <dl> of rows), and the close's corner brackets: .gm-close__cta
+     around a button, with four <i class="gm-corner gm-corner--tl|tr|br|bl" aria-hidden="true">. The
+     brackets fade in with the act's --sc-p (they read it from the enclosing data-sc-act section).
+   * .gm-sr-only: visually hidden, still read by screen readers.
+   * The header is fixed. <main> already starts below it (padding-top: var(--gm-bar-h), 72px), so a
+     first section uses only its own top padding and never adds the header's height again. Every
+     element with an id inside <main>, and every section root ([data-wf-key]), lands var(--gm-bar-h) +
+     12px below the top of the window on a jump or scrollIntoView (scroll-margin-top), so anchors and
+     deep links clear the header. --gm-bar-h is the shared header-height variable the specs
+     mention: main already spends it, so where a spec says "clear the header plus X", a section uses X.
+   * A section on a dark ground adds data-gm-dark to its root: assets/gm-site.js turns the header dark
+     (gm-bar--ondark) while the section is under it. Keep its data-sc-drift light, as on the home page.
+   * Light only: the site has no dark mode. */
+
+/* ---------------------------------------------------- brand tokens ----- */
+:root {
+  --sc-canvas: #f7f5f1;
+  --sc-surface: #ffffff;
+  --sc-ink: #152238;
+  --sc-ink-soft: #51617a;
+  --sc-accent: #33627c;
+  --sc-accent-ink: #ffffff;
+  --sc-font-display: "Playfair Display", Georgia, serif;
+  --sc-font-text: "Archivo", system-ui, sans-serif;
+  --sc-font-mono: "Archivo", system-ui, sans-serif;
+  --sc-shadow-color: 213 28% 22%;
+  --sc-e1: 0 1px 2px hsl(var(--sc-shadow-color) / 0.10),
+           0 2px 6px -1px hsl(var(--sc-shadow-color) / 0.08);
+  --sc-e2: 0 2px 4px hsl(var(--sc-shadow-color) / 0.08),
+           0 8px 18px -4px hsl(var(--sc-shadow-color) / 0.12);
+  --sc-e3: 0 4px 8px hsl(var(--sc-shadow-color) / 0.08),
+           0 18px 40px -8px hsl(var(--sc-shadow-color) / 0.16),
+           0 48px 90px -24px hsl(var(--sc-shadow-color) / 0.12);
+  --sc-edge: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+.sc-grain { opacity: 0.028; }
+.sc-display { font-weight: 600; }
+html { -webkit-tap-highlight-color: transparent; }
+a, button, summary { touch-action: manipulation; }
+
+/* The black-and-blue voice: every headline carries one italic accent phrase in the brand teal. */
+h1 em, h2 em {
+  font-style: italic;
+  color: var(--sc-accent);
+}
+.gm-chalk-u {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M3 4 H 117' stroke='%2333627C' stroke-width='1.7' fill='none' opacity='0.75'/%3E%3Cpath d='M3 1.2 V 6.8 M117 1.2 V 6.8' stroke='%2333627C' stroke-width='1.4' fill='none' opacity='0.75'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0 96%;
+  background-size: 100% 0.16em;
+  padding-bottom: 0.12em;
+}
+.gm-chalk-u--light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M3 4 H 117' stroke='%238fc0d8' stroke-width='1.7' fill='none' opacity='0.8'/%3E%3Cpath d='M3 1.2 V 6.8 M117 1.2 V 6.8' stroke='%238fc0d8' stroke-width='1.4' fill='none' opacity='0.8'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------------------------- chrome ----- */
+.gm-bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--sc-z-chrome);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sc-4);
+  padding: var(--sc-3) max(var(--sc-gutter), env(safe-area-inset-left));
+  background-color: color-mix(in oklab, var(--sc-canvas) 88%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--sc-hairline);
+  transition: background-color 300ms var(--sc-ease-out),
+              border-color 300ms var(--sc-ease-out);
+}
+/* While a dark section is under the bar (data-gm-dark, watched by gm-site.js), the bar darkens itself. */
+.gm-bar--ondark {
+  background-color: rgba(13, 20, 33, 0.74);
+  border-bottom-color: rgba(242, 245, 247, 0.16);
+}
+@media (prefers-reduced-motion: reduce) {
+  .gm-bar { transition: none; }
+}
+.gm-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--sc-ink);
+  transition: color 240ms var(--sc-ease-out);
+}
+.gm-brand__row { transition: color 240ms var(--sc-ease-out); }
+.gm-bar--ondark .gm-brand { color: #f2f5f7; }
+.gm-bar--ondark .gm-brand__row { color: #7db2cc; }
+.gm-brand__name {
+  font-family: var(--sc-font-display);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.gm-brand__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--sc-accent);
+}
+.gm-brand__row::before,
+.gm-brand__row::after {
+  content: "";
+  height: 1px;
+  width: 1.6em;
+  background: currentColor;
+  opacity: 0.55;
+}
+.gm-brand__sub {
+  font-family: var(--sc-font-text);
+  font-weight: 600;
+  font-size: 0.58rem;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.gm-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  min-height: 44px;
+  padding: 0.72em 1.35em;
+  border-radius: var(--sc-r-pill);
+  background: var(--sc-accent);
+  color: var(--sc-accent-ink);
+  font-weight: 600;
+  font-size: var(--sc-t-sm);
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: var(--sc-e1);
+  transition: transform 140ms var(--sc-ease-out), box-shadow 140ms var(--sc-ease-out),
+    background-color 140ms var(--sc-ease-out);
+}
+.gm-cta:hover { background: #2a5269; box-shadow: var(--sc-e2); }
+.gm-cta:active { transform: scale(0.96); }
+.gm-cta--ghost {
+  background: transparent;
+  color: var(--sc-ink);
+  border: 1px solid var(--sc-hairline-strong);
+  box-shadow: none;
+}
+.gm-cta--ghost:hover { background: color-mix(in oklab, var(--sc-ink) 6%, transparent); box-shadow: none; }
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--sc-accent);
+  color: var(--sc-accent-ink);
+  padding: 0.6em 1em;
+  border-radius: 0 0 var(--sc-r-sm) 0;
+}
+.skip-link:focus-visible { left: 0; }
+.gm-brand { transition: opacity 140ms var(--sc-ease-out); }
+.gm-brand:hover { opacity: 0.8; }
+
+.gm-eyebrow {
+  font-size: var(--sc-t-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--sc-track-wide);
+  color: var(--sc-accent);
+}
+
+/* ------------------------------------------- the home page's proof ----- */
+.gm-rating {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sc-3);
+  white-space: nowrap;
+}
+.gm-rating strong {
+  font-family: var(--sc-font-display);
+  font-size: var(--sc-t-3xl);
+  font-weight: 600;
+  color: var(--sc-ink);
+  line-height: 1;
+}
+.gm-rating__meta { display: flex; flex-direction: column; gap: 2px; }
+.gm-rating__stars {
+  position: relative;
+  display: inline-block;
+  color: color-mix(in oklab, var(--sc-accent) 28%, transparent);
+  letter-spacing: 0.14em;
+  font-size: var(--sc-t-base);
+  line-height: 1;
+}
+.gm-rating__stars > span {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  width: 94%;
+  color: var(--sc-accent);
+  white-space: nowrap;
+}
+.gm-rating__meta a {
+  color: var(--sc-ink-soft);
+  font-size: var(--sc-t-sm);
+  display: inline-block;
+  padding-block: 0.3em;
+}
+.gm-rating__meta a:hover { color: var(--sc-ink); }
+.gm-review {
+  flex: 0 0 auto;
+  width: clamp(17rem, 24vw, 21rem);
+  background: var(--sc-surface);
+  border-radius: var(--sc-r-lg);
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+  box-shadow: var(--sc-e2), var(--sc-edge);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-3);
+}
+.gm-review blockquote {
+  margin: 0;
+  font-family: var(--sc-font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--sc-t-lg);
+  line-height: 1.3;
+  color: var(--sc-ink);
+  text-wrap: pretty;
+}
+.gm-review > p { margin: 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+.gm-review footer {
+  margin-top: auto;
+  padding-top: var(--sc-3);
+  border-top: 1px solid var(--sc-hairline);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sc-3);
+  font-size: var(--sc-t-xs);
+  color: var(--sc-ink-soft);
+}
+.gm-review footer strong { color: var(--sc-ink); font-weight: 600; }
+.gm-review__stars { color: var(--sc-accent); letter-spacing: 0.12em; white-space: nowrap; }
+.gm-hours { display: grid; gap: var(--sc-1); margin: 0; }
+.gm-hours div { display: flex; justify-content: space-between; gap: var(--sc-4); }
+.gm-hours dt { color: var(--sc-ink-soft); }
+.gm-hours dd { margin: 0; color: var(--sc-ink); font-variant-numeric: tabular-nums; }
+
+/* --------------------------------------------------------- the close --- */
+.gm-cta--big { font-size: var(--sc-t-lg); padding: 0.85em 1.6em; }
+.gm-cta--big:hover { transform: translateY(-1px); }
+.gm-cta--big:active { transform: scale(0.96); }
+/* Draftsman corner brackets around the call to action. CSS borders, so they always frame the button. */
+.gm-close__cta { position: relative; display: inline-block; }
+.gm-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 0 solid var(--sc-accent);
+  pointer-events: none;
+  opacity: calc(clamp(0, calc((var(--sc-p, 0) - var(--c0, 0.1)) * 4), 1) * 0.75);
+}
+.gm-corner--tl { top: -14px; left: -22px; border-top-width: 1.5px; border-left-width: 1.5px; --c0: 0.08; }
+.gm-corner--tr { top: -14px; right: -22px; border-top-width: 1.5px; border-right-width: 1.5px; --c0: 0.16; }
+.gm-corner--br { bottom: -14px; right: -22px; border-bottom-width: 1.5px; border-right-width: 1.5px; --c0: 0.24; }
+.gm-corner--bl { bottom: -14px; left: -22px; border-bottom-width: 1.5px; border-left-width: 1.5px; --c0: 0.32; }
+@media (prefers-reduced-motion: reduce) {
+  .gm-corner { opacity: 0.75; }
+}
+@media (max-width: 700px) {
+  .gm-corner--tl, .gm-corner--tr { top: -18px; }
+}
+
+/* ---------------------------------------------------------- footer ----- */
+.gm-footer {
+  background: #152238;
+  color: #b7c4d4;
+}
+.gm-footer a { color: #f2f5f7; text-decoration: none; }
+.gm-footer a:hover { text-decoration: underline; }
+.gm-footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(3rem, 6vw, 5rem) var(--sc-gutter) var(--sc-7);
+  max-width: var(--sc-maxw);
+  margin-inline: auto;
+}
+.gm-footer__brand { display: flex; flex-direction: column; gap: var(--sc-3); }
+.gm-footer__brand .gm-brand { align-items: center; align-self: flex-start; color: #f2f5f7; }
+.gm-footer__brand .gm-brand__row { color: #7db2cc; }
+.gm-footer__brand p { margin: 0; font-size: var(--sc-t-sm); max-width: 30ch; }
+.gm-footer h3 {
+  font-family: var(--sc-font-text);
+  font-size: var(--sc-t-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--sc-track-wide);
+  color: #7db2cc;
+  margin: 0 0 var(--sc-3);
+}
+.gm-footer__col { display: flex; flex-direction: column; gap: var(--sc-1); font-size: var(--sc-t-sm); }
+.gm-footer__col a { display: inline-block; padding-block: 0.4em; }
+.gm-footer__col dl { display: grid; gap: var(--sc-1); margin: 0; }
+.gm-footer__col dl div { display: flex; justify-content: space-between; gap: var(--sc-3); }
+.gm-footer__col dd { margin: 0; color: #f2f5f7; font-variant-numeric: tabular-nums; }
+.gm-footer__bottom {
+  border-top: 1px solid rgba(242, 245, 247, 0.14);
+  padding: var(--sc-4) var(--sc-gutter);
+  max-width: var(--sc-maxw);
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--sc-3);
+  font-size: var(--sc-t-xs);
+}
+@media (max-width: 860px) {
+  .gm-footer__grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .gm-footer__grid { grid-template-columns: 1fr; }
+}
+
+/* ------------------------------------------- new for these pages ----- */
+/* The fixed header's room. The bar is about 69px on a phone and 72px on a desktop; main starts below
+   it, and a jump to any id inside main (or a scrollIntoView on any section root) stops 12px under it. */
+:root { --gm-bar-h: 4.5rem; }
+main { display: block; padding-top: var(--gm-bar-h); }
+main [id],
+[data-wf-key] { scroll-margin-top: calc(var(--gm-bar-h) + 12px); }
+
+/* Visually hidden, still read by screen readers. */
+.gm-sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

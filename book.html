@@ -1,0 +1,264 @@
+<!doctype html>
+<!-- /book: wf assemble builds book.html from this shell (webflow/build/book/_shell.html, the integrator's) and the section files beside it. Edit those, never book.html. The header and footer are the same on every page: a change to them goes into all four shells, index.html and privacy.html. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Book a Suit Fitting in Holden, MA | Gabriel's Menswear</title>
+    <meta name="description" content="Plan an individual or group suit fitting with Gabriel in Holden, MA. Choose your preferred visit details or call (508) 829-5186." />
+    <link rel="canonical" href="https://gabrielsmenswear.com/book" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Book a Suit Fitting in Holden, MA | Gabriel's Menswear" />
+    <meta property="og:description" content="Plan an individual or group suit fitting with Gabriel in Holden, MA. Choose your preferred visit details or call (508) 829-5186." />
+    <meta property="og:site_name" content="Gabriel's Menswear" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gabrielsmenswear.com/book" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://gabrielsmenswear.com/assets/og-book.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Gabriel Sr., Senior Master Tailor, next to the words Gabriel's Menswear, suit fittings in Holden, MA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Book a Suit Fitting in Holden, MA | Gabriel's Menswear" />
+    <meta name="twitter:description" content="Plan an individual or group suit fitting with Gabriel in Holden, MA. Choose your preferred visit details or call (508) 829-5186." />
+    <meta name="twitter:image" content="https://gabrielsmenswear.com/assets/og-book.jpg" />
+    <meta name="twitter:image:alt" content="Gabriel Sr., Senior Master Tailor, next to the words Gabriel's Menswear, suit fittings in Holden, MA" />
+    <meta name="theme-color" content="#f7f5f1" />
+    <meta name="color-scheme" content="light" />
+    <script>
+      // Work that can wait for the first screen. Runs once the page has loaded
+      // and its largest image or text block has painted, so analytics and
+      // background video never share a phone's bandwidth with the hero.
+      window.gmAfterFirstPaint = (function () {
+        var queue = [], painted = false, loaded = document.readyState === "complete";
+        function flush() {
+          if (!painted || !loaded) return;
+          queue.splice(0).forEach(function (fn) { setTimeout(fn, 0); });
+        }
+        var types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [];
+        if (types.indexOf("largest-contentful-paint") > -1) {
+          new PerformanceObserver(function (list, observer) {
+            observer.disconnect(); painted = true; flush();
+          }).observe({ type: "largest-contentful-paint", buffered: true });
+        } else painted = true;
+        addEventListener("load", function () {
+          loaded = true; flush();
+          // A tab opened in the background reports no paint until it is shown.
+          setTimeout(function () { painted = true; flush(); }, 3000);
+        }, { once: true });
+        return function (fn) { queue.push(fn); flush(); };
+      })();
+
+      // Calls made before the tags arrive queue in dataLayer and are sent then.
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-GBHF2MRV3Z");
+      dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      gmAfterFirstPaint(function () {
+        ["https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", "https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q"].forEach(function (src) {
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = src;
+          document.head.appendChild(s);
+        });
+      });
+    </script>
+    <!-- The scheduler setting: assets/booking.js marks <html data-booking> before the body is parsed. -->
+    <script src="/assets/booking.js"></script><script src="/assets/fitting-request-config.js"></script>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <style>
+      /* Playfair Display and Archivo (SIL Open Font License), served from this
+         site rather than Google Fonts: two fewer connections before first paint. */
+      @font-face{font-family:"Playfair Display";font-style:normal;font-weight:500 700;font-display:swap;src:url(/assets/fonts/playfair-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Playfair Display";font-style:normal;font-weight:500 700;font-display:swap;src:url(/assets/fonts/playfair-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+      @font-face{font-family:"Playfair Display";font-style:italic;font-weight:500 600;font-display:swap;src:url(/assets/fonts/playfair-italic-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Playfair Display";font-style:italic;font-weight:500 600;font-display:swap;src:url(/assets/fonts/playfair-italic-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+      @font-face{font-family:"Archivo";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/archivo-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Archivo";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/archivo-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+    </style>
+    <link rel="stylesheet" href="/scrollcraft.css" />
+    <link rel="stylesheet" href="/assets/gm-site.css" />
+    <link rel="stylesheet" href="/assets/gm-nav.css" />
+    <noscript>
+      <style>
+        /* without JS the engine never reveals flow content, so show it */
+        [data-sc-in], [data-sc-stagger] > * { opacity: 1 !important; transform: none !important; }
+        [data-sc-cue] { opacity: 1 !important; }
+      </style>
+    </noscript>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://gabrielsmenswear.com/book#webpage","url":"https://gabrielsmenswear.com/book","name":"Book a Suit Fitting in Holden, MA | Gabriel's Menswear","description":"Plan an individual or group suit fitting with Gabriel in Holden, MA. Choose your preferred visit details or call (508) 829-5186.","isPartOf":{"@id":"https://gabrielsmenswear.com/#website"},"about":{"@id":"https://gabrielsmenswear.com/#business"},"breadcrumb":{"@id":"https://gabrielsmenswear.com/book#breadcrumb"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://gabrielsmenswear.com/book#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gabrielsmenswear.com/"},{"@type":"ListItem","position":2,"name":"Book a fitting","item":"https://gabrielsmenswear.com/book"}]},{"@type":"ClothingStore","@id":"https://gabrielsmenswear.com/#business","name":"Gabriel's Menswear","alternateName":"Main Street Menswear","url":"https://gabrielsmenswear.com/","image":"https://gabrielsmenswear.com/assets/og-hero.jpg","logo":"https://gabrielsmenswear.com/assets/logo-header.webp","description":"Gabriel's Menswear in Holden, Massachusetts offers suits, wedding and prom menswear, fittings, accessories, and suit alterations.","telephone":"+15088295186","address":{"@type":"PostalAddress","streetAddress":"1363 Main St","addressLocality":"Holden","addressRegion":"MA","postalCode":"01520","addressCountry":"US"},"hasMap":"https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520","areaServed":[{"@type":"City","name":"Holden"},{"@type":"AdministrativeArea","name":"Central Massachusetts"}],"employee":{"@type":"Person","name":"Gabriel Sr.","jobTitle":"Owner and Senior Master Tailor","knowsAbout":["Suit fittings","Suit alterations","Formalwear","Menswear"]},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"11:00","closes":"18:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"11:00","closes":"18:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"12:00","closes":"16:00"}]}]}</script>
+  <link rel="stylesheet" href="/assets/gm-reviews.css"><link rel="stylesheet" href="/assets/gm-service-proof.css"><script src="/assets/gm-service-proof.js" defer></script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is my fitting confirmed when I send the request?", "acceptedAnswer": {"@type": "Answer", "text": "No. I’ll reply to arrange your fitting and confirm the time."}}, {"@type": "Question", "name": "Can I bring a suit I own?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Bring it in. I’ll check the fit and tell you whether it’s worth altering."}}, {"@type": "Question", "name": "Need it for a specific date?", "acceptedAnswer": {"@type": "Answer", "text": "Call me with your date. I’ll tell you whether there’s time for the suit and alterations."}}]}</script><link rel="stylesheet" href="/assets/gm-section-actions.css"><link rel="stylesheet" href="/assets/gm-media-tone.css"><link rel="stylesheet" href="/assets/wf/book.css"><script src="/assets/gm-photo-match-r45.js" defer></script></head>
+  <body class="gm-book-r16">
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MJCMX83Q"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="sc-grain" aria-hidden="true"></div>
+
+    <header class="gm-bar">
+      <a class="gm-brand" href="/" aria-label="Gabriel's Menswear home">
+        <span class="gm-brand__name">Gabriel's</span>
+        <span class="gm-brand__row" aria-hidden="true">
+          <span class="gm-brand__sub">Menswear</span>
+        </span>
+      </a>
+      <nav class="gm-nav" aria-label="Main">
+        <button class="gm-nav__toggle" type="button" aria-expanded="false" aria-controls="gm-nav-list" aria-label="Menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="gm-nav__bars" d="M3.5 7h17M3.5 12h17M3.5 17h17" /><path class="gm-nav__shut" d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+        <ul class="gm-nav__list" id="gm-nav-list">
+<li><a class="gm-nav__link" href="/">Home</a></li>
+          <li><a class="gm-nav__link" href="/tailoring">Tailoring</a></li>
+          <li><a class="gm-nav__link" href="/weddings">Weddings</a></li>
+          <li><a class="gm-nav__link" href="/prom">Prom</a></li>
+          <li class="gm-nav__call"><a class="gm-nav__link" href="tel:+15088295186">Call (508) 829-5186</a></li>
+          <li><a class="gm-nav__book" href="/book#schedule" data-event="book_click" aria-current="page">Request a fitting</a></li>
+        </ul>
+      </nav>
+
+    </header>
+
+    <main id="main" tabindex="-1">
+<!-- wf:generated by wf assemble from webflow/build/book/ in spec order; edit those fragments, never this file -->
+<!-- wf:section schedule -->
+<section data-wf-key="schedule" id="schedule" class="wf-book-schedule" aria-labelledby="wf-book-schedule-title"><div class="wf-book-schedule__grid"><div class="wf-book-schedule__statement"><figure class="wf-book-portrait"><img src="/assets/gabriel-portrait-cool-960.webp" width="960" height="1200" alt="Gabriel Sr., Owner and Senior Master Tailor" fetchpriority="high"></figure><div class="wf-book-heading"><p>Gabriel Sr. · Master Tailor</p><h1 id="wf-book-schedule-title">Come in.<br><em>I’ll check <br>the fit.</em></h1><div class="wf-book-hero-actions"><a href="#booking-preview">Plan your fitting</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=1363%20Main%20St%2C%20Holden%2C%20MA%2001520">Get directions</a></div></div></div><div class="wf-book-schedule__actions"><div class="wf-book-schedule__status" role="status"></div><template class="wf-book-schedule__booked-tpl"><p>Check your booking confirmation for the date and time.</p></template><ul class="wf-book-schedule__doors"><li class="wf-book-schedule__item wf-book-schedule__item--online" hidden>
+          <a class="wf-book-schedule__door wf-book-schedule__door--online" href="#schedule" data-booking-link data-event="book_click">
+            <span class="wf-book-schedule__text">
+              <span class="wf-book-schedule__label">Pick a time online</span>
+              <span class="wf-book-schedule__detail">Choose with the booking provider</span>
+            </span>
+            
+          </a>
+          <div class="wf-book-schedule__panel" id="wf-book-schedule-calendar" hidden>
+            <h2 class="gm-sr-only" id="wf-book-schedule-calendar-title">Online booking calendar</h2>
+            <div class="wf-book-schedule__frame">
+              <p class="wf-book-schedule__loading">Loading the calendar</p>
+            </div>
+            <div class="wf-book-schedule__panel-foot">
+              <a class="wf-book-schedule__link wf-book-schedule__full" href="#schedule" data-booking-link data-event="book_click">Open the full booking page</a>
+              <button class="wf-book-schedule__close" type="button"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" /></svg>Close the calendar</button>
+            </div>
+          </div>
+        </li></ul><form class="wf-book-preview" id="booking-preview" toolname="request_suit_fitting" tooldescription="Sends Gabriel's Menswear in Holden, MA a request for an in-person suit fitting. It is a request, not a booking: the shop replies by email to confirm a time. Times must fall within shop hours." method="POST" target="_blank" rel="noopener" aria-describedby="book-request-status" aria-labelledby="book-preview-title"><header><p class="wf-book-kicker">Fitting request</p><h2 id="book-preview-title">Your <em>fitting.</em></h2><p class="wf-book-preview__notice">Tell me what you need.<br>I’ll reply to arrange a fitting.</p></header><fieldset class="wf-book-fields" disabled><legend><span>01</span> Who’s coming?</legend><div class="wf-book-choice"><label><input type="radio" name="fitting-for" value="solo" checked toolparamdescription="solo for one person, group for a wedding party or other group"><span>Just me</span></label><label><input type="radio" name="fitting-for" value="group" toolparamdescription="solo for one person, group for a wedding party or other group"><span>A group</span></label></div><div class="wf-book-fieldrow"><label>Occasion<select name="occasion" required><option value="">Choose…</option><option>Wedding</option><option>Prom</option><option>Work</option><option>Something else</option></select></label></div><div class="wf-book-fieldrow wf-book-when"><label>Preferred date<input type="date" name="preferred_date" required toolparamdescription="Preferred visit date, YYYY-MM-DD. The shop is open every day." aria-describedby="book-date-note"></label><label>Preferred time<select name="preferred_time" required disabled><option value="">Choose a date first</option></select></label></div><label class="wf-book-group-count" hidden>People in your group<input type="number" min="2" max="99" inputmode="numeric" name="group-size" placeholder="e.g. 4"></label><p class="wf-book-field-note" id="book-date-note" data-time-summary>Holden time. I’ll confirm your time by email.</p></fieldset><fieldset class="wf-book-fields" disabled><legend><span>02</span> Your details</legend><div class="wf-book-fieldrow"><label>Name<input type="text" name="name" autocomplete="name" maxlength="100" required></label><label>Email<input type="email" name="email" autocomplete="email" maxlength="254" required></label></div></fieldset><div class="wf-book-preview__finish"><input type="hidden" name="_subject" value="Gabriel’s Menswear — fitting request"><input type="hidden" name="_template" value="table"><input class="wf-book-honey" type="text" name="_honey" toolparamdescription="Spam trap. Always leave empty." tabindex="-1" autocomplete="off" aria-hidden="true"><p id="book-request-status" class="wf-book-field-note" role="status">Email setup is being completed. Please call for now.</p><button type="submit" disabled>Send fitting request</button><p class="wf-book-field-note">A request, not a confirmed appointment. Opens FormSubmit for spam protection and the result. <a href="/privacy">Privacy</a></p><a class="wf-book-call" href="tel:+15088295186" data-event="call_click">Call me <span>(508) 829-5186</span></a></div></form></div></div></section>
+<!-- /wf:section schedule -->
+<!-- wf:section reviews -->
+<section class="gm-service-proof" id="reviews" aria-label="Customer reviews" data-wf-key="reviews"><div class="gm-service-proof__head"><h2>People leave feeling <em>taken care of.</em></h2><p>From the shop’s Google reviews.<br><a href="https://www.google.com/maps/place/?q=place_id:ChIJAVZgsEf_44kRuA7mnlKGpow" target="_blank" rel="noopener noreferrer">Read Google reviews</a></p></div><div class="gm-reviews-strip" role="region" aria-label="Customer reviews" tabindex="0"><div class="gm-reviews-track"><div class="gm-reviews-set">
+          <article class="gm-review">
+            <blockquote>&ldquo;A great selection of beautiful suits&rdquo;</blockquote>
+            <p>&ldquo;Amazing personal service and a great selection of beautiful suits! It's the kind of shop you keep going back to to build your wardrobe, from business casual to formal.&rdquo;</p>
+            <footer><strong>Jackie Faron</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Alterations are perfect&rdquo;</blockquote>
+            <p>&ldquo;Turn around for alterations was 3 days, and alterations are perfect. I will definitely be visiting again as I update my business casual and formal wear.&rdquo;</p>
+            <footer><strong>Dave Sutherland</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Great selection at very good prices&rdquo;</blockquote>
+            <p>&ldquo;The store has great selection at very good prices&hellip; was able to navigate a quick turn getting the suit altered. Shop local.&rdquo;</p>
+            <footer><strong>Christian Lewis</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Fast turnaround for alterations&rdquo;</blockquote>
+            <p>&ldquo;Best personal service one can ask for. Huge inventory and fast turnaround for alterations. Highly recommend.&rdquo;</p>
+            <footer><strong>Jennifer LaRange</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;A few quick measurements&rdquo;</blockquote>
+            <p>&ldquo;With a few quick measurements and several excellent recommendations, I left with several different shirts, 2 ties, a new belt&hellip; would highly recommend this place.&rdquo;</p>
+            <footer><strong>Ben Smith</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Walked away happy&rdquo;</blockquote>
+            <p>&ldquo;The perfect combination of helping, guiding, and giving us space&hellip; My husband walked away happy with his new outfit.&rdquo;</p>
+            <footer><strong>Natasha Trapp</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          <article class="gm-review">
+            <blockquote>&ldquo;Very high quality&rdquo;</blockquote>
+            <p>&ldquo;The pants are very high quality cotton and suits and everything is very stylish&hellip; Fantastic store and I highly recommend it.&rdquo;</p>
+            <footer><strong>Wayfarer</strong><span class="gm-review__stars" role="img" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></footer>
+          </article>
+          </div></div></div></section>
+<!-- /wf:section reviews -->
+<!-- wf:section visit -->
+<section class="sc-section gm-visit" data-wf-key="visit" id="visit" aria-label="Visit Gabriel's Menswear">
+        <div class="sc-wrap">
+          <div class="sc-stack">
+            <h2 class="sc-display sc-display--lg">Find us on <em>Main Street</em>.</h2>
+            <p class="sc-body">Call or just stop by. Ten minutes in the shop answers most questions.</p>
+          </div>
+          <div class="gm-visit__grid">
+            <aside class="gm-contact" aria-label="Store contact and hours">
+              <div class="gm-contact__row">
+                <span>Phone</span>
+                <a class="gm-contact__phone" href="tel:+15088295186">(508) 829-5186</a>
+              </div>
+              <div class="gm-contact__row">
+                <span>Address</span>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >1363 Main St, Holden, MA 01520</a>
+              </div>
+              <div class="gm-contact__row">
+                <span>Hours</span>
+                <dl class="gm-hours">
+                  <div><dt>Mon&ndash;Fri</dt><dd>11:00 AM&ndash;6:30 PM</dd></div>
+                  <div><dt>Saturday</dt><dd>11:00 AM&ndash;6:00 PM</dd></div>
+                  <div><dt>Sunday</dt><dd>12:00 PM&ndash;4:00 PM</dd></div>
+                </dl>
+              </div>
+              <a
+                class="gm-cta"
+                href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Get directions</a><span class="gm-section-actions gm-section-actions--inline"><a class="gm-section-actions__primary" href="#booking-preview">Request a fitting</a></span>
+            </aside>
+            <div class="gm-map">
+              <iframe
+                title="Map to Gabriel's Menswear at 1363 Main St, Holden, MA"
+                src="https://www.google.com/maps?q=1363%20Main%20St%2C%20Holden%2C%20MA%2001520&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+              <a
+                class="gm-map__link"
+                href="https://www.google.com/maps/search/?api=1&query=1363%20Main%20St%2C%20Holden%2C%20MA%2001520"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Get directions</a>
+            </div>
+          </div>
+        </div>
+      </section>
+<section class="gm-service-faq" aria-label="Frequently asked questions"><div class="gm-service-faq__inner"><h2>Quick answers <em>before you stop in.</em></h2><div><details><summary>Is my fitting confirmed when I send the request?</summary><p>No. I’ll reply to arrange your fitting and confirm the time.</p></details><details><summary>Can I bring a suit I own?</summary><p>Yes. Bring it in. I’ll check the fit and tell you whether it’s worth altering.</p></details><details><summary>Need it for a specific date?</summary><p>Call me with your date. I’ll tell you whether there’s time for the suit and alterations.</p></details></div></div></section>
+<!-- /wf:section visit -->
+    </main>
+
+    <footer class="gm-site-footer">
+  <div class="gm-site-footer__grid">
+    <div class="gm-site-footer__intro"><a class="gm-site-footer__brand" href="/">Gabriel’s <span>Menswear</span></a><p>Personal service.<br>A <em>better fit.</em></p></div>
+    <nav aria-label="Footer"><h2>Explore</h2><a href="/">Home</a><a href="/tailoring">Tailoring</a><a href="/weddings">Weddings</a><a href="/prom">Prom</a><a href="/book#schedule">Request a fitting</a></nav>
+    <div><h2>Find me</h2><address><a href="https://www.google.com/maps/dir/?api=1&amp;destination=1363%20Main%20St%2C%20Holden%2C%20MA%2001520" target="_blank" rel="noopener noreferrer">1363 Main Street<br>Holden, MA 01520</a><a href="tel:+15088295186">(508) 829-5186</a></address></div>
+    <div class="gm-site-footer__hours"><h2>Shop hours</h2><dl><div><dt>Mon–Fri</dt><dd>11 AM–6:30 PM</dd></div><div><dt>Saturday</dt><dd>11 AM–6 PM</dd></div><div><dt>Sunday</dt><dd>12 PM–4 PM</dd></div></dl><p>Call to confirm before you visit.</p></div>
+  </div>
+  <div class="gm-site-footer__legal"><span>© 2026 Gabriel’s Menswear</span><span>Holden, Massachusetts</span><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a><a href="/terms">Terms</a></div>
+</footer>
+
+
+    <script src="/scrollcraft.js" defer></script>
+    <script src="/assets/gm-site.js" defer></script>
+    <script src="/assets/gm-nav.js" defer></script>
+  <script src="/assets/gm-reviews.js" defer></script><script src="/assets/wf/book-controls.js" defer></script><script src="/assets/wf/book.js" defer></script></body>
+</html>

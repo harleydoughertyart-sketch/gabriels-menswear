@@ -1,0 +1,172 @@
+/* prom/cost: the page's one navy chapter (the home page's .gm-turn ground), the arranger's first worry
+   answered straight. Three things set the price, shown as a sum with no number in it: the garment +
+   the fabric + the work, the plus signs drawn here so they are never read or counted. Under a hairline,
+   the own-suit line and the link to /tailoring.
+   Every width: one centred column inside 54rem, the three tiles always in one row (about 96px each at
+   360), "The" set small over each noun so every tile holds the same two lines. From 600px the tiles
+   grow to 11rem and the nouns to the large text size.
+   The motion: the tiles arrive one after another (data-sc-stagger="90"), each plus with the tile it
+   adds, then the own-suit block one beat later. Transform and opacity only, once. Reduced motion: all
+   of it at once. The section paints its own ground (the engine's drift rewrites --sc-canvas) and
+   re-sets the house tokens on itself only, so the shared focus ring and selection turn light on navy.
+   Light only: no dark-mode rules. */
+.wf-prom-cost {
+  --sc-ink: #f2f5f7;
+  --sc-ink-soft: #b7c4d4;
+  --sc-hairline: rgba(242, 245, 247, 0.14);
+  --sc-accent: #8fc0d8;
+  --sc-accent-ink: #152238;
+  /* the gap between tiles, where each plus sits; the row and the hairline share one width */
+  --wf-prom-cost-gap: clamp(1.25rem, 4vw, 2.5rem);
+  --wf-prom-cost-row: calc(3 * 11rem + 2 * var(--wf-prom-cost-gap));
+  background: #152238;
+  color: var(--sc-ink);
+}
+
+.wf-prom-cost__inner {
+  max-width: calc(54rem + 2 * var(--sc-gutter));
+  text-align: center;
+}
+
+/* Two lines by sense at every width: "Know the cost" / "before you commit." */
+.wf-prom-cost__first { display: block; }
+.wf-prom-cost__title em { color: #7db2cc; }
+
+/* The lead names the sum (it is the list's accessible name), so it sits nearer the tiles than the h2. */
+.wf-prom-cost__lead {
+  margin: clamp(1.75rem, 3.5vw, 2.5rem) 0 0;
+  font-size: var(--sc-t-lg);
+  line-height: 1.4;
+  color: var(--sc-ink-soft);
+  text-wrap: balance;
+}
+
+/* ------------------------------------------------------------------- the sum -- */
+.wf-prom-cost__tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--wf-prom-cost-gap);
+  max-width: var(--wf-prom-cost-row);
+  margin: var(--sc-3) auto 0;
+  padding: 0;
+  list-style: none;
+}
+/* Only the tiles move, one after another; the row itself stays put. */
+.wf-prom-cost__tiles[data-sc-in] {
+  opacity: 1;
+  transform: none;
+}
+.wf-prom-cost__tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 4.5rem;
+  padding: var(--sc-3) var(--sc-1);
+  border: 1px solid rgba(242, 245, 247, 0.24);
+  border-radius: var(--sc-r-md);
+  /* 18px from 360 up; below that it shrinks with the screen so "garment" always fits its tile */
+  font-size: min(1.125rem, 5vw);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--sc-ink);
+}
+.wf-prom-cost__the {
+  display: block;
+  margin-bottom: 0.2em;
+  font-size: var(--sc-t-sm);
+  font-weight: 500;
+  color: var(--sc-ink-soft);
+}
+/* The plus: two 2px strokes in the middle of the gap before the second and third tile. It is a
+   background on an empty ::before, so it is never read aloud or counted. */
+.wf-prom-cost__tile + .wf-prom-cost__tile::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(var(--wf-prom-cost-gap) / -2 - 1px);
+  width: 0.75rem;
+  height: 0.75rem;
+  translate: -50% -50%;
+  background:
+    linear-gradient(#7db2cc, #7db2cc) center / 100% 2px no-repeat,
+    linear-gradient(#7db2cc, #7db2cc) center / 2px 100% no-repeat;
+}
+
+/* ------------------------------------------------------------- the own suit -- */
+.wf-prom-cost__own {
+  max-width: var(--wf-prom-cost-row);
+  margin: var(--sc-7) auto 0;
+  padding-top: var(--sc-5);
+  border-top: 1px solid var(--sc-hairline);
+}
+.wf-prom-cost__line {
+  max-width: 34ch;
+  margin: 0 auto;
+  color: var(--sc-ink-soft);
+  text-wrap: balance;
+}
+.wf-prom-cost__ask {
+  font-weight: 600;
+  color: var(--sc-ink);
+}
+.wf-prom-cost__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--sc-2);
+  font-weight: 600;
+  color: var(--sc-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: rgba(143, 192, 216, 0.7);
+  transition: color 140ms var(--sc-ease-out);
+}
+.wf-prom-cost__link:focus-visible {
+  outline: 2px solid #8fc0d8;
+  outline-offset: 3px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .wf-prom-cost__link:hover { color: #8fc0d8; }
+}
+
+/* --------------------------------------------------------------- from 600px -- */
+@media (min-width: 600px) {
+  .wf-prom-cost__tile {
+    min-height: 5.5rem;
+    padding: var(--sc-4) var(--sc-3);
+    font-size: var(--sc-t-lg);
+  }
+  .wf-prom-cost__tiles { margin-top: var(--sc-4); }
+  .wf-prom-cost__tile + .wf-prom-cost__tile::before {
+    width: 1rem;
+    height: 1rem;
+  }
+  .wf-prom-cost__own { margin-top: var(--sc-8); }
+  /* one line under the hairline wherever it fits; balance splits it evenly where it does not */
+  .wf-prom-cost__line { max-width: none; }
+}
+
+/* Forced colours drop drawn backgrounds: the plus signs take the system text colour. */
+@media (forced-colors: active) {
+  .wf-prom-cost__tile + .wf-prom-cost__tile::before {
+    forced-color-adjust: none;
+    background:
+      linear-gradient(CanvasText, CanvasText) center / 100% 2px no-repeat,
+      linear-gradient(CanvasText, CanvasText) center / 2px 100% no-repeat;
+  }
+}
+
+/* ---------------------------------------------------------------- the reveal -- */
+/* The own-suit block comes in one beat after the third tile (3 x 90ms). */
+.wf-prom-cost__own[data-sc-in] { transition-delay: 270ms; }
+/* Reduced motion: every tile and the line in place at once, no fade. */
+@media (prefers-reduced-motion: reduce) {
+  .wf-prom-cost [data-sc-in],
+  .wf-prom-cost [data-sc-stagger] > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

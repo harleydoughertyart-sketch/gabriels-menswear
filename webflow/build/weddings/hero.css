@@ -1,0 +1,58 @@
+/* R13 page-local foundation. No shared asset is altered. */
+.gm-weddings-r13{background:#f7f5f1;color:#152238}
+.gm-weddings-r13 main{overflow:clip}
+.gm-weddings-r13 main *{box-sizing:border-box}
+.wf-weddings-steps__copy,.wf-weddings-gabriel__copy,.wf-weddings-reviews figure{transition:opacity 160ms cubic-bezier(.23,1,.32,1)}
+.wf-weddings-takeover.is-active .wf-weddings-hero{position:sticky;top:var(--wedding-header,72px)}
+.wf-weddings-takeover.is-active .wf-weddings-roles{z-index:2}
+.gm-weddings-r13 :is(a,button,summary):focus-visible{outline:2px solid #33627c;outline-offset:5px}
+.wf-wedding-pill{display:inline-flex;justify-content:center;align-items:center;gap:24px;min-height:48px;padding:12px 24px;border-radius:999px;border:1px solid transparent;background:#33627c;color:#fff;text-decoration:none;font:400 14px/1.4 Archivo,Arial,sans-serif;cursor:pointer;transition:background 180ms ease,transform 160ms cubic-bezier(.23,1,.32,1)}
+.wf-wedding-pill:active{transform:scale(.96)}
+.wf-weddings-hero{position:relative;isolation:isolate;min-height:800px;height:calc(100svh - var(--wedding-header,72px));background:#111e28;color:#f7f5f1}
+.wf-weddings-hero__media{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.wf-weddings-hero__media :is(picture,img,video){position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+.wf-weddings-hero__media:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 100% 100%,#101b2ae6,transparent 75%)}
+.wf-weddings-hero__copy{position:absolute;right:5.55%;bottom:102px;width:550px;max-width:calc(100% - 48px)}
+.wf-weddings-hero h1{font:400 clamp(58px,4.6vw,70px)/1.06 "Playfair Display",Georgia,serif;letter-spacing:-.035em;margin:0 0 24px;text-wrap:balance}
+.wf-weddings-hero h1 em{display:block;color:#b6d7e8}
+.wf-weddings-hero__copy p{font:400 20px/1.5 "Playfair Display",Georgia,serif;max-width:42ch;margin:0 0 28px;text-wrap:pretty}
+.wf-weddings-hero__mobile-copy{display:none}
+.wf-weddings-hero .wf-wedding-pill{background:#f7f5f1;color:#152238}
+.wf-weddings-hero__utilities{position:absolute;left:24px;right:24px;bottom:20px;display:flex;justify-content:space-between;align-items:center;gap:20px;font:400 11px/1.5 Archivo,Arial,sans-serif}
+.wf-weddings-hero__utilities button{min-height:44px;padding:10px 18px;border-radius:999px;border:1px solid #ffffff70;background:#101b2a70;color:#fff;font:inherit;cursor:pointer}
+.wf-weddings-hero__utilities button[hidden]{display:none}
+.wf-weddings-footer{display:flex;align-items:center;gap:28px;padding:28px max(24px,5.5vw);border-top:1px solid #15223820;font:400 12px/1.5 Archivo,Arial,sans-serif;color:#51617a;background:#f7f5f1}
+.wf-weddings-footer a{color:#152238;min-height:44px;display:flex;align-items:center;text-underline-offset:4px}.wf-weddings-footer a:first-child{font:400 20px "Playfair Display",Georgia,serif;text-decoration:none;margin-right:auto}
+@media(hover:hover) and (pointer:fine){.wf-wedding-pill:hover{background:#284f65}.wf-weddings-hero .wf-wedding-pill:hover{background:#e4edf1}}
+@media(max-width:700px){
+ .wf-weddings-hero{height:auto;min-height:0}
+ .wf-weddings-hero__media{position:relative;height:auto;aspect-ratio:4/5;z-index:0}
+ .wf-weddings-hero__media:after{inset:75% 0 0;background:linear-gradient(transparent,#111e28)}
+ .wf-weddings-hero__copy{position:relative;inset:auto;width:auto;max-width:none;padding:4px 24px 88px;margin-top:-6px}
+ .wf-weddings-hero h1{font-size:clamp(46px,12.8vw,54px);margin-bottom:20px}
+ .wf-weddings-hero h1 em{max-width:12ch;text-wrap:balance}
+ .wf-weddings-hero__copy p{font-size:19px;line-height:1.48;margin-bottom:24px}
+ .wf-weddings-hero__desktop-copy{display:none}.wf-weddings-hero__copy .wf-weddings-hero__mobile-copy{display:block}
+ .wf-weddings-hero__utilities{bottom:18px}
+ .wf-weddings-footer{display:grid;grid-template-columns:1fr auto;gap:0 20px}.wf-weddings-footer a:first-child{grid-column:1/-1}.wf-weddings-footer span:last-child{grid-column:2;grid-row:2}
+}
+@media(prefers-reduced-motion:reduce){.gm-weddings-r13 *{scroll-behavior:auto!important}.wf-wedding-pill,.wf-weddings-steps__copy,.wf-weddings-gabriel__copy,.wf-weddings-reviews figure{transition:none}.wf-wedding-pill:active{transform:none}}
+
+
+@media(max-width:700px){html.gm-has-actions .wf-weddings-hero__copy .wf-wedding-pill{display:none}}
+
+@media(max-width:700px){html.gm-has-actions .wf-weddings-hero__utilities{top:16px;bottom:auto;text-shadow:0 1px 6px #101b2a}html.gm-has-actions .wf-weddings-hero__utilities button{background:#101b2a80}}
+
+/* Primary actions at the page headline. */
+.gm-hero-pair{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:24px}.gm-hero-pair a{display:inline-flex!important;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 22px;border-radius:999px;font:500 14px/1.4 Archivo,Arial,sans-serif;text-decoration:none;transition:background-color .2s,transform .2s}.gm-hero-pair .gm-hero-pair__primary{color:#152238!important;background:#f7f5f1;border:1px solid #f7f5f1}.gm-hero-pair .gm-hero-pair__secondary{color:#f7f5f1!important;background:#101b2a30;border:1px solid #f7f5f180}.gm-hero-pair a:hover{transform:translateY(-2px)}.gm-hero-pair a:focus-visible{outline:2px solid #b6d7e8;outline-offset:4px}@media(max-width:420px){.gm-hero-pair{gap:8px}.gm-hero-pair a{padding:12px 16px;font-size:13px}}@media(prefers-reduced-motion:reduce){.gm-hero-pair a{transition:none;transform:none}}
+
+/* Video controls remain keyboard reachable, visible only while focused. */
+.gm-video-focus-control:not(:focus){position:absolute!important;width:1px!important;height:1px!important;min-width:0!important;min-height:0!important;padding:0!important;margin:0!important;border:0!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.gm-video-focus-control:focus{position:fixed!important;top:90px!important;left:24px!important;bottom:auto!important;right:auto!important;z-index:100!important;width:auto!important;height:auto!important;min-height:44px!important;padding:10px 18px!important;background:#152238!important;color:white!important;clip-path:none!important;outline:2px solid #b6d7e8!important;outline-offset:4px!important;border-radius:99px!important}
+
+@media(max-width:700px){.wf-weddings-hero__copy{padding-bottom:48px}}
+
+/* R26 desktop refinement; phone rules remain unchanged. */
+@media(min-width:861px){
+.wf-weddings-hero{height:calc(100svh - 72px);min-height:650px;max-height:1120px}.wf-weddings-hero__copy{right:6%;bottom:clamp(72px,10svh,116px);width:min(43vw,760px)}.wf-weddings-hero h1{font-size:clamp(66px,5.3vw,102px);line-height:1.04}.wf-weddings-hero__copy p{font-size:clamp(21px,1.4vw,26px);max-width:37ch}.wf-weddings-hero__media:after{background:linear-gradient(90deg,transparent 28%,#101b2a40 55%,#101b2ac4)}.wf-weddings-hero .gm-hero-pair a{min-height:52px;padding-inline:26px;font-size:15px}
+}
