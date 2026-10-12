@@ -53,3 +53,39 @@
   document.body.appendChild(dock);
   document.documentElement.classList.add('gm-has-actions');
 })();
+
+/* Visit tracking, one listener for every page. GA4 records each page view with its landing page and
+   traffic source by itself; this adds the clicks that matter. A link's data-event names its event;
+   otherwise tel: links send call_click, Google Maps place links reviews_click, other Maps links
+   directions_click, and links to the booking page book_click. link_location is the id or label of the
+   closest section, header, footer or the bottom action bar; link_text is the words on the link.
+   Each event goes to GA4 directly (gtag) and to the dataLayer for GTM. */
+(function () {
+  function send(name, params) {
+    var push = { event: name };
+    for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k)) push[k] = params[k];
+    try { window.dataLayer && window.dataLayer.push(push); } catch (_) {}
+    try { window.gtag && window.gtag('event', name, params); } catch (_) {}
+  }
+  // Section scripts raise their own events (a fitting request, a booking confirmation) through this.
+  window.gmTrack = function (name, params) { send(name, params || {}); };
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var h = a.getAttribute('href') || '';
+    var name = a.getAttribute('data-event');
+    if (!name) {
+      if (/^tel:/.test(h)) name = 'call_click';
+      else if (/google\.com\/maps\/place/.test(h)) name = 'reviews_click';
+      else if (/google\.com\/maps/.test(h)) name = 'directions_click';
+      else if (/^(?:https:\/\/gabrielsmenswear\.com)?\/book(?:\.html)?(?:[?#]|$)|^#booking-preview$/.test(h)) name = 'book_click';
+    }
+    if (!name) return;
+    var sec = a.closest('section, header, footer, .gm-actions');
+    send(name, {
+      link_location: sec ? (sec.id || sec.getAttribute('aria-label') || sec.tagName.toLowerCase()) : 'page',
+      link_text: (a.innerText || a.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 100)
+    });
+  });
+})();

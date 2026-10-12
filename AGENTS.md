@@ -54,6 +54,12 @@ The page also contains JSON-LD for local business and FAQ. Keep visible FAQ text
 - Fonts are self-hosted in `assets/fonts/`. Do not re-add Google Fonts links.
 - `/assets` media is cached for a year (`vercel.json`). Replace an image or clip under a new file name, never in place.
 
+## Tracking
+
+- GA4 (`G-GBHF2MRV3Z`) is configured in every page head, so each page view carries its landing page and traffic source.
+- `assets/gm-nav.js`, loaded on every page, is the one click tracker: `call_click`, `directions_click`, `reviews_click` and `book_click`, with `link_location` and `link_text`. A link's `data-event` overrides the name. Do not add a second listener elsewhere, or clicks count twice.
+- The fitting form sends `generate_lead` (`fitting_for`, `occasion`) when it is sent to FormSubmit.
+
 ## Deployment
 
 The folder is linked to the existing Vercel project with `.vercel/project.json`, which is intentionally ignored by Git.

@@ -49,9 +49,11 @@
       // Calls made before the tags arrive queue in dataLayer and are sent then.
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-GBHF2MRV3Z");
       dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
       gmAfterFirstPaint(function () {
-        ["https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q"].forEach(function (src) {
+        ["https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", "https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q"].forEach(function (src) {
           var s = document.createElement("script");
           s.async = true;
           s.src = src;
