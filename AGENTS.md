@@ -57,7 +57,8 @@ The page also contains JSON-LD for local business and FAQ. Keep visible FAQ text
 ## Tracking
 
 - GA4 (`G-GBHF2MRV3Z`) is configured in every page head, so each page view carries its landing page and traffic source.
-- `assets/gm-nav.js`, loaded on every page, is the one click tracker: `call_click`, `directions_click`, `reviews_click` and `book_click`, with `link_location` and `link_text`. A link's `data-event` overrides the name. Do not add a second listener elsewhere, or clicks count twice.
+- `assets/gm-nav.js`, loaded on every page, is the one tracker: `call_click`, `directions_click`, `reviews_click` and `book_click` (with `link_location` and `link_text`), `tab_select` (`tab_name`), `faq_open` (`faq_question`) and `section_view` (`section_name`, once per section). A link's `data-event` overrides the name. Do not add a second listener elsewhere, or events count twice.
+- GA4 custom dimensions exist for `link_location`, `fitting_for`, `occasion`, `tab_name`, `faq_question` and `section_name`. A new event parameter needs its own custom dimension before it shows in reports.
 - The fitting form sends `generate_lead` (`fitting_for`, `occasion`) when it is sent to FormSubmit.
 
 ## Deployment
