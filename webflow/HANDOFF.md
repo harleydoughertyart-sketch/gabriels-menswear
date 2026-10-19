@@ -26,10 +26,10 @@ DRAFT, written during the build (2026-10-04). The orchestrator finalizes it at t
 ### The client confirms
 Nothing below is on the pages. Each item waits for Gabriel's answer; the pages were written around it.
 
-1. **Hours.** The site says Monday to Friday 11 to 6:30, Saturday 11 to 6, Sunday 12 to 4. Google says Monday to
-   Friday 11 to 6, Saturday 11 to 5, Sunday 12 to 4. The old Facebook page says Monday to Saturday 11 to 7, Sunday
-   closed. The new pages use the site's hours. Once Gabriel says which are right, make the site, Google and
-   Facebook match. The site's hours sit in (list finalized at the end of the run):
+1. **Hours. Settled 2026-10-19:** the Google Business Profile is correct (Monday to Friday 11 to 6, Saturday 11 to
+   5, Sunday 12 to 4), and the site now matches it, as do the schema's map position and the footer's "1363 Main St".
+   Facebook (old page: Monday to Saturday 11 to 7, Sunday closed) and the old-name directories still need to be
+   brought in line. If the hours change, they sit in:
    - the footer of every page: `index.html`, `privacy.html`, and each new page's `webflow/build/<page>/_shell.html`
      (then run assemble);
    - the home page's visit section (`index.html`, "Hours" list) and its opening hours data for Google
