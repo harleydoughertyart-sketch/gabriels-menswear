@@ -1,4 +1,4 @@
-/* /booked: FormSubmit's _next brings people here after its spam check. Just before sending, the /book form
+/* /booked: /api/book sends people here once the booking has gone through. Just before posting, the /book form
    saved the visit in this browser as gm-booking (date, time, group, occasion; never the name or email).
    With it the page shows the date and time, the party and calendar links, and counts book_confirmed once.
    Without it (another browser, storage blocked, or over a day old) the page still confirms, minus those. */

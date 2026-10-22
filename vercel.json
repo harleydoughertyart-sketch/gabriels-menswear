@@ -52,6 +52,11 @@
       ]
     }
   ],
+  "functions": {
+    "api/book.mjs": {
+      "maxDuration": 30
+    }
+  },
   "buildCommand": "node scripts/build-site.mjs",
   "outputDirectory": "dist"
 }

@@ -205,8 +205,84 @@
 
 (() => {const root=document.querySelector('.wf-book-schedule');if(!root)return;const choices=root.querySelectorAll('input[name="fitting-for"]'),count=root.querySelector('.wf-book-group-count'),call=root.querySelector('.wf-book-call');function update(){const group=root.querySelector('input[name="fitting-for"]:checked').value==='group';root.dataset.group=String(group);count.hidden=!group;count.querySelector('input').disabled=!group;count.querySelector('input').required=group;call.firstChild.textContent=group?'Call about your group ':'Call me ';}choices.forEach(input=>input.addEventListener('change',update));update();})();
 
-/* The booking form. FormSubmit emails the shop and, through _autoresponse, the customer; after its spam check,
-   _next opens /booked, which shows the visit this saves as gm-booking (date, time, group, occasion; no name or email).
-   Both emails copy every posted field, so only the readable ones post: appointment, party, occasion, name and
-   email. The raw choice, date, time and group-size controls are disabled for the moment the browser posts. */
-(() => {const form=document.querySelector('#booking-preview');if(!form)return;const token=String(window.GM_FITTING_REQUEST?.token||'').trim(),ready=/^[a-zA-Z0-9-]{16,160}$/.test(token),button=form.querySelector('button[type=submit]'),status=form.querySelector('#book-request-status');form.querySelectorAll('fieldset').forEach(f=>f.disabled=false);if(ready){form.action='https://formsubmit.co/'+token;button.disabled=false;status.textContent='You’ll get a confirmation page and an email.';}form.addEventListener('submit',event=>{if(!ready){event.preventDefault();return;}if(event.defaultPrevented||form.querySelector('[name=_honey]').value){event.preventDefault();return;}const data=new FormData(form),booking={date:String(data.get('date')||''),time:String(data.get('time')||''),fitting_for:String(data.get('fitting-for')||''),group_size:String(data.get('group-size')||''),occasion:String(data.get('occasion')||''),saved:Date.now()};try{const [y,m,d]=booking.date.split('-').map(Number),[h,min]=booking.time.split(':').map(Number);form.querySelector('[name=appointment]').value=new Intl.DateTimeFormat('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric',timeZone:'UTC'}).format(Date.UTC(y,m-1,d))+' at '+new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit',timeZone:'UTC'}).format(Date.UTC(2000,0,1,h,min));}catch(e){}form.querySelector('[name=party]').value=booking.fitting_for==='group'?'Group of '+booking.group_size:'Just me';const raw=[...form.querySelectorAll(form.querySelector('[name=appointment]').value?'[name=fitting-for],[name=date],[name=time],[name=group-size]':'[name=fitting-for],[name=group-size]')].filter(el=>!el.disabled);raw.forEach(el=>el.disabled=true);setTimeout(()=>raw.forEach(el=>el.disabled=false));try{localStorage.setItem('gm-booking',JSON.stringify(booking));}catch(e){}window.gmTrack&&gmTrack('generate_lead',{form_name:'fitting_request',fitting_for:booking.fitting_for,occasion:booking.occasion});status.textContent='Finish the spam check in the new tab to confirm your fitting. If it doesn’t go through, your details are still here, or call (508) 829-5186.';});})();
+/* The booking form posts to /api/book (api/book.mjs). That emails the confirmation, schedules the reminder and
+   sends the shop its copy, then opens /booked, which shows the visit saved here as gm-booking (date, time, group,
+   occasion; never the name or email). Cloudflare Turnstile checks that a person is booking: its script loads after
+   first paint and fills the .cf-turnstile box, which stays out of sight unless Cloudflare wants a click, and Book
+   waits for its token. A booking that fails comes back as ?error=check|form|send; the message shows above the
+   fields and the picks are put back. The site key is in assets/fitting-request-config.js; local previews use
+   Cloudflare's always-pass test key. */
+(() => {
+  const form = document.querySelector('#booking-preview'); if (!form) return;
+  const button = form.querySelector('button[type=submit]'), status = form.querySelector('#book-request-status'), box = form.querySelector('.cf-turnstile'), problem = form.querySelector('#book-error');
+  form.querySelectorAll('fieldset').forEach(f => f.disabled = false);
+  const say = text => { status.textContent = text; };
+  const failed = 'The spam check didn’t load. Please try again, or call (508) 829-5186.', ask = 'Please complete the check above to book.';
+
+  const message = {
+    check: 'I couldn’t confirm that booking. Please try again, or call (508) 829-5186.',
+    form: 'Something in the form didn’t look right. Please check the date and time and try again.',
+    send: 'Something went wrong on my end. Please call (508) 829-5186 and I’ll book you in.',
+  }[new URLSearchParams(location.search).get('error')];
+  if (typeof message === 'string' && problem) {
+    problem.textContent = message; problem.hidden = false;
+    const params = new URLSearchParams(location.search); params.delete('error');
+    history.replaceState(history.state, '', location.pathname + (String(params) ? '?' + params : '') + location.hash);
+    try {
+      const last = JSON.parse(localStorage.getItem('gm-booking') || 'null');
+      const set = (el, value) => { if (el && value) { el.value = value; el.dispatchEvent(new Event('change', { bubbles: true })); } };
+      if (last && Date.now() - last.saved < 36e5) {
+        const choice = form.querySelector('[name=fitting-for][value=' + (last.fitting_for === 'group' ? 'group' : 'solo') + ']');
+        choice.checked = true; choice.dispatchEvent(new Event('change', { bubbles: true }));
+        set(form.elements['group-size'], last.group_size); set(form.elements.occasion, last.occasion);
+        set(form.elements.date, last.date); set(form.elements.time, last.time);
+      }
+    } catch (e) {}
+  }
+
+  const local = /^(?:localhost|127\.0\.0\.1|\[::1\])$|\.(?:localhost|test)$/.test(location.hostname);
+  const sitekey = local ? '1x00000000000000000000AA' : String(window.GM_FITTING_REQUEST?.turnstileSiteKey || '').trim();
+  if (!box || !/^[\w-]{10,64}$/.test(sitekey)) return; // no key: the markup's "call to book" stays and Book stays off
+  let token = '', waiting = false, broken = false, timer = 0;
+  const stopWaiting = () => { waiting = false; clearTimeout(timer); button.disabled = false; };
+  window.gmTurnstileToken = value => { token = value; if (waiting) { stopWaiting(); button.click(); } };
+  window.gmTurnstileExpired = window.gmTurnstileError = () => { token = ''; };
+  window.gmTurnstileShow = () => { box.classList.add('is-shown'); if (waiting) { clearTimeout(timer); button.disabled = false; say(ask); } };
+  window.gmTurnstileHide = () => box.classList.remove('is-shown');
+
+  form.addEventListener('submit', event => {
+    if (event.defaultPrevented) return; // book-controls.js found the date or time wrong
+    if (form.elements.website.value) { event.preventDefault(); return; }
+    if (!token) {
+      // Book pressed before Turnstile's token: hold the booking and send it the moment the token comes.
+      event.preventDefault();
+      if (broken) { say(failed); return; }
+      waiting = true;
+      if (box.classList.contains('is-shown')) { say(ask); return; }
+      button.disabled = true; say('One moment.');
+      clearTimeout(timer); timer = setTimeout(() => { stopWaiting(); say(failed); }, 15000);
+      return;
+    }
+    const data = new FormData(form), booking = { date: String(data.get('date') || ''), time: String(data.get('time') || ''), fitting_for: String(data.get('fitting-for') || ''), group_size: String(data.get('group-size') || ''), occasion: String(data.get('occasion') || ''), saved: Date.now() };
+    try { localStorage.setItem('gm-booking', JSON.stringify(booking)); } catch (e) {}
+    window.gmTrack && gmTrack('generate_lead', { form_name: 'fitting_request', fitting_for: booking.fitting_for, occasion: booking.occasion });
+    say('Booking your fitting.'); button.disabled = true;
+  });
+  // Back from /booked, this page comes out of the cache holding a token that was already spent.
+  addEventListener('pageshow', event => {
+    if (!event.persisted) return;
+    token = ''; stopWaiting(); say('');
+    try { window.turnstile?.reset(box); } catch (e) {}
+  });
+
+  box.dataset.sitekey = sitekey;
+  button.disabled = false; say('');
+  const load = () => {
+    box.dataset.size = box.clientWidth < 300 ? 'compact' : 'flexible';
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'; script.async = true;
+    script.onerror = () => { broken = true; if (waiting) { stopWaiting(); say(failed); } };
+    document.head.appendChild(script);
+  };
+  window.gmAfterFirstPaint ? gmAfterFirstPaint(load) : load();
+})();

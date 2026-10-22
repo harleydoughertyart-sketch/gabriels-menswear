@@ -23,7 +23,7 @@ preview_dir: D:\Gabriels Menswear
 - `/msm` msm.html: an archived copy of another business's site (Main Street Menswear, Billings MT). Not
   linked from anywhere; never used as a source.
 - New in run 2026-10-03-local-pages: `/tailoring`, `/weddings`, `/prom`, `/book`.
-- `/booked` booked.html: the booking confirmation the /book form's FormSubmit `_next` opens. Standalone like
+- `/booked` booked.html: the booking confirmation /api/book opens once a booking goes through. Standalone like
   privacy.html (header and footer changes go here too), noindex, not in the sitemap.
 
 ## Design source
@@ -45,7 +45,7 @@ lighthouse_mobile: performance 90, accessibility 100, best-practices 100, seo 10
 - Values from `.env`, the Vercel project and team IDs in AGENTS.md, and anything in `_local/`.
 
 ## Current run: 2026-10-08-interactive-refresh
-Tailoring, Weddings and Prom are refreshed for local preview. Preserve the original homepage content and approved service designs; later user authorization added the shared bottom action bar, complete footer, homepage topbar Directions removal, service review rails and a direct-copy humanizer pass. Book and Privacy received the shared navigation/footer only. New gm-premium.css/js are service-only. User permits illustrative stock/AI video; Weddings and Prom use newly licensed stock edits. Lean verification, no numeric review loops or Lighthouse finish-gate claim. Current preview revision is r17 on port 4640. R17 adds a portrait-led Book page, hero action pairs, an anchored bottom action strip, automatic review movement, public Privacy/Cookies/Website terms pages and an explicit-public-file hosting build. Email fitting requests are being connected to a user-authorized inbox; opaque FormSubmit activation token remains necessary before enabling public submissions.
+Tailoring, Weddings and Prom are refreshed for local preview. Preserve the original homepage content and approved service designs; later user authorization added the shared bottom action bar, complete footer, homepage topbar Directions removal, service review rails and a direct-copy humanizer pass. Book and Privacy received the shared navigation/footer only. New gm-premium.css/js are service-only. User permits illustrative stock/AI video; Weddings and Prom use newly licensed stock edits. Lean verification, no numeric review loops or Lighthouse finish-gate claim. Current preview revision is r17 on port 4640. R17 adds a portrait-led Book page, hero action pairs, an anchored bottom action strip, automatic review movement, public Privacy/Cookies/Website terms pages and an explicit-public-file hosting build. Bookings now post to /api/book (Resend and Cloudflare Turnstile); see AGENTS.md.
 
 ## User-derived design evaluation (2026-10-09)
 Read DESIGN-EVALUATION.md for the reusable checklist built from the user's Tailoring corrections. The user authorized applying it autonomously to Weddings and Prom, iterating on concrete visual/interaction failures before local preview delivery. Preserve the approved Tailoring R11/R12 and original homepage. Use the current run's WEDDINGS-PROM-EVALUATION.md for current acceptance evidence; older global gate targets above are not a claim that those tests ran.

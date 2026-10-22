@@ -1,3 +1,3 @@
-/* After FormSubmit email activation, paste its opaque random string here.
-   Never put an email address in this public file. Empty keeps sending disabled. */
-window.GM_FITTING_REQUEST = { token: "6f2cafc1e86e019ea412e838c5108ba1" };
+/* Cloudflare Turnstile's site key for the /book form (public by design; the secret is TURNSTILE_SECRET_KEY in
+   Vercel). Empty turns online booking off: the form says to call. Local previews use Cloudflare's test key. */
+window.GM_FITTING_REQUEST = { turnstileSiteKey: "0x4AAAAAAFhekWFnNHk3NcVL" };

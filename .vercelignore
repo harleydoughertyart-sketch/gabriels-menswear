@@ -25,6 +25,9 @@
 # Deploy config (read by Vercel, never served)
 !/vercel.json
 
+# The booking function, /api/book (no npm dependencies)
+!/api
+
 # Nothing under assets/ is documentation
 /assets/**/*.md
 

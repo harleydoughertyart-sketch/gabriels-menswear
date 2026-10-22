@@ -9,7 +9,9 @@ if(path.dirname(output)!==root||path.basename(output)!=='dist')throw new Error('
 const pages=['index.html','tailoring.html','weddings.html','prom.html','book.html','booked.html','privacy.html','cookies.html','terms.html'];
 // <32 hex>.txt at the root is the IndexNow key file; engines fetch it to trust our pings.
 const keyFiles=(await fs.readdir(root)).filter(name=>/^[0-9a-f]{32}\.txt$/.test(name));
-const queue=[...pages,'favicon.ico','robots.txt','sitemap.xml','llms.txt',...keyFiles];
+// assets/email/ holds what the booking emails (api/_lib/emails.mjs) load. No page links them, so list them here.
+const emailFiles=(await fs.readdir(path.join(root,'assets','email'))).filter(name=>!name.endsWith('.md')).map(name=>'assets/email/'+name);
+const queue=[...pages,'favicon.ico','robots.txt','sitemap.xml','llms.txt',...keyFiles,...emailFiles];
 const files=new Map(),missing=[];
 const textTypes=new Set(['.html','.css','.js','.svg','.xml','.txt']);
 function addReference(raw,from){
@@ -28,7 +30,6 @@ while(queue.length){
  files.set(relative,buffer);
  if(!textTypes.has(path.extname(relative)))continue;
  const text=buffer.toString('utf8');
- if(/formsubmit\.co\/(?:ajax\/)?[^\s"'<>/]+@/i.test(text))throw new Error('Use an activated opaque FormSubmit token, not a recipient email endpoint: '+relative);
  for(const match of text.matchAll(/https:\/\/gabrielsmenswear\.com(\/assets\/[^"'`\s<>]+?\.(?:svg|ico|png|jpe?g|webp|avif|mp4|webm))/g))addReference(match[1],relative);
  // HTML attributes/srcsets and quoted JS asset constants.
  for(const match of text.matchAll(/(?:["'`])((?:\/?assets\/|\/?scrollcraft\.|\/?styles\.|\/?script\.|\/?favicon\.)[^"'`\s<>]*?\.(?:css|js|svg|ico|png|jpe?g|webp|avif|mp4|webm|woff2?|ttf|json))(?:[?#][^"'`\s<>]*)?(?=["'`\s,])/g)){
