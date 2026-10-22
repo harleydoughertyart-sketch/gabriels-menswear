@@ -7,7 +7,9 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const output=path.join(root,'dist');
 if(path.dirname(output)!==root||path.basename(output)!=='dist')throw new Error('Unsafe output directory');
 const pages=['index.html','tailoring.html','weddings.html','prom.html','book.html','privacy.html','cookies.html','terms.html'];
-const queue=[...pages,'favicon.ico','robots.txt','sitemap.xml','llms.txt'];
+// <32 hex>.txt at the root is the IndexNow key file; engines fetch it to trust our pings.
+const keyFiles=(await fs.readdir(root)).filter(name=>/^[0-9a-f]{32}\.txt$/.test(name));
+const queue=[...pages,'favicon.ico','robots.txt','sitemap.xml','llms.txt',...keyFiles];
 const files=new Map(),missing=[];
 const textTypes=new Set(['.html','.css','.js','.svg','.xml','.txt']);
 function addReference(raw,from){
