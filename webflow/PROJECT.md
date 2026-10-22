@@ -23,6 +23,8 @@ preview_dir: D:\Gabriels Menswear
 - `/msm` msm.html: an archived copy of another business's site (Main Street Menswear, Billings MT). Not
   linked from anywhere; never used as a source.
 - New in run 2026-10-03-local-pages: `/tailoring`, `/weddings`, `/prom`, `/book`.
+- `/booked` booked.html: the booking confirmation the /book form's FormSubmit `_next` opens. Standalone like
+  privacy.html (header and footer changes go here too), noindex, not in the sitemap.
 
 ## Design source
 The live home page, index.html: its inline `:root` tokens (canvas #f7f5f1, surface #ffffff, ink #152238,

@@ -1,0 +1,22 @@
+/* /booked: the booking confirmation card. Tokens from scrollcraft.css and gm-site.css. */
+.gm-booked{display:flex;justify-content:center;padding:clamp(2.5rem,7vw,5.5rem) var(--sc-gutter) clamp(3rem,8vw,6rem)}
+.gm-booked__card{width:100%;max-width:36rem;padding:clamp(1.5rem,5vw,2.75rem);border-radius:var(--sc-r-lg);background:var(--sc-surface);box-shadow:var(--sc-e2),var(--sc-edge)}
+.gm-booked__kicker{margin:0 0 .9rem;color:var(--sc-accent);font-size:var(--sc-t-xs);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.gm-booked__title{font-size:var(--sc-t-3xl);color:var(--sc-ink)}
+.gm-booked__title em{color:var(--sc-accent)}
+.gm-booked__visit{margin-top:1.5rem;padding:1rem 1.15rem;border-left:3px solid var(--sc-accent);border-radius:var(--sc-r-md);background:color-mix(in oklab,var(--sc-accent) 8%,var(--sc-surface))}
+.gm-booked__visit[hidden],.gm-booked__calendar[hidden]{display:none}
+.gm-booked__when{margin:0;font-family:var(--sc-font-display);font-size:var(--sc-t-xl);line-height:1.2;color:var(--sc-ink)}
+.gm-booked__party{margin:.35rem 0 0;color:var(--sc-ink-soft)}
+.gm-booked__party:empty{display:none}
+.gm-booked__note{margin:1.25rem 0 0;max-width:var(--sc-measure);color:var(--sc-ink-soft)}
+.gm-booked__details{display:grid;gap:.85rem;margin:1.5rem 0 0;padding-top:1.25rem;border-top:1px solid color-mix(in oklab,var(--sc-ink) 10%,transparent)}
+.gm-booked__details div{display:grid;grid-template-columns:minmax(8.5rem,auto) 1fr;gap:1rem;align-items:baseline}
+.gm-booked__details dt{color:var(--sc-ink-soft);font-size:var(--sc-t-sm)}
+.gm-booked__details dd{margin:0;color:var(--sc-ink)}
+.gm-booked__details a{color:var(--sc-accent);font-weight:600;text-underline-offset:.2em}
+.gm-booked__calendar{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
+@media (max-width:30rem){
+  .gm-booked__details div{grid-template-columns:1fr;gap:.15rem}
+  .gm-booked__calendar .gm-cta{flex:1 1 100%}
+}

@@ -1,0 +1,149 @@
+<!doctype html>
+<!-- /booked: the booking confirmation. The /book form's _next sends people here after FormSubmit's spam check; assets/wf/booked.js fills in the visit the form saved in this browser. A standalone page like privacy.html: header and footer changes go here too. -->
+<html lang="en" class="gm-has-actions">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>You’re Booked | Gabriel's Menswear</title>
+    <meta name="description" content="Your fitting at Gabriel's Menswear in Holden, MA is booked." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#f7f5f1" />
+    <meta name="color-scheme" content="light" />
+    <script>
+      // Work that can wait for the first screen. Runs once the page has loaded
+      // and its largest image or text block has painted, so analytics and
+      // background video never share a phone's bandwidth with the hero.
+      window.gmAfterFirstPaint = (function () {
+        var queue = [], painted = false, loaded = document.readyState === "complete";
+        function flush() {
+          if (!painted || !loaded) return;
+          queue.splice(0).forEach(function (fn) { setTimeout(fn, 0); });
+        }
+        var types = (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes) || [];
+        if (types.indexOf("largest-contentful-paint") > -1) {
+          new PerformanceObserver(function (list, observer) {
+            observer.disconnect(); painted = true; flush();
+          }).observe({ type: "largest-contentful-paint", buffered: true });
+        } else painted = true;
+        addEventListener("load", function () {
+          loaded = true; flush();
+          // A tab opened in the background reports no paint until it is shown.
+          setTimeout(function () { painted = true; flush(); }, 3000);
+        }, { once: true });
+        return function (fn) { queue.push(fn); flush(); };
+      })();
+
+      // Calls made before the tags arrive queue in dataLayer (Google) and clarity.q
+      // (Microsoft Clarity, recordings and heatmaps) and are sent then.
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-GBHF2MRV3Z");
+      dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
+      gmAfterFirstPaint(function () {
+        ["https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", "https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q", "https://www.clarity.ms/tag/ywmsd790se"].forEach(function (src) {
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = src;
+          document.head.appendChild(s);
+        });
+      });
+    </script>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <style>
+      /* Playfair Display and Archivo (SIL Open Font License), served from this
+         site rather than Google Fonts: two fewer connections before first paint. */
+      @font-face{font-family:"Playfair Display";font-style:normal;font-weight:500 700;font-display:swap;src:url(/assets/fonts/playfair-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Playfair Display";font-style:normal;font-weight:500 700;font-display:swap;src:url(/assets/fonts/playfair-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+      @font-face{font-family:"Playfair Display";font-style:italic;font-weight:500 600;font-display:swap;src:url(/assets/fonts/playfair-italic-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Playfair Display";font-style:italic;font-weight:500 600;font-display:swap;src:url(/assets/fonts/playfair-italic-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+      @font-face{font-family:"Archivo";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/archivo-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+      @font-face{font-family:"Archivo";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/archivo-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+    </style>
+    <link rel="stylesheet" href="/scrollcraft.css" />
+    <link rel="stylesheet" href="/assets/gm-site.css" />
+    <link rel="stylesheet" href="/assets/gm-nav.css" />
+    <link rel="stylesheet" href="/assets/wf/booked.css" />
+  </head>
+  <body class="gm-booked-page">
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MJCMX83Q"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="sc-grain" aria-hidden="true"></div>
+
+    <header class="gm-bar">
+      <a class="gm-brand" href="/" aria-label="Gabriel's Menswear home">
+        <span class="gm-brand__name">Gabriel's</span>
+        <span class="gm-brand__row" aria-hidden="true">
+          <span class="gm-brand__sub">Menswear</span>
+        </span>
+      </a>
+      <nav class="gm-nav" aria-label="Main">
+        <button class="gm-nav__toggle" type="button" aria-expanded="false" aria-controls="gm-nav-list" aria-label="Menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="gm-nav__bars" d="M3.5 7h17M3.5 12h17M3.5 17h17" /><path class="gm-nav__shut" d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+        <ul class="gm-nav__list" id="gm-nav-list">
+<li><a class="gm-nav__link" href="/">Home</a></li>
+          <li><a class="gm-nav__link" href="/tailoring">Tailoring</a></li>
+          <li><a class="gm-nav__link" href="/weddings">Weddings</a></li>
+          <li><a class="gm-nav__link" href="/prom">Prom</a></li>
+          <li class="gm-nav__call"><a class="gm-nav__link" href="tel:+15088295186">Call (508) 829-5186</a></li>
+          <li><a class="gm-nav__book" href="/book#schedule" data-event="book_click">Book a fitting</a></li>
+        </ul>
+      </nav>
+
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="gm-booked" id="booked" aria-labelledby="gm-booked-title">
+        <div class="gm-booked__card">
+          <p class="gm-booked__kicker">Fitting confirmed</p>
+          <h1 class="sc-display gm-booked__title" id="gm-booked-title">You’re <em>booked.</em></h1>
+          <div class="gm-booked__visit" data-clarity-mask="true" hidden>
+            <p class="gm-booked__when"></p>
+            <p class="gm-booked__party"></p>
+          </div>
+          <p class="gm-booked__note">Your confirmation email is on its way. See you at the shop.</p>
+          <dl class="gm-booked__details">
+            <div><dt>Where</dt><dd><a href="https://www.google.com/maps/dir/?api=1&amp;destination=1363%20Main%20St%2C%20Holden%2C%20MA%2001520" target="_blank" rel="noopener noreferrer">1363 Main St, Holden, MA 01520</a></dd></div>
+            <div><dt>Need to change it?</dt><dd><a href="tel:+15088295186">Call (508) 829-5186</a></dd></div>
+            <div><dt>Have a suit?</dt><dd>Bring it in. I’ll check it on you.</dd></div>
+          </dl>
+          <div class="gm-booked__calendar" hidden>
+            <a class="gm-cta" data-calendar="google" target="_blank" rel="noopener noreferrer">Add to Google Calendar</a>
+            <a class="gm-cta gm-cta--ghost" data-calendar="ics" download="gabriels-menswear-fitting.ics">Apple or Outlook</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="gm-site-footer">
+  <div class="gm-site-footer__grid">
+    <div class="gm-site-footer__intro"><a class="gm-site-footer__brand" href="/">Gabriel’s <span>Menswear</span></a><p>Personal service.<br>A <em>better fit.</em></p></div>
+    <nav aria-label="Footer"><h2>Explore</h2><a href="/">Home</a><a href="/tailoring">Tailoring</a><a href="/weddings">Weddings</a><a href="/prom">Prom</a><a href="/book#schedule">Book a fitting</a></nav>
+    <div><h2>Find me</h2><address><a href="https://www.google.com/maps/dir/?api=1&amp;destination=1363%20Main%20St%2C%20Holden%2C%20MA%2001520" target="_blank" rel="noopener noreferrer">1363 Main St<br>Holden, MA 01520</a><a href="tel:+15088295186">(508) 829-5186</a></address></div>
+    <div class="gm-site-footer__hours"><h2>Shop hours</h2><dl><div><dt>Mon–Fri</dt><dd>11 AM–6 PM</dd></div><div><dt>Saturday</dt><dd>11 AM–5 PM</dd></div><div><dt>Sunday</dt><dd>12 PM–4 PM</dd></div></dl><p>Call to confirm before you visit.</p></div>
+  </div>
+  <div class="gm-site-footer__legal"><span>© 2026 Gabriel’s Menswear</span><span>Holden, Massachusetts</span><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a><a href="/terms">Terms</a></div>
+</footer>
+
+
+    <!-- Its own dock: gm-nav.js adds the usual one (Book a fitting) only where none exists. -->
+    <nav class="gm-actions" aria-label="Visit or contact Gabriel"><a class="gm-actions__link gm-actions__link--primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=1363%20Main%20St%2C%20Holden%2C%20MA%2001520" target="_blank" rel="noopener noreferrer">Directions</a><a class="gm-actions__link" href="tel:+15088295186">Call the shop</a></nav>
+
+    <script src="/scrollcraft.js" defer></script>
+    <script src="/assets/gm-site.js" defer></script>
+    <script src="/assets/gm-nav.js" defer></script>
+    <script src="/assets/wf/booked.js" defer></script>
+  </body>
+</html>
