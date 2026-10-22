@@ -51,6 +51,7 @@ The page also contains JSON-LD for local business and FAQ. Keep visible FAQ text
 
 - The /book form books a fitting; it is not a request. Any date and time inside shop hours can be picked (`assets/wf/book-controls.js`), and nothing checks for clashes.
 - It posts to FormSubmit with the opaque token in `assets/fitting-request-config.js`. FormSubmit emails the booking to the inbox that token was activated for (Harley's, not Gabriel's), emails the customer a confirmation through `_autoresponse` (its message is that field's value in the form), then sends them to `/booked` through `_next`.
+- Both emails list every posted field, so the form posts only readable ones: `appointment` (e.g. "Saturday, October 24, 2026 at 2:00 PM"), `party` ("Just me" or "Group of 4"), `occasion`, `name` and `email`. The submit handler disables the raw choice, date, time and group-size controls for the moment the browser posts.
 - `booked.html` (noindex, not in the sitemap) shows the visit the form saved as `gm-booking` in localStorage: date, time, group size and occasion, never the name or email. The privacy and cookies pages say so; keep them in step.
 - `book.html` and `assets/wf/book.js` are built from `webflow/build/book/` by `wf assemble`. Where that isn't available, make the same change in the fragment and in the built file.
 
