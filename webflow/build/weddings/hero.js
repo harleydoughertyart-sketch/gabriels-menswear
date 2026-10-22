@@ -3,6 +3,7 @@
  const root=document.querySelector('.wf-weddings-hero');
  if(!root)return;
  const video=root.querySelector('video'),toggle=root.querySelector('[data-wedding-video-toggle]');
+ video.addEventListener('playing',()=>{video.dataset.played='';});video.addEventListener('emptied',()=>{delete video.dataset.played;});
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  let paused=false,covered=false;
  function sync(){

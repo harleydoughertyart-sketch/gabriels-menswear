@@ -13,6 +13,8 @@
 .wf-weddings-hero{position:relative;isolation:isolate;min-height:800px;height:calc(100svh - var(--wedding-header,72px));background:#111e28;color:#f7f5f1}
 .wf-weddings-hero__media{position:absolute;inset:0;z-index:-2;overflow:hidden}
 .wf-weddings-hero__media :is(picture,img,video){position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+/* The poster is the thumbnail Google reads; the photo behind shows until the clip plays. */
+.wf-weddings-hero__media video:not([data-played]){opacity:0}
 .wf-weddings-hero__media:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 100% 100%,#101b2ae6,transparent 75%)}
 .wf-weddings-hero__copy{position:absolute;right:5.55%;bottom:102px;width:550px;max-width:calc(100% - 48px)}
 .wf-weddings-hero h1{font:400 clamp(58px,4.6vw,70px)/1.06 "Playfair Display",Georgia,serif;letter-spacing:-.035em;margin:0 0 24px;text-wrap:balance}

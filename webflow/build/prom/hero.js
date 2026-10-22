@@ -1,6 +1,7 @@
 (() => {
  const root=document.querySelector('.wf-prom-hero');if(!root)return;
  const film=root.querySelector('video'),button=root.querySelector('[data-prom-video-toggle]'),header=document.querySelector('.gm-bar'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ film.addEventListener('playing',()=>{film.dataset.played='';});film.addEventListener('emptied',()=>{delete film.dataset.played;});
  let paused=false,visible=false,loaded=false,covered=false,frame=0;
  function sync(){const rect=film.getBoundingClientRect();if(rect.bottom>0&&rect.top<innerHeight&&rect.width>0&&!paused&&!covered&&!reduced.matches&&!document.hidden){const source=innerWidth<=700?film.dataset.mobile:film.dataset.desktop;if(film.getAttribute('src')!==source){film.src=source;film.load();loaded=true;}window.GMVideoLifecycle.set(film,true);}else window.GMVideoLifecycle.set(film,false);button.textContent=paused?'Play film':'Pause film';button.setAttribute('aria-pressed',String(paused));button.hidden=reduced.matches;}
  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.15}).observe(film);
