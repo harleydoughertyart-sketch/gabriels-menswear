@@ -13,9 +13,10 @@
   const [y, m, d] = b.date.split('-').map(Number), [h, min] = b.time.split(':').map(Number);
   const wall = Date.UTC(y, m - 1, d, h, min);
   const visit = root.querySelector('.gm-booked__visit');
+  // No-break spaces keep "October 24" and "at 11:00 AM" whole, so a narrow card wraps before "at".
   visit.querySelector('.gm-booked__when').textContent =
-    new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(wall) + ' at ' +
-    new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(wall);
+    new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(wall).replace(/ (\d+)$/, '\u00a0$1') + ' at\u00a0' +
+    new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(wall).replace(/\s/g, '\u00a0');
   const size = Number(b.group_size);
   visit.querySelector('.gm-booked__party').textContent =
     [b.fitting_for === 'group' ? (size > 1 ? 'Group of ' + size : 'Group fitting') : 'Just you', b.occasion].filter(Boolean).join(' · ');
