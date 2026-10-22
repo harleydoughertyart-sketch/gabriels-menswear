@@ -19,6 +19,8 @@
 !/robots.txt
 !/sitemap.xml
 !/llms.txt
+# IndexNow key file: Bing and the other IndexNow engines fetch it before trusting a ping
+!/2410cf8dab212bd7c8c6bcb3648caa46.txt
 
 # Deploy config (read by Vercel, never served)
 !/vercel.json
