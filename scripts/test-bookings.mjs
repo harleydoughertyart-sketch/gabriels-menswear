@@ -99,7 +99,7 @@ test('a booking schedules the reminder, confirms, copies the shop, then goes to 
   // The Stop button opens the scheduled reminder in Resend's dashboard, where it can be cancelled or moved.
   const stop = 'https://resend.com/emails/' + resendId(1);
   assert.match(shop.html, new RegExp(`<a href="${stop}"[^>]*>Stop the reminder</a>`));
-  assert.ok(shop.text.includes(`Stop the reminder: ${stop}\nOpens it in Resend. Press Cancel there, or change the time.`));
+  assert.ok(shop.text.includes(`Stop the reminder: ${stop}\nOpens it in Resend. Under the three dots at the top right, pick Cancel schedule, or Edit schedule to move it.`));
 });
 
 test('the reminder time follows daylight time: EDT in October, EST from the morning the clocks change', async () => {

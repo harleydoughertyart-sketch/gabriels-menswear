@@ -150,7 +150,7 @@ const REMINDER_LINES = {
   far: 'No reminder email. This booking is more than 30 days away.',
   failed: 'The reminder couldn’t be scheduled.',
 };
-const STOP_NOTE = 'Opens it in Resend. Press Cancel there, or change the time.';
+const STOP_NOTE = 'Opens it in Resend. Under the three dots at the top right, pick Cancel schedule, or Edit schedule to move it.';
 export function shopEmail(b, { assetBase = SHOP.site, reminder = { status: 'failed' }, customerSent = true } = {}) {
   const first = firstName(b) || 'them';
   const subject = `${b.name} booked ${shortDate(b)} at ${timeLabel(b.time)}`;
