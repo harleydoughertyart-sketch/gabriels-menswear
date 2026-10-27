@@ -71,12 +71,17 @@
       dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
       window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
       gmAfterFirstPaint(function () {
-        ["https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", "https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q", "https://www.clarity.ms/tag/ywmsd790se"].forEach(function (src) {
+        // gtag.js first, GTM once it has run: GTM reads this page's gtag config, and when gtag.js
+        // is not running yet it fetches a second copy of it (about 180 KB) for the same id.
+        function add(src, then) {
           var s = document.createElement("script");
           s.async = true;
           s.src = src;
+          if (then) s.onload = s.onerror = then;
           document.head.appendChild(s);
-        });
+        }
+        add("https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", function () { add("https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q"); });
+        add("https://www.clarity.ms/tag/ywmsd790se");
       });
     </script>
     <link rel="icon" href="/favicon.ico" sizes="32x32" />

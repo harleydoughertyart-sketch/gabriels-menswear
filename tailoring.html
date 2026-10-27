@@ -58,12 +58,17 @@
       dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
       window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
       gmAfterFirstPaint(function () {
-        ["https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", "https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q", "https://www.clarity.ms/tag/ywmsd790se"].forEach(function (src) {
+        // gtag.js first, GTM once it has run: GTM reads this page's gtag config, and when gtag.js
+        // is not running yet it fetches a second copy of it (about 180 KB) for the same id.
+        function add(src, then) {
           var s = document.createElement("script");
           s.async = true;
           s.src = src;
+          if (then) s.onload = s.onerror = then;
           document.head.appendChild(s);
-        });
+        }
+        add("https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", function () { add("https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q"); });
+        add("https://www.clarity.ms/tag/ywmsd790se");
       });
     </script>
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -307,7 +312,7 @@
 <section class="wf-tailoring-hero" data-wf-key="hero" data-cinema-panel id="top" aria-labelledby="wf-tailoring-hero-title">
   <div class="gm-takeover-surface wf-tailoring-hero-surface" data-gm-dark>
     <div class="wf-tailoring-hero-media" data-cinema-media>
-      <video class="wf-tailoring-hero-film" data-gm-video data-src="assets/tailoring-r4-hero-matched-r45.mp4" data-poster="assets/tailoring-r4-hero-matched-r45-poster.webp" muted loop playsinline preload="none" poster="assets/tailoring-r4-hero-matched-r45-poster.webp" aria-hidden="true"></video>
+      <video class="wf-tailoring-hero-film" data-gm-video data-src="assets/tailoring-r4-hero-matched-r45.mp4" data-poster="assets/tailoring-r4-hero-matched-r45-poster.webp" muted loop playsinline preload="none" poster="assets/tailoring-r4-hero-matched-r45-mobile-poster.webp" aria-hidden="true"></video>
     </div>
     <div class="wf-tailoring-hero-content">
       <h1 id="wf-tailoring-hero-title">Suits.<br><em>Fitted to you.</em></h1>
@@ -379,7 +384,7 @@
 <section class="wf-tailoring-fitting" data-wf-key="fitting" id="fitting" data-gm-dark data-cinema-panel aria-labelledby="wf-tailoring-fitting-title">
   <div class="wf-tailoring-fitting-surface gm-takeover-surface">
     <div class="wf-tailoring-fitting-film" data-cinema-media>
-      <video data-gm-video data-src="assets/tailoring-r4-fitting-matched-r45.mp4" data-src-mobile="assets/tailoring-r4-fitting-matched-r45-mobile.mp4" data-poster="assets/tailoring-r4-fitting-matched-r45-poster.webp" data-poster-mobile="assets/tailoring-r4-fitting-matched-r45-mobile-poster.webp" poster="assets/tailoring-r4-fitting-matched-r45-poster.webp" muted loop playsinline preload="none" aria-label="Illustrative tailoring footage: measuring, chalk marking and cutting cloth"></video>
+      <video data-gm-video data-src="assets/tailoring-r4-fitting-matched-r45.mp4" data-src-mobile="assets/tailoring-r4-fitting-matched-r45-mobile.mp4" data-poster="assets/tailoring-r4-fitting-matched-r45-poster.webp" data-poster-mobile="assets/tailoring-r4-fitting-matched-r45-mobile-poster.webp" poster="assets/tailoring-r4-fitting-matched-r45-mobile-poster.webp" muted loop playsinline preload="none" aria-label="Illustrative tailoring footage: measuring, chalk marking and cutting cloth"></video>
     </div>
     <div class="wf-tailoring-fitting-content">
       <h2 id="wf-tailoring-fitting-title" class="wf-tailoring-fitting-accessible">Your fitting</h2>
@@ -508,7 +513,7 @@
             <div class="gm-map">
               <iframe
                 title="Map to Gabriel's Menswear at 1363 Main St, Holden, MA"
-                src="https://www.google.com/maps?q=1363%20Main%20St%2C%20Holden%2C%20MA%2001520&output=embed"
+                data-map-src="https://www.google.com/maps?q=1363%20Main%20St%2C%20Holden%2C%20MA%2001520&output=embed"
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
               ></iframe>

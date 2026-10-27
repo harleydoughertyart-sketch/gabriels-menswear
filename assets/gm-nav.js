@@ -54,6 +54,27 @@
   document.documentElement.classList.add('gm-has-actions');
 })();
 
+/* The Google Maps embed brings about 600 KB of script, and loading it with the page held back the first
+   paint (PageSpeed put /book's LCP at 6 s). The iframe carries its address in data-map-src and gets it
+   here, after the first screen has painted and once the map is within a screen of view. */
+(function () {
+  var maps = document.querySelectorAll('iframe[data-map-src]');
+  if (!maps.length) return;
+  function show(frame) { if (!frame.getAttribute('src')) frame.src = frame.getAttribute('data-map-src'); }
+  function watch() {
+    if (!window.IntersectionObserver) return maps.forEach(show);
+    var near = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        near.unobserve(entry.target);
+        show(entry.target);
+      });
+    }, { rootMargin: '100% 0px' });
+    maps.forEach(function (frame) { near.observe(frame); });
+  }
+  window.gmAfterFirstPaint ? window.gmAfterFirstPaint(watch) : watch();
+})();
+
 /* Visit tracking, one listener for every page. GA4 records each page view with its landing page and
    traffic source by itself; this adds what people do on the page:
    - Clicks that matter. A link's data-event names its event; otherwise tel: links send call_click,

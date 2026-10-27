@@ -71,7 +71,11 @@ The page also contains JSON-LD for local business and FAQ. Keep visible FAQ text
 ## Speed
 
 - `scripts/build-site.mjs` inlines each page's local stylesheets into `dist/`. Source pages keep their `<link>` tags.
-- Each page head defines `gmAfterFirstPaint`. GTM, GA4 and the home page's clips start only after the first screen has painted.
+- Each page head defines `gmAfterFirstPaint`. GTM, GA4, the home page's clips and /tailoring's clips (`assets/gm-premium.js`) start only after the first screen has painted. gtm.js loads once gtag.js has run; loaded together, GTM fetched a second copy of gtag (about 180 KB).
+- The Google Maps embed (about 600 KB of script) carries its address in `data-map-src`; `assets/gm-nav.js` sets it after first paint, once the map is within a screen of view. A map iframe with a plain `src` held /book's first paint back (PageSpeed LCP 6 s).
+- Turnstile's script loads the first time someone touches the booking form, not with the page.
+- Clip posters in the HTML are the phone versions; scripts swap in the desktop poster on wider screens. The home page's clips get their posters late on purpose.
+- Speed and SEO are proven with seo-gate (`seo-gate.json` here); the reply quotes its summary line.
 - Fonts are self-hosted in `assets/fonts/`. Do not re-add Google Fonts links.
 - `/assets` media is cached for a year (`vercel.json`). Replace an image or clip under a new file name, never in place.
 

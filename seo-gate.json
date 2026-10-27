@@ -1,0 +1,14 @@
+{
+  "notes": "SEO and speed gate config. Run: node C:/Users/hdougherty/.claude/skills/seo-gate/scripts/seo-gate.mjs local (or live) --config \"D:/Gabriels Menswear/seo-gate.json\". The business file turns on the NAP, LocalBusiness, tel: and tag checks and adds its own expected list. Field reference: C:/Users/hdougherty/.claude/skills/seo-gate/reference/config.md",
+  "name": "Gabriel's Menswear",
+  "slug": "gabriels-menswear",
+  "origin": "https://gabrielsmenswear.com",
+  "pages": "sitemap",
+  "speed_pages": ["/", "/tailoring", "/weddings", "/prom", "/book"],
+  "serve": { "static": "dist", "build": "node scripts/build-site.mjs", "port": "auto", "clean_urls": true, "trailing_slash": false },
+  "groups": { "local": ["site", "lighthouse"], "live": ["site", "psi", "crux", "gsc"] },
+  "lighthouse": { "runs": 3, "form_factors": ["mobile"] },
+  "gsc_property": "sc-domain:gabrielsmenswear.com",
+  "business_file": "C:/Users/hdougherty/.claude/google-local-stack/gabriels-menswear.json",
+  "expected": []
+}

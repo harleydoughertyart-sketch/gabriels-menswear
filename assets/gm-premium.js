@@ -13,7 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (v.dataset.poster) { v.poster = v.dataset.poster; delete v.dataset.poster; }
   if (v.dataset.src) { v.src = v.dataset.src; delete v.dataset.src; v.load(); }
  }
+ // Clips get their files once the first screen has painted (gmAfterFirstPaint, in the page head), so a
+ // 1.2 MB hero clip never competes with the headline and its fonts on a phone.
+ let painted = !window.gmAfterFirstPaint;
  function syncMedia() {
+  if (!painted) return;
   videos.forEach(v => {
    const rect=v.getBoundingClientRect();
    const wanted=!document.hidden&&!reduced.matches&&!paused.has(v)&&rect.width>0&&rect.bottom>0&&rect.top<innerHeight&&v.dataset.cinemaCovered!=='true';
@@ -28,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const watcher = new IntersectionObserver(entries => {
    syncMedia();
   }, { threshold: .05 });
-  videos.forEach(v => { v.autoplay = false; warm.observe(v); watcher.observe(v); });
+  videos.forEach(v => { v.autoplay = false; });
+  const watch = () => { painted = true; videos.forEach(v => { warm.observe(v); watcher.observe(v); }); };
+  painted ? watch() : gmAfterFirstPaint(watch);
   const reveals = new IntersectionObserver(entries => entries.forEach(e => {
    if (e.isIntersecting) { e.target.classList.add('gm-is-visible'); reveals.unobserve(e.target); }
   }), { threshold: .12 });

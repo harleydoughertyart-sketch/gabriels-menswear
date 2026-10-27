@@ -211,8 +211,8 @@ try {
 
 /* The booking form posts to /api/book (api/book.mjs). That emails the confirmation, schedules the reminder and
    sends the shop its copy, then opens /booked, which shows the visit saved here as gm-booking (date, time, group,
-   occasion; never the name or email). Cloudflare Turnstile checks that a person is booking: its script loads after
-   first paint and fills the .cf-turnstile box, which stays out of sight unless Cloudflare wants a click, and Book
+   occasion; never the name or email). Cloudflare Turnstile checks that a person is booking: its script loads the first
+   time someone touches the form and fills the .cf-turnstile box, which stays out of sight unless Cloudflare wants a click, and Book
    waits for its token. A booking that fails comes back as ?error=check|form|send; the message shows above the
    fields and the picks are put back. The site key is in assets/fitting-request-config.js; local previews use
    Cloudflare's always-pass test key. */
@@ -288,7 +288,13 @@ try {
     script.onerror = () => { broken = true; if (waiting) { stopWaiting(); say(failed); } };
     document.head.appendChild(script);
   };
-  window.gmAfterFirstPaint ? gmAfterFirstPaint(load) : load();
+  // The check downloads and runs a lot of Cloudflare script, so it
+  // starts when someone first touches the form, not with the page. A booking that came back with an error
+  // starts it at once. Its token takes a second or two; Book waits for it (above).
+  let started = false;
+  const start = () => { if (started) return; started = true; load(); };
+  ['pointerdown', 'focusin', 'keydown'].forEach(type => form.addEventListener(type, start, { passive: true }));
+  if (typeof message === 'string') window.gmAfterFirstPaint ? gmAfterFirstPaint(start) : start();
 })();
 })();
 } catch (e) { console.error("wf:section schedule", e); }
