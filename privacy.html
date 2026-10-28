@@ -56,8 +56,8 @@
       window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
       // The tags load on the visitor's first touch, click, key press or mouse move, or 5 seconds
       // after the first screen has painted if none comes. Together they cost a phone up to half a
-      // second of script work, which this keeps off the page while it is still loading. A tracked
-      // click that leaves the page before then is held by assets/gm-nav.js and sent from the next page.
+      // second of script work, which this keeps off the page while it is still loading. Clicks made
+      // before then are kept by assets/gm-nav.js until GA4 confirms it has sent them.
       (function () {
         var started = false, opts = { capture: true, passive: true };
         var cues = ["pointerdown", "touchstart", "keydown", "wheel", "mousemove"];
@@ -81,6 +81,7 @@
           add("https://www.clarity.ms/tag/ywmsd790se");
         }
         cues.forEach(function (type) { addEventListener(type, start, opts); });
+        window.gmTagsStart = start;
         gmAfterFirstPaint(function () { setTimeout(start, 5000); });
       })();
     </script>

@@ -88,11 +88,13 @@
    bottom action bar. Each event goes to GA4 directly (gtag), to the dataLayer for GTM, and by name to
    Microsoft Clarity. */
 (function () {
-  function send(name, params) {
-    var push = { event: name };
-    for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k)) push[k] = params[k];
+  // done, when given, runs once GA4 has sent the event.
+  function send(name, params, done) {
+    var push = { event: name }, ga = {};
+    for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k)) push[k] = ga[k] = params[k];
+    if (done) { ga.event_callback = done; ga.event_timeout = 5000; }
     try { window.dataLayer && window.dataLayer.push(push); } catch (_) {}
-    try { window.gtag && window.gtag('event', name, params); } catch (_) {}
+    try { window.gtag && window.gtag('event', name, ga); } catch (_) {}
     // Clarity takes the name only; its recordings can then be filtered to visits that called, booked and so on.
     try { window.clarity && window.clarity('event', name); } catch (_) {}
   }
@@ -112,33 +114,51 @@
   // Section scripts raise their own events (a fitting request, a booking confirmation) through this.
   window.gmTrack = function (name, params) { send(name, params || {}); };
 
-  // The tags load on the first touch or 5 seconds after the first screen (see the page head). A tracked
-  // click that leaves the page before then would go with it, so it waits in sessionStorage, with the
-  // page it came from as link_page, and the next page on this site sends it.
-  function leaves(a, e) {
-    var h = a.getAttribute('href') || '';
+  // The tags load on the first touch or 5 seconds after the first screen (see the page head). A click
+  // made before they have loaded is kept in localStorage until GA4 says it has sent it, so it still
+  // counts when the visitor leaves first or the phone pauses the page for a call or a map. A click that
+  // opens another page on this site is only kept, with link_page saying where it came from, and that
+  // page sends it. Whatever is still kept when any page of the site opens is sent again, with the tags
+  // starting right after that page's first paint, for up to a day and five tries (a blocker that stops
+  // the tags never confirms). The touch that made a click has already started the tags.
+  var KEPT = 'gm-held';
+  function kept() {
+    try { return JSON.parse(localStorage.getItem(KEPT) || '[]'); } catch (_) { return []; }
+  }
+  function keep(list) {
+    try { list.length ? localStorage.setItem(KEPT, JSON.stringify(list)) : localStorage.removeItem(KEPT); } catch (_) {}
+  }
+  function sendKept(c) {
+    send(c.name, c.params, function () {
+      keep(kept().filter(function (x) { return x.id !== c.id; }));
+    });
+  }
+  function click(name, params, opensPage) {
+    if (window.gmTagsOn) return send(name, params);
+    if (opensPage) params.link_page = location.pathname;
+    var c = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7), at: Date.now(), tries: opensPage ? 0 : 1, name: name, params: params };
+    var list = kept();
+    list.push(c);
+    keep(list);
+    if (!opensPage) sendKept(c);
+  }
+  // Another page on this site, in this tab.
+  function opensPage(a, e) {
     return !e.defaultPrevented && e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey &&
-      a.target !== '_blank' && !/^(?:#|tel:|mailto:|sms:)/.test(h) &&
-      !(a.pathname === location.pathname && a.hash);
+      a.target !== '_blank' && a.origin === location.origin && !(a.pathname === location.pathname && a.hash);
   }
-  function hold(name, params) {
-    params.link_page = location.pathname;
-    try {
-      var held = JSON.parse(sessionStorage.getItem('gm-held') || '[]');
-      held.push([name, params]);
-      sessionStorage.setItem('gm-held', JSON.stringify(held));
-    } catch (_) { send(name, params); }
+  var waiting = kept().filter(function (c) { return Date.now() - c.at < 864e5 && c.tries < 5; });
+  waiting.forEach(function (c) { c.tries++; });
+  keep(waiting);
+  if (waiting.length) {
+    waiting.forEach(sendKept);
+    if (window.gmTagsStart) window.gmAfterFirstPaint(window.gmTagsStart);
   }
-  try {
-    var held = JSON.parse(sessionStorage.getItem('gm-held') || '[]');
-    sessionStorage.removeItem('gm-held');
-    held.forEach(function (h) { send(h[0], h[1]); });
-  } catch (_) {}
 
   document.addEventListener('click', function (e) {
     if (!e.target.closest) return;
     var tab = e.target.closest('button[aria-controls][aria-selected]');
-    if (tab) return send('tab_select', { tab_name: words(tab), link_location: where(tab) });
+    if (tab) return click('tab_select', { tab_name: words(tab), link_location: where(tab) }, false);
     var a = e.target.closest('a');
     if (!a) return;
     var h = a.getAttribute('href') || '';
@@ -149,10 +169,7 @@
       else if (/google\.com\/maps/.test(h)) name = 'directions_click';
       else if (/^(?:https:\/\/gabrielsmenswear\.com)?\/book(?:\.html)?(?:[?#]|$)|^#booking-preview$/.test(h)) name = 'book_click';
     }
-    if (!name) return;
-    var params = { link_location: where(a), link_text: words(a) };
-    if (!window.gmTagsOn && leaves(a, e)) hold(name, params);
-    else send(name, params);
+    if (name) click(name, { link_location: where(a), link_text: words(a) }, opensPage(a, e));
   });
 
   // toggle does not bubble, so listen in the capture phase.
@@ -160,7 +177,7 @@
     var d = e.target;
     if (!d.open || !d.closest || !d.closest('.gm-faq, .gm-service-faq') || d.hasAttribute('data-gm-opened')) return;
     d.setAttribute('data-gm-opened', '');
-    send('faq_open', { faq_question: words(d.querySelector('summary')) });
+    click('faq_open', { faq_question: words(d.querySelector('summary')) }, false);
   }, true);
 
   if (!window.IntersectionObserver) return;
