@@ -250,6 +250,14 @@
     },
     {
       "@type": "Question",
+      "name": "Do you rent suits or tuxedos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every suit here is one you buy and keep, and I fit it on you in person."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "How far ahead should I visit?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -259,7 +267,7 @@
   ]
 }</script>
   <link rel="stylesheet" href="/assets/gm-reviews.css" />
-<link rel="stylesheet" href="/assets/gm-service-proof.css"><script src="/assets/gm-service-proof.js" defer></script><link rel="stylesheet" href="/assets/gm-section-actions.css"><link rel="stylesheet" href="/assets/gm-media-tone.css"><link rel="stylesheet" href="/assets/wf/weddings.css"><script src="/assets/gm-photo-match-r45.js" defer></script></head>
+<link rel="stylesheet" href="/assets/gm-service-proof.css"><script src="/assets/gm-service-proof.js" defer></script><link rel="stylesheet" href="/assets/gm-section-actions.css"><link rel="stylesheet" href="/assets/gm-media-tone.css"><script src="/assets/gm-photo-match-r45.js" defer></script><link rel="stylesheet" href="/assets/wf/weddings.css"></head>
   <body class="gm-weddings-r13">
     <noscript>
       <iframe
@@ -306,6 +314,40 @@
 <!-- wf:section steps -->
 <section class="wf-weddings-steps" data-wf-key="steps" id="how-it-works" aria-labelledby="wf-weddings-steps-title"><div class="wf-weddings-steps__copy"><h2 id="wf-weddings-steps-title">Start with <em>the date.</em></h2><p>Call me with the wedding date. I’ll tell you whether there’s time for the suit and alterations.</p></div></section>
 <!-- /wf:section steps -->
+<!-- wf:section ownit -->
+<section class="wf-weddings-ownit" data-wf-key="ownit" id="own-it" aria-labelledby="wf-weddings-ownit-title">
+  <!-- weddings/ownit: the answer for anyone who searched for a rental. The shop sells suits and rents
+       none (Harley, 2026-10-28), so the section says what owning gets you. The two paths beside the copy
+       are code-built (ownit.css) and restate the first paragraph, so they are hidden from screen readers:
+       the rented line stops at "Goes back", the owned one runs on past the last stop. No price appears. -->
+  <div class="wf-weddings-ownit__inner">
+    <div class="wf-weddings-ownit__copy">
+      <h2 id="wf-weddings-ownit-title">Own your suit <em>instead of renting it.</em></h2>
+      <p>A rented suit goes back after the wedding. A suit you buy here stays in your closet, ready for the next wedding or an interview.</p>
+      <p>Your groomsmen keep theirs too.</p>
+      <p class="wf-weddings-ownit__price">Prices depend on the suit, the fabric and the work it needs. I’ll go through the options and the price with you before you decide.</p>
+      <a class="wf-wedding-pill" href="/book#booking-preview" data-event="book_click">Book a wedding fitting</a>
+    </div>
+    <div class="wf-weddings-ownit__paths" aria-hidden="true" data-sc-in>
+      <div class="wf-weddings-ownit__path wf-weddings-ownit__path--rent">
+        <span class="wf-weddings-ownit__label">Rented</span>
+        <ol class="wf-weddings-ownit__stops">
+          <li>The wedding</li>
+          <li class="wf-weddings-ownit__end">Goes back</li>
+        </ol>
+      </div>
+      <div class="wf-weddings-ownit__path wf-weddings-ownit__path--own">
+        <span class="wf-weddings-ownit__label">Yours</span>
+        <ol class="wf-weddings-ownit__stops">
+          <li>The wedding</li>
+          <li>The next wedding</li>
+          <li>An interview</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /wf:section ownit -->
 <!-- wf:section roles -->
 <section class="wf-weddings-roles" data-wf-key="roles" id="your-part" aria-labelledby="wf-weddings-roles-title">
  <header class="wf-weddings-roles__heading"><div class="wf-weddings-roles__tabs" role="tablist" aria-label="Your wedding role" hidden><button type="button" role="tab" id="wedding-tab-groom" aria-controls="wedding-role-groom" aria-selected="true" tabindex="0">Groom</button><button type="button" role="tab" id="wedding-tab-groomsman" aria-controls="wedding-role-groomsman" aria-selected="false" tabindex="-1">Groomsman</button><button type="button" role="tab" id="wedding-tab-guest" aria-controls="wedding-role-guest" aria-selected="false" tabindex="-1">Guest</button></div><h2 id="wf-weddings-roles-title">Tell me what you<br><em>have in mind.</em></h2></header>
@@ -416,7 +458,7 @@
           </div>
 
 </div></section>
-<section class="gm-service-faq" aria-label="Frequently asked questions"><div class="gm-service-faq__inner"><h2>Quick answers <em>before you stop in.</em></h2><div><details name="wedding-faq"><summary>Can I bring a suit I own?</summary><p>Yes. Bring it in. I’ll check the fit and tell you whether it’s worth altering.</p></details><details name="wedding-faq" id="cost"><summary>What will it cost?</summary><p>The garment, fabric and alterations affect the price. I’ll explain the cost before you decide.</p></details><details name="wedding-faq"><summary>How far ahead should I visit?</summary><p>Call me with the wedding date. I’ll tell you whether there’s time for the suit and alterations.</p></details></div></div></section>
+<section class="gm-service-faq" aria-label="Frequently asked questions"><div class="gm-service-faq__inner"><h2>Quick answers <em>before you stop in.</em></h2><div><details name="wedding-faq"><summary>Can I bring a suit I own?</summary><p>Yes. Bring it in. I’ll check the fit and tell you whether it’s worth altering.</p></details><details name="wedding-faq" id="cost"><summary>What will it cost?</summary><p>The garment, fabric and alterations affect the price. I’ll explain the cost before you decide.</p></details><details name="wedding-faq"><summary>Do you rent suits or tuxedos?</summary><p>No. Every suit here is one you buy and keep, and I fit it on you in person.</p></details><details name="wedding-faq"><summary>How far ahead should I visit?</summary><p>Call me with the wedding date. I’ll tell you whether there’s time for the suit and alterations.</p></details></div></div></section>
 <!-- /wf:section close -->
     </main>
 

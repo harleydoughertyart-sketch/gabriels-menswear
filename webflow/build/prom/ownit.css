@@ -1,0 +1,217 @@
+/* prom/ownit: own it instead of renting it. The steps and groups sections' type (Playfair Display,
+   the teal second line, the house pill) on the canvas, with a white card of two drawn paths beside it:
+   "Rented" runs dashed from prom to a stop marked "Goes back"; "Yours" runs solid teal through
+   every stop and on past the last one. Lines, dots, the stop and the arrow are CSS only.
+   Phone (to 559px): copy, then the card with the two paths side by side, running down. 560 to 1079px:
+   copy, then the card with the paths as rows, running across. From 1080px, as the navy cost section
+   switches (below it the prom card is too narrow): copy left, card right.
+   The motion: the card rises in with the house reveal (data-sc-in), then each line draws from its dot,
+   the rented one stopping early. Transform only, once. Reduced motion: the lines are simply there. */
+.wf-prom-ownit {
+  --wf-ownit-ink: #152238;
+  --wf-ownit-soft: #51617a;
+  --wf-ownit-accent: #33627c;
+  --wf-ownit-muted: #a3adbb;
+  --wf-ownit-cols: 4;
+  --wf-ownit-dot: 11px;
+  --wf-ownit-stroke: 1.5px;
+  position: relative;
+  background: #f7f5f1;
+  color: var(--wf-ownit-ink);
+  padding: 100px max(24px, 5.55vw);
+}
+.wf-prom-ownit__inner { max-width: 1280px; margin: 0 auto; }
+
+/* ------------------------------------------------------------------ the copy -- */
+.wf-prom-ownit h2 {
+  font: 400 clamp(44px, 4.2vw, 62px)/1.08 "Playfair Display", Georgia, serif;
+  letter-spacing: -0.035em;
+  margin: 0 0 28px;
+  text-wrap: balance;
+}
+.wf-prom-ownit h2 em { display: block; color: var(--wf-ownit-accent); }
+.wf-prom-ownit__copy p {
+  font: 400 21px/1.5 "Playfair Display", Georgia, serif;
+  max-width: 34ch;
+  margin: 0 0 18px;
+  text-wrap: pretty;
+}
+.wf-prom-ownit__copy .wf-prom-ownit__price {
+  font-size: 18px;
+  color: var(--wf-ownit-soft);
+  margin-bottom: 32px;
+}
+.wf-prom-ownit .wf-prom-pill { gap: 18px; }
+
+/* ------------------------------------------------------------------ the card -- */
+.wf-prom-ownit__paths {
+  display: grid;
+  gap: 36px;
+  max-width: 720px;
+  margin-top: 48px;
+  padding: clamp(28px, 3.4vw, 48px);
+  background: #fff;
+  border: 1px solid rgba(21, 34, 56, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(21, 34, 56, 0.04), 0 18px 40px -24px rgba(21, 34, 56, 0.22);
+}
+.wf-prom-ownit__label {
+  display: block;
+  margin-bottom: 16px;
+  font: 600 12px/1.2 Archivo, Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wf-ownit-soft);
+}
+.wf-prom-ownit__path--own .wf-prom-ownit__label { color: var(--wf-ownit-accent); }
+.wf-prom-ownit__path + .wf-prom-ownit__path { padding-top: 32px; border-top: 1px solid rgba(21, 34, 56, 0.08); }
+
+/* ------------------------------------------------------- the paths, across -- */
+/* Each stop is a cell: its dot at the top left, its words under it, and a line from its dot to the
+   next cell's. Both paths share the column count, so "The wedding" sits over "The wedding". */
+.wf-prom-ownit__stops {
+  display: grid;
+  grid-template-columns: repeat(var(--wf-ownit-cols), minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* "The next formal event" gets the widest column, so it breaks once, not twice. */
+.wf-prom-ownit__stops { grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.4fr); }
+.wf-prom-ownit__stops li {
+  position: relative;
+  padding: 28px 12px 0 0;
+  font: 400 18px/1.3 "Playfair Display", Georgia, serif;
+  text-wrap: balance;
+}
+.wf-prom-ownit__stops li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--wf-ownit-dot);
+  height: var(--wf-ownit-dot);
+  border-radius: 50%;
+  background: var(--wf-ownit-accent);
+}
+.wf-prom-ownit__stops li::after {
+  content: "";
+  position: absolute;
+  top: calc((var(--wf-ownit-dot) - var(--wf-ownit-stroke)) / 2);
+  left: var(--wf-ownit-dot);
+  right: 0;
+  height: var(--wf-ownit-stroke);
+  background: var(--wf-ownit-accent);
+  transform-origin: left center;
+}
+/* Rented: grey and dashed, and it stops. */
+.wf-prom-ownit__path--rent li { color: var(--wf-ownit-soft); }
+.wf-prom-ownit__path--rent li::before { background: var(--wf-ownit-muted); }
+.wf-prom-ownit__path--rent li::after {
+  background: repeating-linear-gradient(90deg, var(--wf-ownit-muted) 0 6px, transparent 6px 11px);
+}
+.wf-prom-ownit__path--rent .wf-prom-ownit__end { font-style: italic; }
+.wf-prom-ownit__path--rent .wf-prom-ownit__end::before {
+  top: -3px;
+  width: var(--wf-ownit-stroke);
+  height: 17px;
+  border-radius: 0;
+  background: var(--wf-ownit-soft);
+}
+.wf-prom-ownit__path--rent .wf-prom-ownit__end::after { content: none; }
+/* Yours: the last stop's line runs on to the card's edge and ends in an arrow. */
+.wf-prom-ownit__path--own li:last-child::after { right: 2px; }
+.wf-prom-ownit__path--own li:last-child {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='12' viewBox='0 0 8 12'%3E%3Cpath d='M1.2 1.2 6.6 6l-5.4 4.8' fill='none' stroke='%2333627c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 0 top 0 / 8px 12px;
+}
+
+/* ---------------------------------------------------------------- the draw -- */
+.wf-prom-ownit__stops li::after { transform: scaleX(0); transition: transform 560ms cubic-bezier(.23, 1, .32, 1); }
+.wf-prom-ownit__paths.sc-in li::after { transform: none; }
+.wf-prom-ownit__path--own li:last-child { background-size: 0 0; transition: background-size 0s; }
+.wf-prom-ownit__paths.sc-in .wf-prom-ownit__path--own li:last-child { background-size: 8px 12px; transition-delay: 1500ms; }
+.wf-prom-ownit__paths.sc-in li:nth-child(1)::after { transition-delay: 420ms; }
+.wf-prom-ownit__paths.sc-in li:nth-child(2)::after { transition-delay: 900ms; }
+.wf-prom-ownit__paths.sc-in li:nth-child(3)::after { transition-delay: 1200ms; }
+.wf-prom-ownit__paths.sc-in li:nth-child(4)::after { transition-delay: 1500ms; }
+
+/* ----------------------------------------------------------- from 1080px -- */
+@media (min-width: 1080px) {
+  .wf-prom-ownit { padding-block: clamp(80px, 7vw, 120px); }
+  .wf-prom-ownit__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(48px, 6vw, 88px);
+    align-items: center;
+  }
+  /* capped so the teal line stays on one line in the 5fr column up to the widest screens */
+  .wf-prom-ownit h2 { font-size: clamp(44px, 4.2vw, 58px); }
+  .wf-prom-ownit__paths { margin-top: 0; }
+}
+
+/* --------------------------------------------------------------- to 700px -- */
+/* The steps and groups sections' phone type. */
+@media (max-width: 700px) {
+  .wf-prom-ownit { padding: 64px 24px; }
+  .wf-prom-ownit h2 { font-size: clamp(42px, 11.8vw, 50px); max-width: 13ch; margin-bottom: 22px; }
+  .wf-prom-ownit__copy p { font-size: 20px; }
+  .wf-prom-ownit__copy .wf-prom-ownit__price { font-size: 17px; margin-bottom: 26px; }
+}
+
+/* ---------------------------------------------------------- to 559px, down -- */
+/* The paths stand side by side and run down the card: the dot on the left of its words, the line
+   from one dot to the next below, the rented stop drawn across, the arrow pointing down. Wider than
+   this the card has room for the rows across. */
+@media (max-width: 559px) {
+  .wf-prom-ownit__paths {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 18px;
+    margin-top: 40px;
+    padding: 24px 18px 28px;
+  }
+  .wf-prom-ownit__path + .wf-prom-ownit__path { padding-top: 0; border-top: 0; }
+  .wf-prom-ownit__stops { grid-template-columns: minmax(0, 1fr); }
+  .wf-prom-ownit__stops li { min-height: 70px; padding: 0 0 18px 24px; font-size: 17px; }
+  .wf-prom-ownit__stops li::before { top: 5px; }
+  .wf-prom-ownit__stops li::after {
+    top: calc(5px + var(--wf-ownit-dot));
+    bottom: -5px;
+    left: calc((var(--wf-ownit-dot) - var(--wf-ownit-stroke)) / 2);
+    right: auto;
+    width: var(--wf-ownit-stroke);
+    height: auto;
+    transform-origin: center top;
+  }
+  .wf-prom-ownit__path--rent li::after {
+    bottom: -10px;
+    background: repeating-linear-gradient(180deg, var(--wf-ownit-muted) 0 6px, transparent 6px 11px);
+  }
+  .wf-prom-ownit__path--rent .wf-prom-ownit__end::before {
+    top: 10px;
+    left: -3px;
+    width: 17px;
+    height: var(--wf-ownit-stroke);
+  }
+  .wf-prom-ownit__path--own li:last-child { min-height: 84px; background-position: left 0 bottom 0; }
+  .wf-prom-ownit__path--own li:last-child::after { bottom: 3px; }
+  .wf-prom-ownit__path--own li:last-child {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1.2 1.2 6 6.6l4.8-5.4' fill='none' stroke='%2333627c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  .wf-prom-ownit__paths.sc-in .wf-prom-ownit__path--own li:last-child { background-size: 12px 8px; }
+  .wf-prom-ownit__stops li::after { transform: scaleY(0); }
+}
+
+/* Forced colors drop drawn backgrounds: the lines, dots and arrow take the system text color. */
+@media (forced-colors: active) {
+  .wf-prom-ownit__stops li::before,
+  .wf-prom-ownit__stops li::after { forced-color-adjust: none; background: CanvasText; }
+}
+
+/* Reduced motion: the lines and the arrow are there from the start. */
+@media (prefers-reduced-motion: reduce) {
+  .wf-prom-ownit__stops li::after { transform: none; transition: none; }
+  .wf-prom-ownit__path--own li:last-child { background-size: 8px 12px; transition: none; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 559px) {
+  .wf-prom-ownit__path--own li:last-child { background-size: 12px 8px; }
+}

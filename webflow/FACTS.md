@@ -354,8 +354,9 @@ Sections by topic. Facts about the business itself first, then the trade, then t
 - Hours: which are right, the site's (Monday to Friday 11 to 6:30, Saturday 11 to 6, Sunday 12 to 4), Google's
   (Monday to Friday 11 to 6, Saturday 11 to 5, Sunday 12 to 4) or the old Facebook page's (Monday to Saturday 11 to 7,
   Sunday closed); then make the site, Google and Facebook match. Used by every page's footer and by book.
-- Rentals: whether the shop rents suits or tuxedos at all (no source says either way), and how it relates to Gabriel's
-  Tailoring & Tuxedo at 808 Main St, which does rent. Used by weddings and prom.
+- Rentals: answered 2026-10-28, the shop rents no suits or tuxedos (Harley); weddings and prom now carry an "own it
+  instead of renting" section and every FAQ a "Do you rent suits or tuxedos?" answer. Still open: how the shop relates
+  to Gabriel's Tailoring & Tuxedo at 808 Main St, which does rent.
 - Prices or price ranges for suits, alterations and fittings. Used by tailoring, weddings, prom and book.
 - Whether basic alterations are included when a suit is bought here. Used by tailoring, weddings and prom.
 - Wedding party packages or group discounts, including whether the "special package pricing" in the February 26, 2024
