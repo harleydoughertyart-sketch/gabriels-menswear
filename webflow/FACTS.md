@@ -183,10 +183,9 @@ Sections by topic. Facts about the business itself first, then the trade, then t
   Gabriel's (https://www.instagram.com/mainstreetmenswear/, profile; read 2026-10-03).
 - Not this business: Gabriel's Tailoring & Tuxedo, 808 Main St, Holden, (508) 829-7346, with its own site and its own
   Google listing (category Tailor, 4.7 from 23 reviews). It offers tuxedo rentals; none of its facts belong to
-  Gabriel's Menswear, and no source found says how the two are related (https://www.gabrielstailoring.com/, header
-  and Visit section; Google Maps search:
+  Gabriel's Menswear (https://www.gabrielstailoring.com/, header and Visit section; Google Maps search:
   https://www.google.com/maps/search/?api=1&query=Gabriel's%20Menswear%201363%20Main%20St%20Holden%20MA; read
-  2026-10-03).
+  2026-10-03). It is a separate business with no tie to this site (Harley, 2026-10-28).
 
 ## Suit fittings and alterations, general guidance (sourced 2026-10-03)
 - General guidance: making a suit smaller is usually doable, making it bigger is not: "taking away or reducing the
@@ -355,9 +354,13 @@ Sections by topic. Facts about the business itself first, then the trade, then t
   (Monday to Friday 11 to 6, Saturday 11 to 5, Sunday 12 to 4) or the old Facebook page's (Monday to Saturday 11 to 7,
   Sunday closed); then make the site, Google and Facebook match. Used by every page's footer and by book.
 - Rentals: answered 2026-10-28, the shop rents no suits or tuxedos (Harley); weddings and prom now carry an "own it
-  instead of renting" section and every FAQ a "Do you rent suits or tuxedos?" answer. Still open: how the shop relates
-  to Gabriel's Tailoring & Tuxedo at 808 Main St, which does rent.
-- Prices or price ranges for suits, alterations and fittings. Used by tailoring, weddings, prom and book.
+  instead of renting" section and every FAQ a "Do you rent suits or tuxedos?" answer.
+- Gabriel's Tailoring & Tuxedo at 808 Main St: answered 2026-10-28, a separate business with no tie to this site
+  (Harley). Never borrow its facts or offers, and never link to it.
+- Tuxedos: answered 2026-10-28, the shop sells no tuxedos (Harley). Never offer one; dress shoes are still open.
+- Graduation: answered 2026-10-28, pages may name graduation as an occasion (Harley).
+- Prices: no price, floor or range appears on the site (Harley, 2026-10-28). Still open: alterations and fittings.
+  Used by tailoring, weddings, prom and book.
 - Whether basic alterations are included when a suit is bought here. Used by tailoring, weddings and prom.
 - Wedding party packages or group discounts, including whether the "special package pricing" in the February 26, 2024
   Facebook post still exists. Used by weddings.
@@ -373,7 +376,7 @@ Sections by topic. Facts about the business itself first, then the trade, then t
 - Fabrics and where they come from (DESIGN.md mentions Turkey and Italy; one review mentions "100% wool suits"). Used
   by tailoring.
 - Brands carried; none found anywhere. Used by weddings and prom.
-- Whether the shop sells tuxedos and dress shoes; no listing says. Used by prom and weddings.
+- Whether the shop sells dress shoes; no listing says. Used by prom and weddings.
 - Sizes carried, such as big and tall or slimmer cuts for students. Used by prom and weddings.
 - Whether Gabriel does every alteration himself, or who else sews. Used by tailoring.
 - How long the shop has been at 1363 Main St and in Holden; only "Formerly Main Street Menswear" is sourced. Used by
