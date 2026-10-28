@@ -159,8 +159,6 @@
   padding: 0;
   list-style: none;
 }
-/* "The next formal event" gets the widest column, so it breaks once, not twice. */
-.wf-prom-ownit__stops { grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.4fr); }
 .wf-prom-ownit__stops li {
   position: relative;
   padding: 28px 12px 0 0;
