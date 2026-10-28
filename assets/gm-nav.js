@@ -112,6 +112,29 @@
   // Section scripts raise their own events (a fitting request, a booking confirmation) through this.
   window.gmTrack = function (name, params) { send(name, params || {}); };
 
+  // The tags load on the first touch or 5 seconds after the first screen (see the page head). A tracked
+  // click that leaves the page before then would go with it, so it waits in sessionStorage, with the
+  // page it came from as link_page, and the next page on this site sends it.
+  function leaves(a, e) {
+    var h = a.getAttribute('href') || '';
+    return !e.defaultPrevented && e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey &&
+      a.target !== '_blank' && !/^(?:#|tel:|mailto:|sms:)/.test(h) &&
+      !(a.pathname === location.pathname && a.hash);
+  }
+  function hold(name, params) {
+    params.link_page = location.pathname;
+    try {
+      var held = JSON.parse(sessionStorage.getItem('gm-held') || '[]');
+      held.push([name, params]);
+      sessionStorage.setItem('gm-held', JSON.stringify(held));
+    } catch (_) { send(name, params); }
+  }
+  try {
+    var held = JSON.parse(sessionStorage.getItem('gm-held') || '[]');
+    sessionStorage.removeItem('gm-held');
+    held.forEach(function (h) { send(h[0], h[1]); });
+  } catch (_) {}
+
   document.addEventListener('click', function (e) {
     if (!e.target.closest) return;
     var tab = e.target.closest('button[aria-controls][aria-selected]');
@@ -126,7 +149,10 @@
       else if (/google\.com\/maps/.test(h)) name = 'directions_click';
       else if (/^(?:https:\/\/gabrielsmenswear\.com)?\/book(?:\.html)?(?:[?#]|$)|^#booking-preview$/.test(h)) name = 'book_click';
     }
-    if (name) send(name, { link_location: where(a), link_text: words(a) });
+    if (!name) return;
+    var params = { link_location: where(a), link_text: words(a) };
+    if (!window.gmTagsOn && leaves(a, e)) hold(name, params);
+    else send(name, params);
   });
 
   // toggle does not bubble, so listen in the capture phase.

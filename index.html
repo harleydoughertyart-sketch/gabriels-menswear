@@ -70,9 +70,13 @@
       gtag("config", "G-GBHF2MRV3Z");
       dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
       window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
-      gmAfterFirstPaint(function () {
-        // gtag.js first, GTM once it has run: GTM reads this page's gtag config, and when gtag.js
-        // is not running yet it fetches a second copy of it (about 180 KB) for the same id.
+      // The tags load on the visitor's first touch, click, key press or mouse move, or 5 seconds
+      // after the first screen has painted if none comes. Together they cost a phone up to half a
+      // second of script work, which this keeps off the page while it is still loading. A tracked
+      // click that leaves the page before then is held by assets/gm-nav.js and sent from the next page.
+      (function () {
+        var started = false, opts = { capture: true, passive: true };
+        var cues = ["pointerdown", "touchstart", "keydown", "wheel", "mousemove"];
         function add(src, then) {
           var s = document.createElement("script");
           s.async = true;
@@ -80,9 +84,21 @@
           if (then) s.onload = s.onerror = then;
           document.head.appendChild(s);
         }
-        add("https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", function () { add("https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q"); });
-        add("https://www.clarity.ms/tag/ywmsd790se");
-      });
+        function start() {
+          if (started) return;
+          started = true;
+          cues.forEach(function (type) { removeEventListener(type, start, opts); });
+          // gtag.js first, GTM once it has run: GTM reads this page's gtag config, and when gtag.js
+          // is not running yet it fetches a second copy of it (about 180 KB) for the same id.
+          add("https://www.googletagmanager.com/gtag/js?id=G-GBHF2MRV3Z", function () {
+            window.gmTagsOn = true;
+            add("https://www.googletagmanager.com/gtm.js?id=GTM-MJCMX83Q");
+          });
+          add("https://www.clarity.ms/tag/ywmsd790se");
+        }
+        cues.forEach(function (type) { addEventListener(type, start, opts); });
+        gmAfterFirstPaint(function () { setTimeout(start, 5000); });
+      })();
     </script>
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
